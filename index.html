@@ -289,22 +289,57 @@ const a = document.createElement('a'); a.href = dataStr; a.download = nome;
 document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 function exportarJSON() {
-if (!registros.length) return alert('Nenhum dado.');
-baixarJSON(registros, `geriah_fractal_global_${tsAgora()}.json`);
+// registros já contêm chat_historico e docs embutidos
+const snapshot = {
+_geriah_version: '0.4.0.2',
+_exported_at: new Date().toISOString(),
+// Biblioteca completa — inclui todos os campos, chat e docs de cada registro
+registros: registros,
+// Ferramentas e links
+linksExtras: linksExtras,
+// Preferências de visualização
+view: localStorage.getItem('geriah_view') || 'diagnostico',
+};
+baixarJSON(snapshot, `geriah_fractal_global_${tsAgora()}.json`);
 }
 function importarJSON(event) {
 const file = event.target.files[0]; if (!file) return;
 const reader = new FileReader();
 reader.onload = function(e) {
 try {
-const importedData = JSON.parse(e.target.result);
-if (Array.isArray(importedData)) {
-registros = [...importedData, ...registros];
-const uniqueIds = new Set();
-registros = registros.filter(r => { if (uniqueIds.has(r.id)) return false; uniqueIds.add(r.id); return true; });
-salvarMemoria(); renderizarTabela(); alert(`${importedData.length} mapas importados com sucesso!`);
-} else { alert('Formato inválido.'); }
-} catch (error) { alert('Erro na importação.'); }
+const data = JSON.parse(e.target.result);
+let regs = [], links = [], msg = [];
+if (Array.isArray(data)) {
+// formato antigo — só registros
+regs = data;
+} else if (data.registros) {
+// formato snapshot completo
+regs = data.registros || [];
+links = data.linksExtras || [];
+} else {
+return alert('Formato de arquivo não reconhecido.');
+}
+// Merge registros (sem duplicatas por id)
+if (regs.length) {
+const existingIds = new Set(registros.map(r => r.id));
+const novos = regs.filter(r => !existingIds.has(r.id));
+registros = [...novos, ...registros];
+salvarMemoria();
+msg.push(`${novos.length} registro(s) importado(s)`);
+}
+// Merge links (sem duplicatas por id)
+if (links.length) {
+const existingGIds = new Set(linksExtras.map(g => g.id));
+const novosGrupos = links.filter(g => !existingGIds.has(g.id));
+linksExtras = [...linksExtras, ...novosGrupos];
+salvarLinks();
+msg.push(`${novosGrupos.length} grupo(s) de links importado(s)`);
+}
+// restaura preferência de view se presente
+if (data.view) { localStorage.setItem('geriah_view', data.view); setView(data.view); }
+renderizarTabela();
+alert(msg.length ? msg.join(' · ') + '.' : 'Nada novo para importar.');
+} catch (err) { alert('Erro na importação: ' + err.message); }
 event.target.value = '';
 };
 reader.readAsText(file);
@@ -620,7 +655,7 @@ if (label.toLowerCase().includes(q)) {
 _buscaResultados.push({ tipo: 'modulo', label, key, sub: 'Módulo estratégico' });
 }
 });
-// ── Campos do registro ativo
+// ── Campos + módulos + docs + chat do registro ativo
 if (r) {
 const camposTexto = {
 vivencia: 'Vivência', experiencia: 'Experiência', demanda: 'Demanda',
@@ -629,30 +664,54 @@ pq_praca: 'Praça', pq_preco: 'Preço', oq_pessoas: 'Pessoas',
 oq_processos: 'Processos', oq_produto: 'Produto',
 pt_produto: 'Promessa', pt_mensagem: 'Mensagem', pt_oferta: 'Oferta',
 cm_parceria: 'Parceria', cm_posicionamento: 'Posicionamento', cm_promocao: 'Promoção',
-foco_essencia: 'Foco da Essência', prioridades: 'Prioridades', nota_global: 'Nota Global'
+foco_essencia: 'Foco da Essência', prioridades: 'Prioridades', nota_global: 'Nota Global',
+modelo_marketing: 'Marketing', modelo_vendas: 'Vendas', modelo_cs: 'CS',
+modelo_educacao: 'Educação', modelo_esteira: 'Esteira', modelo_bsc: 'BSC',
+modelo_escala: 'Escala', modelo_iaprompts: 'IA Prompts'
 };
 Object.entries(camposTexto).forEach(([key, label]) => {
-const val = r[key] || '';
+const val = typeof r[key] === 'string' ? r[key] : '';
 if (val.toLowerCase().includes(q)) {
 const idx = val.toLowerCase().indexOf(q);
 const trecho = '...' + val.substring(Math.max(0, idx-20), idx+60).replace(/\n/g,' ') + '...';
-_buscaResultados.push({ tipo: 'campo', label, key, sub: trecho,
-aba: ['vivencia','experiencia','demanda','oferta','mercado','foco_essencia','prioridades','nota_global'].includes(key) ? 'base' : 'base'
+_buscaResultados.push({ tipo: 'campo', label, key, sub: trecho, aba: 'base' });
+}
 });
+(r.docs || []).forEach(doc => {
+if ((doc.nome + ' ' + doc.conteudo).toLowerCase().includes(q)) {
+const idx = doc.conteudo.toLowerCase().indexOf(q);
+const trecho = idx >= 0 ? '...' + doc.conteudo.substring(Math.max(0, idx-20), idx+60) + '...' : doc.nome;
+_buscaResultados.push({ tipo: 'doc', label: doc.nome, sub: trecho, aba: 'docs' });
+}
+});
+(r.chat_historico || []).forEach(msg => {
+if (msg.content && msg.content.toLowerCase().includes(q)) {
+const idx = msg.content.toLowerCase().indexOf(q);
+const trecho = '...' + msg.content.substring(Math.max(0, idx-20), idx+60) + '...';
+_buscaResultados.push({ tipo: 'chat', label: `Chat [${msg.role === 'user' ? 'você' : 'Advisor'}]`, sub: trecho });
 }
 });
 }
-// ── Biblioteca (outros registros)
+// ── Biblioteca completa
 registros.forEach(reg => {
 if (reg.id === registroAtivoId) return;
-const texto = [reg.vivencia, reg.pq_publico, reg.experiencia].join(' ').toLowerCase();
-if (texto.includes(q)) {
+const todosCampos = [
+reg.vivencia, reg.experiencia, reg.demanda, reg.oferta, reg.mercado,
+reg.pq_publico, reg.nota_global, reg.prioridades,
+reg.modelo_marketing, reg.modelo_vendas, reg.modelo_cs, reg.modelo_educacao,
+...(reg.docs || []).map(d => d.conteudo),
+...(reg.chat_historico || []).map(m => m.content)
+].filter(Boolean).join(' ').toLowerCase();
+if (todosCampos.includes(q)) {
 const preview = (reg.vivencia || reg.pq_publico || '').substring(0, 60);
-_buscaResultados.push({ tipo: 'registro', label: preview, regId: reg.id, sub: 'Biblioteca — clica para abrir' });
+_buscaResultados.push({ tipo: 'registro', label: preview || `Registro #${reg.id}`, regId: reg.id, sub: 'Biblioteca — clica para carregar' });
 }
 });
-// ── Links
+// ── Links e grupos
 linksExtras.forEach(g => {
+if (g.grupo.toLowerCase().includes(q)) {
+_buscaResultados.push({ tipo: 'link', label: g.grupo, url: null, sub: `Grupo · ${(g.links||[]).length} links`, grupoLabel: null });
+}
 (g.links || []).forEach(lk => {
 if (lk.titulo.toLowerCase().includes(q) || lk.url.toLowerCase().includes(q)) {
 _buscaResultados.push({ tipo: 'link', label: lk.titulo, url: lk.url, sub: lk.url, grupoLabel: g.grupo });
@@ -664,7 +723,7 @@ box.innerHTML = '<div class="px-4 py-3 text-sm text-slate-400 italic">Nenhum res
 box.style.display = 'block';
 return;
 }
-const TIPO_ICONE = { modulo: '📋', campo: '✏️', registro: '📁', link: '🔗' };
+const TIPO_ICONE = { modulo: '📋', campo: '✏️', registro: '📁', link: '🔗', doc: '📄', chat: '💬' };
 box.innerHTML = _buscaResultados.map((res, i) => `
 <div class="busca-result-item px-4 py-2.5 cursor-pointer border-b border-slate-100 last:border-0 hover:bg-blue-50 transition"
 data-idx="${i}" onmousedown="selecionarBusca(${i})"><div class="flex items-center gap-2"><span class="text-base">${TIPO_ICONE[res.tipo] || '🔍'}</span><div class="min-w-0"><div class="text-sm font-semibold text-slate-800 truncate">${res.label}</div><div class="text-[11px] text-slate-400 truncate">${res.sub}</div></div>
@@ -697,7 +756,12 @@ if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.focus()
 } else if (res.tipo === 'registro') {
 carregarDiagnosticoEAbrir(res.regId);
 } else if (res.tipo === 'link') {
-abrirLink(res.url);
+if (res.url) abrirLink(res.url);
+else abrirDrawer();
+} else if (res.tipo === 'doc') {
+mudarAbaExpansao('docs');
+} else if (res.tipo === 'chat') {
+if (!_chatAberto) toggleChat();
 }
 }
 function fecharBusca() {

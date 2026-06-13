@@ -1,4 +1,4 @@
-
+<!--  geriah_fractal_SNPQVE  Versão 0.4.0.7 -  import export full - copyright FMW Assessoria & Parceiros, 2026 freenat.doc@gmail.com-->
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GERIAH Fractal | Seu negócio a partir de quem você é</title><script src="https://cdn.tailwindcss.com"></script><style>.bg-quem-sou{background-color:#ffffff;border-top:4px solid #3b82f6;border-left:1px solid #e5e7eb;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;}.bg-o-que-faco{background-color:#fff7ed;border-top:4px solid #f97316;}.bg-pra-quem{background-color:#fefce8;border-top:4px solid #eab308;}.bg-por-quanto{background-color:#f0fdfa;border-top:4px solid #14b8a6;}.bg-como{background-color:#f0fdf4;border-top:4px solid #22c55e;}.modal-active{overflow:hidden;}.spinner{display:inline-block;width:16px;height:16px;border:2px solid #ffffff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-right:8px;}.spinner-blue{border:2px solid #3b82f6;border-top-color:transparent;}@keyframes spin{to{transform:rotate(360deg);}}::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px;}::-webkit-scrollbar-thumb:hover{background:#94a3b8;}textarea{line-height:1.6 !important;letter-spacing:0.01em;overflow:hidden;}.markdown-content h1{font-size:1.5rem;font-weight:bold;color:#1e293b;margin-top:1.5rem;margin-bottom:0.75rem;}.markdown-content h2{font-size:1.25rem;font-weight:bold;color:#334155;margin-top:1.5rem;margin-bottom:0.75rem;border-bottom:1px solid #e2e8f0;padding-bottom:6px;}.markdown-content h3{font-size:1.1rem;font-weight:bold;color:#475569;margin-top:1rem;margin-bottom:0.5rem;}.markdown-content p{margin-bottom:1.25rem;line-height:1.75;font-size:0.95rem;color:#334155;}.markdown-content ul{list-style-type:none;padding-left:0;margin-bottom:1.25rem;}.markdown-content li{margin-bottom:0.75rem;line-height:1.6;position:relative;padding-left:1.5rem;}.markdown-content li::before{content:"•";color:#3b82f6;font-weight:bold;position:absolute;left:0;top:0;}.markdown-content strong{color:#0f172a;font-weight:700;background-color:#f8fafc;padding:0 2px;border-radius:2px;}.geriah-tooltip{cursor:help;border-bottom:2px dotted #6b7280;position:relative;}.geriah-tooltip::after{content:attr(data-tooltip);position:absolute;left:0;top:calc(100%+8px);background:#1e293b;color:#f8fafc;font-size:0.72rem;font-weight:500;letter-spacing:0.01em;padding:6px 12px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.2);}.geriah-tooltip::before{content:'';position:absolute;left:14px;top:calc(100%+2px);border:5px solid transparent;border-bottom-color:#1e293b;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;}.geriah-tooltip:hover::after,.geriah-tooltip:hover::before{opacity:1;}#tabelaRegistros tr{transition:background 0.15s;}#tabelaRegistros tr.tr-hover-active{background:#eff6ff;}#tabelaRegistros tr.tr-selected{background:#dbeafe !important;border-left:3px solid #3b82f6;}#tabelaRegistros tr.tr-selected td:first-child{color:#2563eb;}#tabelaRegistros tr td:first-child{width:2.5rem;}.ia-dropdown-wrap{display:inline-block;}.ia-dropdown-wrap .hidden{display:none;}.ia-dropdown-wrap .visible{display:block;}.view-btn{color:#64748b;background:transparent;}.view-btn.active{background:#ffffff;color:#1e40af;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1);}#secao-diagnostico{overflow:visible;}</style></head><body class="bg-gray-50 font-sans text-gray-800 antialiased"><header class="sticky top-0 z-50 bg-gray-50 border-b border-gray-200 shadow-sm px-6 py-4"><div class="max-w-7xl mx-auto flex items-center justify-between gap-4"><div class="shrink-0"><h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-tight"><span class="geriah-tooltip" data-tooltip="Gênese Empreendedora para Renovação de Inteligência e Autonomia Humana">GERiAH</span><span class="text-blue-600">Fractal</span></h1><p class="text-gray-500 text-xs font-medium">Seu negócio a partir de quem você é.</p></div><nav class="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1"><button onclick="setView('diagnostico')" id="view-btn-diagnostico" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🔍 Diagnóstico</button><button onclick="setView('biblioteca')" id="view-btn-biblioteca" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">📚 Biblioteca</button><button onclick="setView('ferramentas')" id="view-btn-ferramentas" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🛠 Ferramentas</button><button onclick="setView('tudo')" id="view-btn-tudo" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">☰ Tudo</button></nav><div class="flex items-center gap-2 shrink-0"><button type="button" onclick="abrirTutorial()" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-md hover:bg-blue-100 transition font-semibold text-sm">
  📖 Como usar
  </button><button type="button" onclick="toggleChat()" id="btn-chat-global" class="bg-emerald-600 text-white border border-emerald-700 px-3 py-2 rounded-md hover:bg-emerald-700 transition font-semibold text-sm flex items-center gap-2">
@@ -289,16 +289,16 @@ const a = document.createElement('a'); a.href = dataStr; a.download = nome;
 document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 function exportarJSON() {
-// registros já contêm chat_historico e docs embutidos
+const orKey = localStorage.getItem('fnw-ia-openrouter-key') || '';
+const groqKey = localStorage.getItem('fnw-ia-groq-key') || '';
+const modelo = localStorage.getItem('fnw-ia-modelo') || '';
 const snapshot = {
-_geriah_version: '0.4.0.2',
+_geriah_version: '0.4.0.5',
 _exported_at: new Date().toISOString(),
-// Biblioteca completa — inclui todos os campos, chat e docs de cada registro
 registros: registros,
-// Ferramentas e links
 linksExtras: linksExtras,
-// Preferências de visualização
 view: localStorage.getItem('geriah_view') || 'diagnostico',
+ia_config: { or_key: orKey, groq_key: groqKey, modelo: modelo }
 };
 baixarJSON(snapshot, `geriah_fractal_global_${tsAgora()}.json`);
 }
@@ -327,16 +327,43 @@ registros = [...novos, ...registros];
 salvarMemoria();
 msg.push(`${novos.length} registro(s) importado(s)`);
 }
-// Merge links (sem duplicatas por id)
+// Merge profundo de links — grupos novos entram, grupos existentes têm links mergeados
 if (links.length) {
-const existingGIds = new Set(linksExtras.map(g => g.id));
-const novosGrupos = links.filter(g => !existingGIds.has(g.id));
-linksExtras = [...linksExtras, ...novosGrupos];
-salvarLinks();
-msg.push(`${novosGrupos.length} grupo(s) de links importado(s)`);
+let gruposNovos = 0, linksNovos = 0;
+links.forEach(gImport => {
+const gExist = linksExtras.find(g => g.id === gImport.id || g.grupo === gImport.grupo);
+if (gExist) {
+// grupo já existe — merge dos links internos
+const existingLinkIds = new Set((gExist.links || []).map(l => l.id));
+(gImport.links || []).forEach(lk => {
+if (!existingLinkIds.has(lk.id)) {
+gExist.links = gExist.links || [];
+gExist.links.push(lk);
+linksNovos++;
 }
-// restaura preferência de view se presente
+});
+} else {
+// grupo novo — adiciona completo
+linksExtras.push(gImport);
+gruposNovos++;
+linksNovos += (gImport.links || []).length;
+}
+});
+salvarLinks();
+if (gruposNovos || linksNovos) msg.push(`${gruposNovos} grupo(s) e ${linksNovos} link(s) importado(s)`);
+}
+// restaura preferência de view
 if (data.view) { localStorage.setItem('geriah_view', data.view); setView(data.view); }
+// restaura chaves de IA via salvarKeys (atualiza vars internas + localStorage)
+if (data.ia_config && (data.ia_config.or_key || data.ia_config.groq_key)) {
+iaKit.salvarKeys(
+data.ia_config.or_key || '',
+data.ia_config.groq_key || '',
+data.ia_config.modelo || ''
+);
+atualizarStatusIA();
+msg.push('configuração de IA restaurada');
+}
 renderizarTabela();
 alert(msg.length ? msg.join(' · ') + '.' : 'Nada novo para importar.');
 } catch (err) { alert('Erro na importação: ' + err.message); }

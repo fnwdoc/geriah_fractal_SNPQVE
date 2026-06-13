@@ -1,0 +1,1877 @@
+
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GERIAH Fractal | Seu negócio a partir de quem você é</title><script src="https://cdn.tailwindcss.com"></script><style>.bg-quem-sou{background-color:#ffffff;border-top:4px solid #3b82f6;border-left:1px solid #e5e7eb;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;}.bg-o-que-faco{background-color:#fff7ed;border-top:4px solid #f97316;}.bg-pra-quem{background-color:#fefce8;border-top:4px solid #eab308;}.bg-por-quanto{background-color:#f0fdfa;border-top:4px solid #14b8a6;}.bg-como{background-color:#f0fdf4;border-top:4px solid #22c55e;}.modal-active{overflow:hidden;}.spinner{display:inline-block;width:16px;height:16px;border:2px solid #ffffff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-right:8px;}.spinner-blue{border:2px solid #3b82f6;border-top-color:transparent;}@keyframes spin{to{transform:rotate(360deg);}}::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px;}::-webkit-scrollbar-thumb:hover{background:#94a3b8;}textarea{line-height:1.6 !important;letter-spacing:0.01em;overflow:hidden;}.markdown-content h1{font-size:1.5rem;font-weight:bold;color:#1e293b;margin-top:1.5rem;margin-bottom:0.75rem;}.markdown-content h2{font-size:1.25rem;font-weight:bold;color:#334155;margin-top:1.5rem;margin-bottom:0.75rem;border-bottom:1px solid #e2e8f0;padding-bottom:6px;}.markdown-content h3{font-size:1.1rem;font-weight:bold;color:#475569;margin-top:1rem;margin-bottom:0.5rem;}.markdown-content p{margin-bottom:1.25rem;line-height:1.75;font-size:0.95rem;color:#334155;}.markdown-content ul{list-style-type:none;padding-left:0;margin-bottom:1.25rem;}.markdown-content li{margin-bottom:0.75rem;line-height:1.6;position:relative;padding-left:1.5rem;}.markdown-content li::before{content:"•";color:#3b82f6;font-weight:bold;position:absolute;left:0;top:0;}.markdown-content strong{color:#0f172a;font-weight:700;background-color:#f8fafc;padding:0 2px;border-radius:2px;}.geriah-tooltip{cursor:help;border-bottom:2px dotted #6b7280;position:relative;}.geriah-tooltip::after{content:attr(data-tooltip);position:absolute;left:0;top:calc(100%+8px);background:#1e293b;color:#f8fafc;font-size:0.72rem;font-weight:500;letter-spacing:0.01em;padding:6px 12px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.2);}.geriah-tooltip::before{content:'';position:absolute;left:14px;top:calc(100%+2px);border:5px solid transparent;border-bottom-color:#1e293b;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;}.geriah-tooltip:hover::after,.geriah-tooltip:hover::before{opacity:1;}#tabelaRegistros tr{transition:background 0.15s;}#tabelaRegistros tr.tr-hover-active{background:#eff6ff;}#tabelaRegistros tr.tr-selected{background:#dbeafe !important;border-left:3px solid #3b82f6;}#tabelaRegistros tr.tr-selected td:first-child{color:#2563eb;}#tabelaRegistros tr td:first-child{width:2.5rem;}.ia-dropdown-wrap{display:inline-block;}.ia-dropdown-wrap .hidden{display:none;}.ia-dropdown-wrap .visible{display:block;}.view-btn{color:#64748b;background:transparent;}.view-btn.active{background:#ffffff;color:#1e40af;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1);}#secao-diagnostico{overflow:visible;}</style></head><body class="bg-gray-50 font-sans text-gray-800 antialiased"><header class="sticky top-0 z-50 bg-gray-50 border-b border-gray-200 shadow-sm px-6 py-4"><div class="max-w-7xl mx-auto flex items-center justify-between gap-4"><div class="shrink-0"><h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-tight"><span class="geriah-tooltip" data-tooltip="Gênese Empreendedora para Renovação de Inteligência e Autonomia Humana">GERiAH</span><span class="text-blue-600">Fractal</span></h1><p class="text-gray-500 text-xs font-medium">Seu negócio a partir de quem você é.</p></div><nav class="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1"><button onclick="setView('diagnostico')" id="view-btn-diagnostico" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🔍 Diagnóstico</button><button onclick="setView('biblioteca')" id="view-btn-biblioteca" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">📚 Biblioteca</button><button onclick="setView('ferramentas')" id="view-btn-ferramentas" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🛠 Ferramentas</button><button onclick="setView('tudo')" id="view-btn-tudo" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">☰ Tudo</button></nav><div class="flex items-center gap-2 shrink-0"><button type="button" onclick="abrirTutorial()" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-md hover:bg-blue-100 transition font-semibold text-sm">
+ 📖 Como usar
+ </button><button type="button" onclick="toggleChat()" id="btn-chat-global" class="bg-emerald-600 text-white border border-emerald-700 px-3 py-2 rounded-md hover:bg-emerald-700 transition font-semibold text-sm flex items-center gap-2">
+ 💬 Advisor IA
+ </button><button type="button" onclick="abrirModalConfig()" class="bg-slate-900 text-yellow-500 border border-slate-700 px-3 py-2 rounded-md hover:bg-slate-800 transition flex items-center gap-2 font-semibold text-sm"><span id="ia-status-dot" class="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></span>
+ ⚙️ IA
+ </button><input type="file" id="file-import" accept=".json" class="hidden" onchange="importarJSON(event)"><button type="button" onclick="document.getElementById('file-import').click()" class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-2 rounded-md hover:bg-indigo-100 transition font-semibold text-sm">
+ 📥 Importar
+ </button><button type="button" onclick="exportarJSON()" class="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition font-semibold text-sm">
+ 📤 Exportar
+ </button></div></div></header><div class="max-w-7xl mx-auto px-6 pt-6 pb-6" id="main-content" style="transition:max-width 0.25s ease,margin-right 0.25s ease;"><div id="secao-diagnostico" style="position:relative;"><div class="bg-quem-sou p-6 shadow-sm rounded-md mb-8"><h2 class="font-bold text-blue-800 mb-4 text-xl border-b pb-2">1. DIAGNÓSTICO DA ESSÊNCIA (QUEM SOU)</h2><div class="flex flex-col gap-3 mb-5 p-4 bg-slate-50 border border-slate-200 rounded-lg"><div class="flex flex-col sm:flex-row gap-3"><div class="flex-1"><label class="text-xs font-semibold text-slate-500 mb-1 block">🌐 URL (site, blog, Instagram, <span class="text-blue-600 font-bold">LinkedIn</span>...)</label><div class="flex gap-2"><input id="input-url" type="url" placeholder="https://linkedin.com/in/... ou outro" class="flex-1 text-sm p-2 border border-slate-300 rounded outline-none focus:border-blue-500 bg-white" oninput="detectarLinkedIn(this.value)"><button type="button" onclick="preencherViaURL()" id="btn-url" class="bg-slate-700 text-white px-4 py-2 rounded text-xs font-bold hover:bg-slate-900 transition whitespace-nowrap">⚡ Preencher</button></div></div><div class="flex items-end gap-2"><div><label class="text-xs font-semibold text-slate-500 mb-1 block">📄 Documento (CV, código, texto, transcrição...)</label><div class="flex gap-2"><label class="cursor-pointer bg-white border border-slate-300 text-slate-600 px-4 py-2 rounded text-xs font-semibold hover:bg-slate-50 transition flex items-center gap-1">
+ 📎 Escolher arquivo
+ <input type="file" id="input-documento" accept=".pdf,.txt,.doc,.docx,.html,.htm,.md,.csv,.json" class="hidden" onchange="preencherViaDocumento(this)"></label><span id="nome-documento" class="text-xs text-slate-400 self-center italic">nenhum arquivo</span></div></div></div></div><div id="linkedin-paste-area" style="display:none" class="bg-blue-50 border border-blue-200 rounded-lg p-3"><label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">
+ 💼 LinkedIn detectado — cole o texto do perfil para melhor extração
+ <span class="font-normal text-blue-400">(Ctrl+A no perfil → copiar → colar aqui)</span></label><textarea id="input-linkedin-texto" rows="4" placeholder="Cole aqui o texto copiado do perfil LinkedIn..." class="w-full text-xs p-2 border border-blue-200 rounded outline-none focus:border-blue-400 bg-white resize-y font-mono"></textarea><p class="text-[10px] text-blue-400 mt-1">💡 Se preferir, pode preencher só com a URL — o sistema tentará extrair o que conseguir.</p></div></div><div id="status-alimentacao" class="hidden mb-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded px-4 py-2.5"><span class="spinner"></span><span id="status-alimentacao-msg">Analisando...</span></div><div class="grid grid-cols-1 lg:grid-cols-5 gap-4"><div><label class="text-xs font-semibold text-gray-600">Vivência (Habilidades)</label><textarea id="qs_vivencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que domina..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Experiência</label><textarea id="qs_experiencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades realizadas..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Demanda (Reconhecida)</label><textarea id="qs_demanda" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Reconhecido por outros..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Oferta (Preferidas)</label><textarea id="qs_oferta" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que mais gosta de fazer..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Mercado (Disposição a pagar)</label><textarea id="qs_mercado" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades rentáveis..."></textarea></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"><div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">🔍 Foco da Essência
+ <span class="font-normal text-blue-400">(perspectiva para ler o QUEM SOU — ex: "ótica de coach", "viés técnico")</span></label><input id="qs_foco_essencia" type="text" placeholder="Ex: olhar como educador, foco em liderança feminina..." class="w-full text-[13px] p-2 bg-white border border-blue-200 rounded outline-none focus:border-blue-500"></div><div class="p-3 bg-orange-50 border border-orange-200 rounded-lg"><label class="text-xs font-bold text-orange-700 flex items-center gap-1 mb-1">🎯 Prioridade Estratégica
+ <span class="font-normal text-orange-400">(diretriz para extrair a base — ex: "P1: lançar mentoria", "foco B2B")</span></label><input id="qs_foco" type="text" placeholder="Ex: P1 — monetizar via infoproduto, P2 — parcerias B2B..." class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400"></div></div><div class="flex items-center justify-between mt-4"><div class="w-48"></div><button type="button" id="btn-gerar" onclick="gerarEstrategiaComIA()" class="bg-blue-600 text-white px-8 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition flex items-center tracking-wide">
+ ✦ Extrair Base Estratégica
+ </button><div class="w-48 flex justify-end"><button type="button" id="btn-painel-expansao" onclick="abrirPainelExpansao(registroAtivoId)" style="display:none"
+ class="bg-slate-800 text-yellow-400 border border-slate-600 px-5 py-3 rounded-md shadow font-bold hover:bg-slate-700 transition text-sm flex items-center gap-2">
+ 🚀 Painel de Expansão
+ </button></div></div></div></div><div id="secao-biblioteca"><div class="bg-white p-6 shadow rounded-md overflow-x-auto border border-gray-100"><h3 class="text-xl font-bold text-gray-800 mb-4">Bibliotecas & Hubs de Expansão</h3><table class="w-full text-left border-collapse min-w-[800px]"><thead><tr class="bg-gray-100 text-gray-600 text-sm"><th class="p-3 border-b w-8"><input type="checkbox" id="chk-all" onclick="toggleSelecionarTodos(this)" class="w-4 h-4 accent-blue-600"></th><th class="p-3 border-b w-16">ID</th><th class="p-3 border-b w-1/3">Essência do Cliente (Resumo)</th><th class="p-3 border-b w-1/3">Público Foco (Gerado)</th><th class="p-3 border-b text-right">Ações de Expansão</th></tr></thead><tbody id="tabelaRegistros"></tbody></table><div id="barra-export" style="display:none;" class="mt-3 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-2.5"><span class="text-sm text-blue-700 font-semibold" id="barra-export-label">0 itens selecionados</span><div class="flex gap-2"><button onclick="exportarSelecionados()" class="bg-blue-600 text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-blue-700 transition">⬇ Exportar JSON</button><button onclick="limparSelecao()" class="bg-white text-slate-500 border border-slate-300 px-4 py-1.5 rounded-md text-xs font-semibold hover:bg-slate-50 transition">Limpar seleção</button></div></div></div></div></div><div id="drawer-overlay" onclick="fecharDrawer()" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(15,23,42,0.4);backdrop-filter:blur(2px);"></div><div id="drawer-ferramentas" style="position:fixed;top:0;left:0;height:100%;width:500px;z-index:8001;background:#fff;box-shadow:4px 0 32px rgba(0,0,0,0.18);transform:translateX(-100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;"><div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white shrink-0"><div class="flex items-center gap-3"><span class="text-lg">🛠</span><span class="font-bold text-base">Ferramentas & Links</span></div><div class="flex items-center gap-2"><button onclick="adicionarGrupoMain()" class="text-yellow-400 border border-slate-600 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-700 transition">＋ Grupo</button><button onclick="fecharDrawer()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none px-1 transition">&times;</button></div></div><div class="flex-1 overflow-y-auto p-4 space-y-2" id="ferramentas-main-container"></div><div id="form-link-main" style="display:none" class="shrink-0 border-t border-slate-200 bg-slate-50 p-4 space-y-2"><h4 class="font-bold text-slate-700 text-sm" id="form-link-main-label">Novo link</h4><input id="form-link-main-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><input id="form-link-main-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><div id="form-link-main-grupo-wrap" style="display:none"><input id="form-link-main-grupo" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"></div><div class="flex gap-2 justify-end pt-1"><button onclick="cancelarFormMain()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button><button onclick="salvarFormMain()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button></div></div></div><div id="expansaoModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9000;" class="bg-gray-900 bg-opacity-85 items-center justify-center backdrop-blur-sm p-2 md:p-6"><div id="expansao-inner" class="bg-white w-full h-full md:h-[95vh] rounded-xl shadow-2xl flex flex-col overflow-hidden" style="max-width:80rem;transition:max-width 0.25s ease;"><div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white"><div class="flex items-center gap-4"><h3 class="text-xl font-bold flex items-center gap-2"><span class="text-blue-400">✦</span> Central de Desdobramento</h3><div class="flex items-center gap-1 bg-slate-800 rounded-lg p-1 border border-slate-700"><button id="btn-undo" onclick="undoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Desfazer">↩️ Undo</button><div class="w-px h-4 bg-slate-600"></div><button id="btn-redo" onclick="redoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Refazer">↪️ Redo</button></div></div><div class="flex items-center gap-3"><div class="relative" id="busca-global-wrap"><input id="busca-global-input" type="text" placeholder="🔍 Buscar no sistema..." autocomplete="off"
+ oninput="buscarGlobal(this.value)"
+ onkeydown="navegarBusca(event)"
+ class="bg-slate-800 border border-slate-600 text-white text-sm px-3 py-1.5 rounded-lg outline-none focus:border-blue-400 w-56 placeholder-slate-400"><div id="busca-global-results" style="display:none"
+ class="absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 w-80 max-h-80 overflow-y-auto text-slate-800"></div></div><button type="button" onclick="abrirModalConfig()" class="text-xs bg-slate-800 border border-slate-700 hover:bg-slate-700 text-yellow-500 px-3 py-1.5 rounded transition">⚙️ Configuração IA</button><button type="button" onclick="fecharPainelExpansao()" class="text-gray-400 hover:text-red-400 font-bold text-3xl transition px-2 leading-none">&times;</button></div></div><div class="flex flex-col md:flex-row flex-1 overflow-hidden"><div class="w-full md:w-72 bg-slate-50 border-r border-slate-200 flex flex-col p-4 gap-2 overflow-y-auto"><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Módulos Estratégicos</p><button onclick="mudarAbaExpansao('base')" id="tab-btn-base" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('negocio')" id="tab-btn-negocio" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('marketing')" id="tab-btn-marketing" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('vendas')" id="tab-btn-vendas" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('cs')" id="tab-btn-cs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('educacao')" id="tab-btn-educacao" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><div class="my-2 border-t border-slate-200"></div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Crescimento & Addons</p><button onclick="mudarAbaExpansao('esteira')" id="tab-btn-esteira" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('bsc')" id="tab-btn-bsc" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('escala')" id="tab-btn-escala" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('iaprompts')" id="tab-btn-iaprompts" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('docs')" id="tab-btn-docs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('extras')" id="tab-btn-extras" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><div class="my-2 border-t border-slate-200"></div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">🔗 Links & Ferramentas</p><div id="sidebar-links-container" class="space-y-1"></div></div><div class="flex-1 bg-slate-50 overflow-y-auto p-6 relative" id="expansao-content-area"></div></div></div></div><div id="tutorialModal" style="display:none; position:fixed; inset:0; z-index:10000;" class="bg-slate-900 bg-opacity-85 backdrop-blur-sm flex items-start justify-center p-4 overflow-y-auto"><div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl my-8 overflow-hidden flex flex-col"><div class="bg-gradient-to-r from-blue-700 to-blue-500 px-8 py-6 flex justify-between items-start"><div><h2 class="text-2xl font-bold text-white flex items-center gap-2">📖 Como usar o GERiAH Fractal</h2><p class="text-blue-100 text-sm mt-1">Seu negócio a partir de quem você é — guia rápido</p></div><button onclick="fecharTutorial()" class="text-blue-200 hover:text-white text-3xl font-bold leading-none mt-1 transition">&times;</button></div><div class="p-8 space-y-8 overflow-y-auto text-slate-700 text-[14px] leading-relaxed"><div><h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">✦ O que é o GERiAH Fractal?</h3><p>O GERiAH Fractal é uma plataforma de <strong>diagnóstico estratégico pessoal e de negócio</strong>. A ideia central é simples: antes de definir o que você vende ou para quem, você precisa entender <em>quem você é</em> — suas vivências, experiências, o que o mercado já reconhece em você.</p><p class="mt-2">A partir desse diagnóstico, a IA expande sua essência em um <strong>Framework Estratégico completo</strong>: público-alvo, posicionamento, canais, oferta, plano de marketing, playbook de vendas e muito mais.</p></div><div><h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">🔄 Fluxo de uso</h3><div class="space-y-3"><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">1</span><div><strong>Configure a IA</strong> — clique em ⚙️ Configurar IA e insira sua chave OpenRouter (gratuita) ou Groq. Os links para criar as chaves estão dentro do modal.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">2</span><div><strong>Preencha o Diagnóstico da Essência</strong> — use os 5 campos (Vivência, Experiência, Demanda, Oferta, Mercado) manualmente, ou cole uma URL/currículo para preenchimento automático via IA.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">3</span><div><strong>Defina o Foco e a Prioridade</strong> — <em>Foco da Essência</em> orienta como a IA lê o QUEM SOU (ex: "ótica de coach"). <em>Prioridade Estratégica</em> direciona a geração dos pilares (ex: "P1 lançar mentoria").</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">4</span><div><strong>Clique em ✦ Extrair Base Estratégica</strong> — a IA gera os 4 pilares do framework. O resultado vai para a Biblioteca.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">5</span><div><strong>Abra o Painel de Expansão</strong> — clique em 🚀 Painel de Expansão na biblioteca para desdobrar em módulos: BMC, Marketing, Vendas, CS, Educação e muito mais.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">6</span><div><strong>Revise, edite e itere</strong> — clique em qualquer linha da biblioteca para recarregar o diagnóstico. Altere o foco, mude a prioridade e gere uma nova versão. Cada geração é um registro separado.</div></div></div></div><div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-xl p-6"><h3 class="text-lg font-bold text-yellow-400 mb-3 flex items-center gap-2">🆓 Gratuito &nbsp;×&nbsp; 🔒 Premium — entenda o modelo</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"><div class="bg-slate-700 rounded-lg p-4"><div class="font-bold text-green-400 mb-2">✅ Gratuito (sempre)</div><ul class="space-y-1 text-slate-300"><li>• Diagnóstico da Essência completo</li><li>• Framework Base Interativo</li><li>• Canvas BMC</li><li>• Playbook de Vendas</li><li>• Educação do Cliente</li><li>• Biblioteca ilimitada de registros</li><li>• Export / Import JSON</li><li>• Preenchimento via URL e currículo</li></ul></div><div class="bg-slate-700 rounded-lg p-4"><div class="font-bold text-yellow-400 mb-2">🔒 Premium (senha de acesso)</div><ul class="space-y-1 text-slate-300"><li>• Plano de Marketing Estratégico</li><li>• Estratégia de Sucesso do Cliente</li><li>• Esteira de Produtos</li><li>• Balanced Scorecard (BSC)</li><li>• Estratégia de Escala e Crescimento</li><li>• IA com Prompts Livres</li></ul><p class="text-slate-400 text-xs mt-3">A senha de acesso Premium é fornecida pela equipe FNW Advisory mediante contratação.</p></div></div></div><div><h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">💡 Dicas rápidas</h3><ul class="space-y-2 text-slate-600"><li>📌 <strong>Clique em qualquer linha da biblioteca</strong> para recarregar aquele diagnóstico no formulário — edite e regere sem perder o original.</li><li>🎯 <strong>Use o campo Foco da Essência</strong> para ver perspectivas diferentes da mesma pessoa — ex: "olhar técnico" vs "olhar comercial".</li><li>📋 <strong>Nota Global do Cliente</strong> (no painel, aba Base) é o lugar para colar mensagens de WhatsApp, resumos de reunião e contexto livre.</li><li>⬇️ <strong>Marque itens na biblioteca</strong> e exporte só os selecionados — útil para entregar o dossiê de um cliente específico.</li><li>🔑 <strong>Sua chave de IA fica salva localmente</strong> no navegador. Nenhum dado é enviado para servidores FNW — apenas para OpenRouter/Groq.</li></ul></div></div><div class="px-8 py-4 border-t border-slate-100 flex justify-end bg-slate-50 rounded-b-2xl"><button onclick="fecharTutorial()" class="bg-blue-600 text-white px-6 py-2 rounded-md font-bold hover:bg-blue-700 transition text-sm">Entendido, vamos começar →</button></div></div></div><div id="configModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;" class="bg-slate-900 bg-opacity-80 items-center justify-center backdrop-blur-sm p-4"><div class="bg-slate-900 w-full max-w-2xl rounded-xl shadow-2xl border border-slate-700 flex flex-col"><div class="p-5 border-b border-slate-800 flex justify-between items-center"><h3 class="text-lg font-bold text-yellow-500 flex items-center gap-2">✦ FNW IA Kit</h3><button type="button" onclick="fecharModalConfig()" class="text-slate-400 hover:text-white font-bold text-2xl transition px-2 leading-none">&times;</button></div><div class="p-6 space-y-6"><div class="bg-slate-800 p-5 rounded-lg border border-slate-700"><div class="flex justify-between items-center mb-3"><h4 class="font-semibold text-sm text-slate-300">OpenRouter (Principal)</h4><a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://openrouter.ai/workspaces/default/keys'); return false;">🔑 Gerar chave OpenRouter ↗</a></div><div class="space-y-3"><input type="password" id="or-key" placeholder="sk-or-v1-..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"><select id="or-model" class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"><option value="google/gemma-3-27b-it:free">Gemma 3 27B (free)</option><option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B (free)</option><option value="openai/gpt-4o-mini">GPT-4o Mini</option></select></div></div><div class="bg-slate-800 p-5 rounded-lg border border-slate-700"><div class="flex justify-between items-center mb-3"><h4 class="font-semibold text-sm text-slate-300">Groq (Fallback)</h4><a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://console.groq.com/keys'); return false;">🔑 Gerar chave Groq ↗</a></div><input type="password" id="groq-key" placeholder="gsk_..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"></div></div><div class="p-5 border-t border-slate-800 bg-slate-800/50 rounded-b-xl flex justify-between items-center"><button type="button" onclick="limparConfigIA()" class="text-slate-400 hover:text-red-400 text-sm font-semibold transition">Limpar Chaves</button><button type="button" onclick="salvarConfigIA()" class="bg-yellow-600 text-slate-900 px-6 py-2 text-sm font-bold rounded-md shadow hover:bg-yellow-500 transition tracking-wide">Salvar Configurações</button></div></div></div><script>// ════════════════════════════════════════
+// FUNÇÃO GLOBAL DE AUTO-RESIZE
+// ════════════════════════════════════════
+function abrirTutorial() {
+document.getElementById('tutorialModal').style.display = 'flex';
+}
+function fecharTutorial() {
+document.getElementById('tutorialModal').style.display = 'none';
+}
+// Auto-abrir na primeira visita
+if (!localStorage.getItem('geriah_tutorial_visto')) {
+window.addEventListener('load', () => {
+setTimeout(() => { abrirTutorial(); localStorage.setItem('geriah_tutorial_visto', '1'); }, 600);
+});
+}
+let _viewAtual = 'diagnostico';
+function setView(v) {
+if (v === 'ferramentas') { abrirDrawer(); return; }
+_viewAtual = v;
+const diag = document.getElementById('secao-diagnostico');
+const bib = document.getElementById('secao-biblioteca');
+diag.style.display = (v === 'tudo' || v === 'diagnostico') ? 'block' : 'none';
+bib.style.display = (v === 'tudo' || v === 'biblioteca') ? 'block' : 'none';
+['tudo','diagnostico','biblioteca','ferramentas'].forEach(b => {
+const btn = document.getElementById('view-btn-' + b);
+if (btn) btn.classList.toggle('active', b === v);
+});
+localStorage.setItem('geriah_view', v);
+}
+function abrirDrawer() {
+renderizarFerramentasMain();
+document.getElementById('drawer-overlay').style.display = 'block';
+document.getElementById('drawer-ferramentas').style.transform = 'translateX(0)';
+}
+function fecharDrawer() {
+document.getElementById('drawer-overlay').style.display = 'none';
+document.getElementById('drawer-ferramentas').style.transform = 'translateX(-100%)';
+}
+function initView() {
+const saved = localStorage.getItem('geriah_view') || 'diagnostico';
+setView(saved);
+}
+function autoResize(el) {
+if (el && el.id && el.id.startsWith('qs_')) atualizarContextoLabel();
+el.style.height = 'auto';
+el.style.height = (el.scrollHeight) + 'px';
+}
+function reajustarTodosTextareas() {
+setTimeout(() => {
+document.querySelectorAll('textarea:not(#custom-ia-prompt)').forEach(el => autoResize(el));
+}, 50);
+}
+// ════════════════════════════════════════
+// FNW IA Kit v1.0 — CORE Seguro
+// ════════════════════════════════════════
+const iaKit = (() => {
+const LS_OR_KEY = 'fnw-ia-openrouter-key';
+const LS_GROQ_KEY = 'fnw-ia-groq-key';
+const LS_MODEL = 'fnw-ia-modelo';
+const DEFAULT_MODEL_OR = 'google/gemma-3-27b-it:free';
+const DEFAULT_MODEL_GROQ = 'llama-3.3-70b-versatile';
+let _orKey = '', _groqKey = '', _modelo = DEFAULT_MODEL_OR;
+function carregar() {
+_orKey = localStorage.getItem(LS_OR_KEY) || '';
+_groqKey = localStorage.getItem(LS_GROQ_KEY) || '';
+_modelo = localStorage.getItem(LS_MODEL) || DEFAULT_MODEL_OR;
+}
+function salvarKeys(or, groq, mod) {
+_orKey = (or||'').trim(); localStorage.setItem(LS_OR_KEY, _orKey);
+_groqKey = (groq||'').trim(); localStorage.setItem(LS_GROQ_KEY, _groqKey);
+_modelo = (mod||DEFAULT_MODEL_OR).trim(); localStorage.setItem(LS_MODEL, _modelo);
+}
+function temChave() { return !!(_orKey || _groqKey); }
+async function chamar(prompt, systemPrompt = '') {
+if (!temChave()) throw new Error('Nenhuma chave configurada.');
+const messages = [{ role: 'user', content: prompt }];
+const bodyOR = { model: _modelo, messages: sysMsg(systemPrompt, messages) };
+const bodyGroq = { model: DEFAULT_MODEL_GROQ, messages: sysMsg(systemPrompt, messages) };
+if (_orKey) {
+try { return await _req('https://openrouter.ai/api/v1/chat/completions', _orKey, bodyOR); }
+catch(e) { console.warn('OR falhou, tentando Groq', e); if (!_groqKey) throw e; }
+}
+return await _req('https://api.groq.com/openai/v1/chat/completions', _groqKey, bodyGroq);
+}
+function sysMsg(sys, msgs) { return sys ? [{ role:'system', content:sys }, ...msgs] : msgs; }
+async function _req(url, key, body) {
+const res = await fetch(url, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
+body: JSON.stringify(body)
+});
+const d = await res.json();
+if (d.error) throw new Error(d.error.message || JSON.stringify(d.error));
+return d.choices[0].message.content;
+}
+async function chamarComHistorico(historico, systemPrompt = '') {
+if (!temChave()) throw new Error('Nenhuma chave configurada.');
+const messages = sysMsg(systemPrompt, historico);
+const bodyOR = { model: _modelo, messages };
+const bodyGroq = { model: DEFAULT_MODEL_GROQ, messages };
+if (_orKey) {
+try { return await _req('https://openrouter.ai/api/v1/chat/completions', _orKey, bodyOR); }
+catch(e) { if (!_groqKey) throw e; }
+}
+return await _req('https://api.groq.com/openai/v1/chat/completions', _groqKey, bodyGroq);
+}
+return { carregar, chamar, chamarComHistorico, salvarKeys, temChave, getOR: ()=>_orKey, getGroq: ()=>_groqKey, getMod: ()=>_modelo };
+})();
+// ════════════════════════════════════════
+// Lógica da Aplicação Global & Histórico
+// ════════════════════════════════════════
+let registros = [];
+let linksExtras = [];
+function carregarLinks() {
+try {
+const s = localStorage.getItem('geriah_links_extras_v2');
+linksExtras = s ? JSON.parse(s) : [];
+if (!Array.isArray(linksExtras)) linksExtras = [];
+} catch(e) { linksExtras = []; }
+if (!linksExtras.length) {
+linksExtras = [
+{ id: 1, grupo: 'FNW Ecosystem', aberto: true, links: [
+{ id: 11, titulo: 'Rolefy', url: 'https://rolefy-neon.vercel.app/' }
+]},
+{ id: 2, grupo: 'IA & APIs', aberto: true, links: [
+{ id: 21, titulo: 'OpenRouter', url: 'https://openrouter.ai' },
+{ id: 22, titulo: 'Groq Console', url: 'https://console.groq.com' }
+]}
+];
+salvarLinks();
+}
+// sidebar rendered after panel opens
+}
+function salvarLinks() { localStorage.setItem('geriah_links_extras_v2', JSON.stringify(linksExtras)); }
+let registroAtivoId = null;
+let modulosPremiumDesbloqueados = false;
+let abaAtiva = 'base';
+let historyStack = [];
+let historyIndex = -1;
+function registrarHistorico() {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+if (historyIndex < historyStack.length - 1) {
+historyStack = historyStack.slice(0, historyIndex + 1);
+}
+historyStack.push(JSON.parse(JSON.stringify(r)));
+historyIndex++;
+atualizarBotoesHistorico();
+}
+function undoAcao() {
+if (historyIndex > 0) {
+historyIndex--;
+restaurarHistorico();
+}
+}
+function redoAcao() {
+if (historyIndex < historyStack.length - 1) {
+historyIndex++;
+restaurarHistorico();
+}
+}
+function restaurarHistorico() {
+const estadoSalvo = historyStack[historyIndex];
+const idx = registros.findIndex(x => x.id === registroAtivoId);
+if (idx !== -1) {
+registros[idx] = JSON.parse(JSON.stringify(estadoSalvo));
+salvarMemoria();
+mudarAbaExpansao(abaAtiva);
+atualizarBotoesHistorico();
+}
+}
+function atualizarBotoesHistorico() {
+const btnUndo = document.getElementById('btn-undo');
+const btnRedo = document.getElementById('btn-redo');
+if(btnUndo) btnUndo.disabled = historyIndex <= 0;
+if(btnRedo) btnRedo.disabled = historyIndex >= historyStack.length - 1;
+}
+function extrairJSON(texto) {
+try {
+const inicio = texto.indexOf('{');
+const fim = texto.lastIndexOf('}');
+if (inicio === -1 || fim === -1) throw new Error("A IA não retornou um formato JSON identificável.");
+return JSON.parse(texto.substring(inicio, fim + 1));
+} catch (e) {
+throw new Error("Falha na interpretação da resposta da IA. Verifique se o modelo selecionado suporta saída estruturada.");
+}
+}
+const regrasLeiturabilidade = "MANDATÓRIO: Estruture a resposta para máxima clareza. Use parágrafos MUITO CURTOS (máximo 3 linhas). Use TÓPICOS (bullet points). Use **NEGRITO** para destacar termos vitais.";
+const modulosConfig = {
+negocio: {
+titulo: "Canvas BMC Interativo", icone: "🏗️", desc: "Gere os 9 blocos do BMC.",
+prompt: `Você é um Consultor Estratégico. Gere o "Modelo de Negócio" baseado nos dados. Foco em propulsão de vendas. PROIBIDO metáforas de aviação.
+Sua resposta DEVE SER UM OBJETO JSON VÁLIDO contendo EXATAMENTE: {"parcerias":"","atividades":"","recursos":"","proposta":"","relacionamento":"","canais":"","segmentos":"","custos":"","receitas":""}`
+},
+marketing: {
+titulo: "Plano de Marketing Estratégico", icone: "🎯", desc: "Ações de aquisição, branding e tráfego.",
+prompt: `Você é um CMO. Gere o "Plano de Marketing". Inclua: Posicionamento, Pilares de Conteúdo, Captação e Esteira. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+vendas: {
+titulo: "Playbook de Vendas", icone: "🤝", desc: "Scripts, qualificação e fechamento.",
+prompt: `Você é um Diretor de Vendas. Gere o "Playbook de Vendas". Inclua: Pitch, Qualificação, Objeções e Fechamento. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+cs: {
+titulo: "Estratégia de Sucesso do Cliente", icone: "💎", desc: "Jornada de retenção e LTV.",
+prompt: `Você é um Especialista em CS. Gere o "Plano de CS". Inclua: Onboarding, Touchpoints, Retenção e Upsell. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+educacao: {
+titulo: "Educação do Cliente", icone: "📚", desc: "Trilhas de aprendizado e apoio.",
+prompt: `Você é um Especialista em Customer Education. Gere o "Plano de Educação do Cliente". Inclua: Conscientização, Capacitação e Formatos. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+esteira: {
+titulo: "Esteira de Produtos e Previsibilidade", icone: "🛤️", desc: "Crie um portfólio estruturado em escada de valor.",
+prompt: `Você é um Estrategista de Produtos. Gere a "Esteira de Produtos". Inclua: Isca (Front-end), Produto Core, Upsell/Cross-sell (Back-end) e Estratégia de Previsibilidade de Caixa. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+bsc: {
+titulo: "Balanced Scorecard (BSC)", icone: "📊", desc: "Objetivos e indicadores nas 4 perspectivas.",
+prompt: `Você é um Especialista em Gestão. Gere o "Balanced Scorecard". Inclua as 4 perspectivas: 1) Financeira, 2) Clientes, 3) Processos, 4) Aprendizado/Inovação. Defina Objetivos e KPIs para cada. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+},
+escala: {
+titulo: "Estratégia de Escala e Crescimento", icone: "🚀", desc: "Motores de crescimento e escala.",
+prompt: `Você é um Diretor de Crescimento (Growth). Gere o plano de "Crescimento e Escala". Estruture em: Lucratividade, Previsibilidade, Crescimento, Recorrência e Escala. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
+}
+};
+function initApp() {
+try {
+const saved = localStorage.getItem('consultoria_regs_v3');
+if (saved) { registros = JSON.parse(saved); if (!Array.isArray(registros)) registros = []; }
+} catch (e) { registros = []; }
+carregarLinks();
+iaKit.carregar();
+initView();
+document.getElementById('or-key').value = iaKit.getOR();
+document.getElementById('groq-key').value = iaKit.getGroq();
+document.getElementById('or-model').value = iaKit.getMod();
+atualizarStatusIA();
+renderizarTabela();
+reajustarTodosTextareas();
+}
+function salvarMemoria() { localStorage.setItem('consultoria_regs_v3', JSON.stringify(registros)); }
+function atualizarStatusIA() {
+const dot = document.getElementById('ia-status-dot');
+dot.className = iaKit.temChave() ? "w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.8)]" : "w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)]";
+}
+function abrirModalConfig() {
+document.getElementById('configModal').style.display = 'flex';
+}
+function fecharModalConfig() {
+document.getElementById('configModal').style.display = 'none';
+}
+function salvarConfigIA() {
+iaKit.salvarKeys(document.getElementById('or-key').value, document.getElementById('groq-key').value, document.getElementById('or-model').value);
+atualizarStatusIA(); fecharModalConfig(); alert("Chaves de IA salvas e ativas!");
+}
+function limparConfigIA() { document.getElementById('or-key').value = ''; document.getElementById('groq-key').value = ''; }
+function tsAgora() {
+const d = new Date();
+const pad = n => String(n).padStart(2,'0');
+return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}h${pad(d.getMinutes())}`;
+}
+function baixarJSON(dados, nome) {
+const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dados, null, 2));
+const a = document.createElement('a'); a.href = dataStr; a.download = nome;
+document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function exportarJSON() {
+if (!registros.length) return alert('Nenhum dado.');
+baixarJSON(registros, `geriah_fractal_global_${tsAgora()}.json`);
+}
+function importarJSON(event) {
+const file = event.target.files[0]; if (!file) return;
+const reader = new FileReader();
+reader.onload = function(e) {
+try {
+const importedData = JSON.parse(e.target.result);
+if (Array.isArray(importedData)) {
+registros = [...importedData, ...registros];
+const uniqueIds = new Set();
+registros = registros.filter(r => { if (uniqueIds.has(r.id)) return false; uniqueIds.add(r.id); return true; });
+salvarMemoria(); renderizarTabela(); alert(`${importedData.length} mapas importados com sucesso!`);
+} else { alert('Formato inválido.'); }
+} catch (error) { alert('Erro na importação.'); }
+event.target.value = '';
+};
+reader.readAsText(file);
+}
+// ════════════════════════════════════════
+// ALIMENTAÇÃO RÁPIDA — URL e Currículo
+// ════════════════════════════════════════
+function getSysAlimentacao() {
+const foco = (document.getElementById('qs_foco_essencia') || {}).value || '';
+return `Você é um consultor estratégico especialista em diagnóstico de essência humana e posicionamento de negócio.
+INTERPRETAÇÃO DA FONTE — leia a intenção:
+A fonte pode ser qualquer coisa: currículo, transcrição, perfil, site, app, código HTML, sistema.
+Sua missão é sempre a mesma: entender o NEGÓCIO ou PESSOA por trás da fonte e extrair a essência estratégica.
+- Texto / transcrição / currículo / perfil → extraia a essência da pessoa diretamente
+- Site / landing page / blog → extraia o negócio: o que faz, para quem, como se posiciona
+- App ou sistema em HTML → leia o propósito do produto: que problema resolve, quem usa, que valor entrega, como funciona — use isso para preencher os campos como se fosse o diagnóstico do negócio por trás do produto
+- Se a fonte for o próprio GERiAH Fractal com registros preenchidos → leia os dados dos registros salvos no localStorage ou no código como origem do diagnóstico
+- Em qualquer caso: extraia valor real, não descreva tecnicamente o código
+Analise o conteúdo fornecido e extraia o diagnóstico real da pessoa — preserve contradições, anseios, frustrações, bastidores, o que ela NÃO quer mais, tentativas anteriores, habilidades latentes ainda não monetizadas.
+NÃO simplifique. NÃO normalize. Capture a textura real da trajetória.${foco ? ' PERSPECTIVA DE LEITURA: ' + foco : ''}
+Responda SOMENTE com JSON válido, sem markdown, com exatamente estas chaves:
+{
+"vivencia": "o que a fonte domina, conhece, opera ou entrega — pode ser técnico, relacional, criativo, operacional, comercial, qualquer domínio real presente na fonte",
+"experiencia": "o que foi feito, construído, tentado ou vivido — projetos, produtos, serviços, mercados, contextos, erros e acertos — exatamente como aparece na fonte",
+"demanda": "o que o mercado, clientes ou usuários reconhecem, pedem ou buscam — baseado apenas no que está na fonte, sem inferir categorias genéricas",
+"oferta": "o que é entregue, vendido, oferecido ou pretende oferecer — produtos, serviços, sistemas, conteúdos, processos — conforme a fonte",
+"mercado": "quem compra, usa ou se beneficia — segmentos, perfis, contextos reais identificados na fonte"
+}
+Seja fiel à fonte. Não projete categorias genéricas como coaching, mentoria ou consultoria a menos que estejam explicitamente na fonte. Se não houver dados suficientes num campo, deixe-o vazio.`; }
+function setStatusAlimentacao(msg) {
+const el = document.getElementById('status-alimentacao');
+const txt = document.getElementById('status-alimentacao-msg');
+if (msg) { el.style.display = 'flex'; txt.textContent = msg; }
+else { el.style.display = 'none'; }
+}
+function distribuirNoCampos(obj) {
+['vivencia','experiencia','demanda','oferta','mercado'].forEach(c => {
+const el = document.getElementById('qs_' + c);
+if (el && obj[c]) { el.value = obj[c]; autoResize(el); }
+});
+const form = document.querySelector('.bg-quem-sou');
+if (form) {
+form.style.transition = 'box-shadow 0.4s';
+form.style.boxShadow = '0 0 0 3px #10b981';
+setTimeout(() => { form.style.boxShadow = ''; }, 2000);
+}
+}
+function detectarLinkedIn(url) {
+const isLinkedIn = url.includes('linkedin.com');
+const area = document.getElementById('linkedin-paste-area');
+if (area) area.style.display = isLinkedIn ? 'block' : 'none';
+}
+async function preencherViaURL() {
+if (!iaKit.temChave()) return alert('Configure a chave de IA primeiro.');
+const url = document.getElementById('input-url').value.trim();
+if (!url) return alert('Informe uma URL.');
+// isola — não contamina registro anterior
+registroAtivoId = null;
+const btnPainel = document.getElementById('btn-painel-expansao');
+if (btnPainel) btnPainel.style.display = 'none';
+const btn = document.getElementById('btn-url');
+btn.disabled = true; btn.textContent = '⏳ Analisando...';
+const isLinkedIn = url.includes('linkedin.com');
+const textoCola = (document.getElementById('input-linkedin-texto') || {}).value || '';
+let prompt;
+if (isLinkedIn) {
+setStatusAlimentacao('Processando perfil LinkedIn...');
+if (textoCola.trim()) {
+prompt = `Perfil LinkedIn: ${url}
+Texto copiado do perfil:
+${textoCola}
+Extraia o diagnóstico de essência desta pessoa com base no texto do perfil.`;
+} else {
+prompt = `Perfil LinkedIn: ${url}
+O LinkedIn bloqueia acesso direto. Com base na URL e no que você conhece sobre perfis LinkedIn típicos desta área, extraia o que for possível. Informe no campo vivencia que os dados são baseados na URL pois o texto do perfil não foi fornecido — sugira que o usuário cole o texto do perfil para melhor resultado.`;
+}
+} else {
+setStatusAlimentacao('Lendo URL e extraindo dados...');
+prompt = `Analise a URL a seguir e extraia informações sobre a pessoa ou negócio: ${url}
+Se não conseguir acessar diretamente, baseie-se no que a URL sugere sobre o domínio/perfil.`;
+}
+try {
+const resposta = await iaKit.chamar(prompt, getSysAlimentacao());
+const obj = extrairJSON(resposta);
+distribuirNoCampos(obj);
+setStatusAlimentacao(null);
+} catch(e) { alert('Erro: ' + e.message); setStatusAlimentacao(null); }
+finally { btn.disabled = false; btn.textContent = '⚡ Preencher'; }
+}
+async function preencherViaDocumento(input) {
+if (!iaKit.temChave()) return alert('Configure a chave de IA primeiro.');
+const file = input.files[0]; if (!file) return;
+document.getElementById('nome-documento').textContent = file.name;
+// isola — não contamina registro anterior
+registroAtivoId = null;
+const btnPainel = document.getElementById('btn-painel-expansao');
+if (btnPainel) btnPainel.style.display = 'none';
+setStatusAlimentacao('📄 Lendo documento...');
+try {
+let texto = '';
+if (file.type === 'application/pdf') {
+// PDF: lê bytes e envia como base64 para a IA interpretar via prompt
+const b64 = await new Promise((res, rej) => {
+const r = new FileReader();
+r.onload = e => res(e.target.result.split(',')[1]);
+r.onerror = rej;
+r.readAsDataURL(file);
+});
+// Envia descrição + base64 truncado para a IA extrair texto
+texto = `[Arquivo PDF em base64 — nome: ${file.name}]
+${b64.substring(0, 8000)}`;
+} else {
+// TXT / DOCX como texto
+texto = await new Promise((res, rej) => {
+const r = new FileReader();
+r.onload = e => res(e.target.result);
+r.onerror = rej;
+r.readAsText(file);
+});
+// HTML: extrai texto visível
+const isHtml = file.name.endsWith('.html') || file.name.endsWith('.htm') || file.type === 'text/html';
+if (isHtml) {
+setStatusAlimentacao('🔍 Escaneando documento HTML...');
+const parser = new DOMParser();
+const doc = parser.parseFromString(texto, 'text/html');
+doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove());
+texto = (doc.body || doc.documentElement).textContent || '';
+texto = texto.split('\n').filter(l => l.trim()).join('\n').trim();
+}
+texto = texto.substring(0, 12000);
+}
+setStatusAlimentacao('🧠 Escaneando documento...');
+const resposta = await iaKit.chamar(`Documento a seguir:\n\n${texto}`, getSysAlimentacao());
+const obj = extrairJSON(resposta);
+distribuirNoCampos(obj);
+setStatusAlimentacao(null);
+} catch(e) { alert('Erro: ' + e.message); setStatusAlimentacao(null); }
+input.value = '';
+}
+async function gerarEstrategiaComIA() {
+if (!iaKit.temChave()) return abrirModalConfig();
+const inputData = {
+vivencia: document.getElementById('qs_vivencia').value.trim(),
+experiencia: document.getElementById('qs_experiencia').value.trim(),
+demanda: document.getElementById('qs_demanda').value.trim(),
+oferta: document.getElementById('qs_oferta').value.trim(),
+mercado: document.getElementById('qs_mercado').value.trim(),
+foco_essencia: document.getElementById('qs_foco_essencia').value.trim(),
+foco: document.getElementById('qs_foco').value.trim()
+};
+if (!inputData.vivencia) return alert("Preencha ao menos a 'Vivência' para a IA ter base.");
+const btn = document.getElementById('btn-gerar');
+btn.innerHTML = `<span class='spinner'></span> Gerando pilares...`;
+btn.disabled = true;
+const focoEssenciaTxt = inputData.foco_essencia ? `\nPERSPECTIVA DE LEITURA DA ESSÊNCIA: ${inputData.foco_essencia}` : '';
+const prioridadeTxt = inputData.foco ? `\nPRIORIDADE ESTRATÉGICA DO CLIENTE: ${inputData.foco}\nUse esta prioridade como diretriz principal para gerar todos os pilares estratégicos.` : '';
+const systemPrompt = `Você é um advisor estratégico especialista em transformar essência humana em negócio.
+Leia o diagnóstico do cliente com profundidade — preserve contradições, anseios, frustrações e o que ainda não está formalizado.
+Use tudo isso para gerar os 4 pilares estratégicos de forma singular, específica para esta pessoa. PROIBIDO respostas genéricas.${focoEssenciaTxt}${prioridadeTxt}
+Diretrizes por pilar:
+- oq_pessoas/processos/produto: O QUE ELA FAZ — traduz vivência + experiência em entrega concreta
+- pq_publico/praca/preco: PRA QUEM — quem tem o problema que ela resolve, onde estão, o que pagariam
+- pt_produto/mensagem/oferta: POR QUANTO / PROMESSA — o que ela entrega, como fala, qual a oferta
+- cm_parceria/posicionamento/promocao: COMO — como chega nesse público, como se posiciona, com quem se alia
+Sua resposta DEVE SER UM OBJETO JSON VÁLIDO contendo EXATAMENTE estas chaves, sem markdown:
+{"oq_pessoas":"","oq_processos":"","oq_produto":"","pq_publico":"","pq_praca":"","pq_preco":"","pt_produto":"","pt_mensagem":"","pt_oferta":"","cm_parceria":"","cm_posicionamento":"","cm_promocao":""}`;
+const userPrompt = `DADOS DO CLIENTE (QUEM SOU):\n${JSON.stringify(inputData, null, 2)}`;
+try {
+const respostaTexto = await iaKit.chamar(userPrompt, systemPrompt);
+const gerado = extrairJSON(respostaTexto);
+const registroCompleto = { id: Date.now(), ...inputData, ...gerado };
+registros.unshift(registroCompleto); salvarMemoria();
+document.querySelectorAll('.bg-quem-sou textarea').forEach(t => { t.value = ''; autoResize(t); }); document.getElementById('qs_foco').value = ''; document.getElementById('qs_foco_essencia').value = '';
+renderizarTabela(); abrirPainelExpansao(registroCompleto.id);
+} catch (e) { alert(`Erro: ${e.message}`); }
+finally { btn.innerHTML = `✦ Extrair Base Estratégica`; btn.disabled = false; }
+}
+function renderizarTabela() {
+const tbody = document.getElementById('tabelaRegistros'); tbody.innerHTML = '';
+registros.forEach((r, idx) => {
+const tr = document.createElement('tr'); tr.className = "border-b hover:bg-gray-50 text-sm transition align-top";
+const esc = v => (v||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+tr.style.cursor = 'pointer';
+tr.dataset.id = r.id;
+tr.addEventListener('mouseenter', function() { this.classList.add('tr-hover-active'); });
+tr.addEventListener('mouseleave', function() { this.classList.remove('tr-hover-active'); });
+tr.addEventListener('click', function(e) {
+if (e.target.closest('button')) return;
+carregarNoDiagnostico(parseInt(this.dataset.id));
+document.querySelectorAll('#tabelaRegistros tr').forEach(t => t.classList.remove('tr-selected'));
+this.classList.add('tr-selected');
+});
+tr.innerHTML = `
+<td class="p-3 align-middle" onclick="event.stopPropagation()"><input type="checkbox" class="chk-item w-4 h-4 accent-blue-600" data-id="${r.id}" onchange="atualizarBarraExport()"></td><td class="p-3 font-semibold text-gray-400 whitespace-nowrap align-middle">#${registros.length - idx}</td><td class="p-3 align-middle text-slate-700 max-w-xs text-sm">${esc(r.vivencia || '-')}</td><td class="p-3 align-middle text-yellow-700 font-medium max-w-sm text-sm">${esc(r.pq_publico || '-')}</td><td class="p-3 align-middle"><div class="flex gap-2 items-center justify-end"><button onclick="carregarDiagnosticoEAbrir(${r.id})" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700 text-xs font-bold transition inline-flex items-center gap-1 whitespace-nowrap">
+🚀 Painel de Expansão
+</button><button onclick="deletarRegistro(${r.id})" class="text-red-400 hover:text-red-600 font-semibold text-xs transition whitespace-nowrap">Excluir</button></div></td>
+`;
+tbody.appendChild(tr);
+});
+}
+function carregarNoDiagnostico(id) {
+const r = registros.find(x => x.id === id);
+if (!r) return;
+registroAtivoId = id;
+const btnPainel = document.getElementById('btn-painel-expansao');
+if (btnPainel) btnPainel.style.display = id ? 'flex' : 'none';
+['vivencia','experiencia','demanda','oferta','mercado'].forEach(c => {
+const el = document.getElementById('qs_' + c);
+if (el) { el.value = r[c] || ''; autoResize(el); }
+});
+// restaura histórico do chat deste registro
+_chatHistorico = Array.isArray(r.chat_historico) ? [...r.chat_historico] : [];
+const msgBox = document.getElementById('chat-messages');
+if (msgBox) {
+msgBox.innerHTML = '';
+_chatHistorico.forEach(m => adicionarMensagemChat(m.role, m.content));
+}
+atualizarContextoLabel();
+window.scrollTo({ top: 0, behavior: 'smooth' }); if(_viewAtual==='biblioteca') setView('diagnostico');
+const form = document.querySelector('.bg-quem-sou');
+if (form) {
+form.style.transition = 'box-shadow 0.4s';
+form.style.boxShadow = '0 0 0 3px #3b82f6';
+setTimeout(() => { form.style.boxShadow = ''; }, 2000);
+}
+}
+function carregarDiagnosticoEAbrir(id) {
+carregarNoDiagnostico(id);
+abrirPainelExpansao(id);
+}
+function atualizarBarraExport() {
+const checked = document.querySelectorAll('.chk-item:checked');
+const barra = document.getElementById('barra-export');
+const label = document.getElementById('barra-export-label');
+if (checked.length > 0) {
+barra.style.display = 'flex';
+label.textContent = checked.length + ' item' + (checked.length > 1 ? 'ns' : '') + ' selecionado' + (checked.length > 1 ? 's' : '');
+} else {
+barra.style.display = 'none';
+}
+const chkAll = document.getElementById('chk-all');
+const total = document.querySelectorAll('.chk-item').length;
+if (chkAll) chkAll.indeterminate = checked.length > 0 && checked.length < total;
+if (chkAll) chkAll.checked = total > 0 && checked.length === total;
+}
+function toggleSelecionarTodos(chk) {
+document.querySelectorAll('.chk-item').forEach(c => c.checked = chk.checked);
+atualizarBarraExport();
+}
+function limparSelecao() {
+document.querySelectorAll('.chk-item').forEach(c => c.checked = false);
+const chkAll = document.getElementById('chk-all');
+if (chkAll) { chkAll.checked = false; chkAll.indeterminate = false; }
+atualizarBarraExport();
+}
+function exportarSelecionados() {
+const ids = [...document.querySelectorAll('.chk-item:checked')].map(c => parseInt(c.dataset.id));
+const selecionados = registros.filter(r => ids.includes(r.id));
+if (!selecionados.length) return;
+const sugestao = selecionados.length === 1 ? (selecionados[0].vivencia || '').slice(0, 40).trim() : '';
+const nome = prompt(`Nome para o arquivo (${selecionados.length} item${selecionados.length>1?'ns':''}):
+Data e hora serão adicionadas automaticamente.`, sugestao);
+if (nome === null) return;
+const nomeSlug = (nome.trim() || 'geriah_export').toLowerCase().replace(/[^a-z0-9_\-áéíóúãõâêîôûàç ]/gi,'').replace(/\s+/g,'_');
+baixarJSON(selecionados, `${nomeSlug}_${tsAgora()}.json`);
+limparSelecao();
+}
+function salvarCampoRegistro(campo, valor) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+r[campo] = valor;
+salvarMemoria();
+}
+function deletarRegistro(id) { registros = registros.filter(r => r.id !== id); salvarMemoria(); renderizarTabela(); }
+function abrirPainelExpansao(id) {
+registroAtivoId = id;
+document.getElementById('expansaoModal').style.display = 'flex';
+setTimeout(() => { renderizarSidebarLinks(); ajustarLarguraModal(); }, 50);
+document.body.classList.add('modal-active');
+historyStack = [];
+historyIndex = -1;
+registrarHistorico();
+mudarAbaExpansao('base');
+}
+// ════════════════════════════════════════
+// BUSCA GLOBAL DO PAINEL
+// ════════════════════════════════════════
+let _buscaIdx = -1;
+let _buscaResultados = [];
+const MODULOS_LABELS = {
+base: '1. Framework Base Interativo',
+negocio: '2. BMC Interativo',
+marketing: '3. Marketing',
+vendas: '4. Vendas',
+cs: '5. Sucesso do Cliente',
+educacao: '6. Educação do Cliente',
+esteira: '7. Esteira de Produtos',
+bsc: '8. Balanced Scorecard',
+escala: '9. Escala e Crescimento',
+iaprompts: '10. IA com Prompts Livres',
+extras: '11. Ferramentas (EXTRAS)'
+};
+function buscarGlobal(q) {
+const box = document.getElementById('busca-global-results');
+q = (q || '').trim().toLowerCase();
+_buscaIdx = -1;
+if (!q || q.length < 2) { box.style.display = 'none'; return; }
+const r = registros.find(x => x.id === registroAtivoId);
+_buscaResultados = [];
+// ── Módulos estratégicos
+Object.entries(MODULOS_LABELS).forEach(([key, label]) => {
+if (label.toLowerCase().includes(q)) {
+_buscaResultados.push({ tipo: 'modulo', label, key, sub: 'Módulo estratégico' });
+}
+});
+// ── Campos do registro ativo
+if (r) {
+const camposTexto = {
+vivencia: 'Vivência', experiencia: 'Experiência', demanda: 'Demanda',
+oferta: 'Oferta', mercado: 'Mercado', pq_publico: 'Público Foco',
+pq_praca: 'Praça', pq_preco: 'Preço', oq_pessoas: 'Pessoas',
+oq_processos: 'Processos', oq_produto: 'Produto',
+pt_produto: 'Promessa', pt_mensagem: 'Mensagem', pt_oferta: 'Oferta',
+cm_parceria: 'Parceria', cm_posicionamento: 'Posicionamento', cm_promocao: 'Promoção',
+foco_essencia: 'Foco da Essência', prioridades: 'Prioridades', nota_global: 'Nota Global'
+};
+Object.entries(camposTexto).forEach(([key, label]) => {
+const val = r[key] || '';
+if (val.toLowerCase().includes(q)) {
+const idx = val.toLowerCase().indexOf(q);
+const trecho = '...' + val.substring(Math.max(0, idx-20), idx+60).replace(/\n/g,' ') + '...';
+_buscaResultados.push({ tipo: 'campo', label, key, sub: trecho,
+aba: ['vivencia','experiencia','demanda','oferta','mercado','foco_essencia','prioridades','nota_global'].includes(key) ? 'base' : 'base'
+});
+}
+});
+}
+// ── Biblioteca (outros registros)
+registros.forEach(reg => {
+if (reg.id === registroAtivoId) return;
+const texto = [reg.vivencia, reg.pq_publico, reg.experiencia].join(' ').toLowerCase();
+if (texto.includes(q)) {
+const preview = (reg.vivencia || reg.pq_publico || '').substring(0, 60);
+_buscaResultados.push({ tipo: 'registro', label: preview, regId: reg.id, sub: 'Biblioteca — clica para abrir' });
+}
+});
+// ── Links
+linksExtras.forEach(g => {
+(g.links || []).forEach(lk => {
+if (lk.titulo.toLowerCase().includes(q) || lk.url.toLowerCase().includes(q)) {
+_buscaResultados.push({ tipo: 'link', label: lk.titulo, url: lk.url, sub: lk.url, grupoLabel: g.grupo });
+}
+});
+});
+if (!_buscaResultados.length) {
+box.innerHTML = '<div class="px-4 py-3 text-sm text-slate-400 italic">Nenhum resultado encontrado.</div>';
+box.style.display = 'block';
+return;
+}
+const TIPO_ICONE = { modulo: '📋', campo: '✏️', registro: '📁', link: '🔗' };
+box.innerHTML = _buscaResultados.map((res, i) => `
+<div class="busca-result-item px-4 py-2.5 cursor-pointer border-b border-slate-100 last:border-0 hover:bg-blue-50 transition"
+data-idx="${i}" onmousedown="selecionarBusca(${i})"><div class="flex items-center gap-2"><span class="text-base">${TIPO_ICONE[res.tipo] || '🔍'}</span><div class="min-w-0"><div class="text-sm font-semibold text-slate-800 truncate">${res.label}</div><div class="text-[11px] text-slate-400 truncate">${res.sub}</div></div>
+${res.grupoLabel ? '<span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded shrink-0">' + res.grupoLabel + '</span>' : ''}
+</div></div>
+`).join('');
+box.style.display = 'block';
+}
+function navegarBusca(e) {
+const items = document.querySelectorAll('.busca-result-item');
+if (!items.length) return;
+if (e.key === 'ArrowDown') { e.preventDefault(); _buscaIdx = Math.min(_buscaIdx + 1, items.length - 1); }
+else if (e.key === 'ArrowUp') { e.preventDefault(); _buscaIdx = Math.max(_buscaIdx - 1, 0); }
+else if (e.key === 'Enter') { if (_buscaIdx >= 0) selecionarBusca(_buscaIdx); return; }
+else if (e.key === 'Escape') { fecharBusca(); return; }
+items.forEach((el, i) => el.classList.toggle('bg-blue-100', i === _buscaIdx));
+}
+function selecionarBusca(idx) {
+const res = _buscaResultados[idx];
+if (!res) return;
+fecharBusca();
+if (res.tipo === 'modulo') {
+mudarAbaExpansao(res.key);
+} else if (res.tipo === 'campo') {
+mudarAbaExpansao(res.aba || 'base');
+setTimeout(() => {
+const el = document.getElementById('base-' + res.key) || document.getElementById('campo-' + res.key.replace('_','-'));
+if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.focus(); el.style.boxShadow = '0 0 0 3px #3b82f6'; setTimeout(() => el.style.boxShadow = '', 2000); }
+}, 150);
+} else if (res.tipo === 'registro') {
+carregarDiagnosticoEAbrir(res.regId);
+} else if (res.tipo === 'link') {
+abrirLink(res.url);
+}
+}
+function fecharBusca() {
+document.getElementById('busca-global-results').style.display = 'none';
+document.getElementById('busca-global-input').value = '';
+_buscaResultados = []; _buscaIdx = -1;
+}
+document.addEventListener('click', e => {
+const wrap = document.getElementById('busca-global-wrap');
+if (wrap && !wrap.contains(e.target)) fecharBusca();
+});
+// ════════════════════════════════════════
+// DOCS & CONTEXTO
+// ════════════════════════════════════════
+function renderizarDocs(contentArea) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+if (!Array.isArray(r.docs)) r.docs = [];
+const docsHtml = r.docs.map((doc, i) => `
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleDocItem(${i}, this)"><div class="flex items-center gap-2"><span class="doc-arrow text-slate-400 font-bold text-sm">▸</span><span class="text-sm font-bold text-white">${doc.nome}</span><span class="text-[11px] text-slate-400">${doc.tipo || 'texto'} · ${(doc.conteudo||'').length} chars</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="editarNomeDoc(${i})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️ Nome</button><button onclick="substituirConteudoDoc(${i})" class="text-yellow-400 hover:text-yellow-200 text-xs border border-slate-600 px-2 py-1 rounded">📋 Substituir</button><button onclick="removerDoc(${i})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button></div></div><div class="doc-body p-4 bg-slate-50" style="display:none" id="doc-body-${i}"><textarea onblur="salvarDocConteudo(${i}, this.value)" class="w-full text-[12px] font-mono p-3 bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-400 min-h-[120px] resize-y text-slate-700">${doc.conteudo||''}</textarea></div></div>
+`).join('') || '<p class="text-slate-400 text-sm text-center py-8 italic">Nenhum documento ainda.</p>';
+contentArea.innerHTML = `
+<div class="flex flex-col sm:flex-row justify-between items-center mb-5 border-b pb-4 gap-3"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">📁 Docs & Contexto</h2><div class="flex gap-2"><button onclick="adicionarDocTexto()" class="bg-slate-700 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-900 transition">✏️ Colar texto</button><label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-blue-700 transition flex items-center gap-1">
+📎 Upload arquivo
+<input type="file" accept=".pdf,.txt,.doc,.docx,.md" class="hidden" onchange="uploadDoc(this)"></label></div></div><div id="docs-lista">${docsHtml}</div><div id="form-doc" style="display:none" class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3"><input id="form-doc-nome" type="text" placeholder="Nome do documento" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><textarea id="form-doc-conteudo" placeholder="Cole o conteúdo aqui..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white min-h-[140px] resize-y font-mono"></textarea><div class="flex gap-2 justify-end"><button onclick="cancelarFormDoc()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button><button onclick="salvarFormDoc()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button></div></div><div class="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700">
+💡 Docs salvos aqui são lidos automaticamente pelo <strong>Advisor IA</strong> e pelos módulos de geração.
+</div>
+`;
+}
+function toggleDocItem(i, btn) {
+const body = document.getElementById('doc-body-' + i);
+const arrow = btn.querySelector('.doc-arrow');
+if (!body) return;
+const open = body.style.display === 'block';
+body.style.display = open ? 'none' : 'block';
+if (arrow) arrow.textContent = open ? '▸' : '▾';
+}
+function adicionarDocTexto() {
+document.getElementById('form-doc-nome').value = '';
+document.getElementById('form-doc-conteudo').value = '';
+document.getElementById('form-doc').style.display = 'block';
+document.getElementById('form-doc-nome').focus();
+}
+function cancelarFormDoc() {
+const f = document.getElementById('form-doc');
+f.style.display = 'none';
+delete f.dataset.substituindo;
+}
+function salvarFormDoc() {
+const nome = document.getElementById('form-doc-nome').value.trim();
+const conteudo = document.getElementById('form-doc-conteudo').value.trim();
+if (!nome || !conteudo) return alert('Preencha nome e conteúdo.');
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+if (!Array.isArray(r.docs)) r.docs = [];
+const idxSubst = document.getElementById('form-doc').dataset.substituindo;
+if (idxSubst !== undefined && idxSubst !== '') {
+// substituição
+r.docs[parseInt(idxSubst)] = { nome, conteudo, tipo: 'texto', data: new Date().toISOString() };
+} else {
+r.docs.push({ nome, conteudo, tipo: 'texto', data: new Date().toISOString() });
+}
+salvarMemoria();
+cancelarFormDoc();
+renderizarDocs(document.getElementById('expansao-content-area'));
+}
+function salvarDocConteudo(i, valor) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.docs || !r.docs[i]) return;
+r.docs[i].conteudo = valor;
+salvarMemoria();
+}
+function removerDoc(i) {
+if (!confirm('Remover este documento?')) return;
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.docs) return;
+r.docs.splice(i, 1);
+salvarMemoria();
+renderizarDocs(document.getElementById('expansao-content-area'));
+}
+function substituirConteudoDoc(i) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.docs || !r.docs[i]) return;
+// reuse the add form
+document.getElementById('form-doc-nome').value = r.docs[i].nome;
+document.getElementById('form-doc-conteudo').value = '';
+document.getElementById('form-doc-conteudo').placeholder = 'Cole o novo conteúdo aqui...';
+document.getElementById('form-doc').style.display = 'block';
+document.getElementById('form-doc').dataset.substituindo = i;
+document.getElementById('form-doc-conteudo').focus();
+}
+function editarNomeDoc(i) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.docs || !r.docs[i]) return;
+const novo = prompt('Novo nome:', r.docs[i].nome);
+if (novo && novo.trim()) {
+r.docs[i].nome = novo.trim();
+salvarMemoria();
+renderizarDocs(document.getElementById('expansao-content-area'));
+}
+}
+async function uploadDoc(input) {
+const file = input.files[0]; if (!file) return;
+const r = registros.find(x => x.id === registroAtivoId); if (!r) return;
+if (!Array.isArray(r.docs)) r.docs = [];
+input.value = '';
+const isTxt = file.type === 'text/plain' || file.type === 'text/html' || file.name.endsWith('.txt') || file.name.endsWith('.md') || file.name.endsWith('.html') || file.name.endsWith('.htm');
+if (isTxt) {
+// TXT/MD/HTML: lê como texto
+let conteudo = await new Promise((res, rej) => {
+const reader = new FileReader();
+reader.onload = e => res(e.target.result);
+reader.onerror = rej;
+reader.readAsText(file);
+});
+// Se for HTML: extrai só texto visível, remove scripts/styles/tags
+if (file.name.endsWith('.html') || file.name.endsWith('.htm') || file.type === 'text/html') {
+const parser = new DOMParser();
+const doc = parser.parseFromString(conteudo, 'text/html');
+// remove scripts, styles, noscript
+doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove());
+// extrai texto visível
+conteudo = (doc.body || doc.documentElement).innerText || doc.body.textContent || '';
+// colapsa linhas vazias
+conteudo = conteudo.split('\n').filter(l => l.trim()).join('\n').trim();
+}
+r.docs.push({ nome: file.name, conteudo: conteudo.substring(0, 20000), tipo: 'texto', data: new Date().toISOString() });
+salvarMemoria();
+renderizarDocs(document.getElementById('expansao-content-area'));
+} else {
+// PDF/DOCX: envia base64 para a IA extrair o texto
+if (!iaKit.temChave()) return alert('Configure a IA para processar este tipo de arquivo.');
+const statusEl = document.getElementById('docs-lista');
+const orig = statusEl.innerHTML;
+statusEl.innerHTML = '<div class="text-center py-8 text-blue-600 font-semibold">⏳ Extraindo texto do arquivo via IA...</div>';
+try {
+const b64 = await new Promise((res, rej) => {
+const reader = new FileReader();
+reader.onload = e => res(e.target.result.split(',')[1]);
+reader.onerror = rej;
+reader.readAsDataURL(file);
+});
+const sys = `Extraia TODO o texto legível deste arquivo. Retorne apenas o texto puro, sem comentários, sem formatação markdown, sem explicações. Se for uma conversa ou anotação, preserve a estrutura original.`;
+const prompt = `Arquivo: ${file.name}
+Tipo: ${file.type}
+Conteúdo base64 (primeiros 60000 chars):
+${b64.substring(0, 60000)}`;
+const conteudo = await iaKit.chamar(prompt, sys);
+r.docs.push({ nome: file.name, conteudo: conteudo.substring(0, 30000), tipo: file.type || 'arquivo', data: new Date().toISOString() });
+salvarMemoria();
+} catch(e) {
+alert('Erro ao extrair: ' + e.message + '\n\nDica: para DOCX, copie e cole o texto diretamente usando "Colar texto".');
+}
+renderizarDocs(document.getElementById('expansao-content-area'));
+}
+}
+// ════════════════════════════════════════
+// SISTEMA DE LINKS — FERRAMENTAS EXTRAS (com grupos/acordeão)
+// ════════════════════════════════════════
+const _linkWins = {}; // url → window reference
+const LINK_WIN_W = 500, LINK_WIN_H = 700;
+function getLinkWinFeatures() {
+const chatW = _chatAberto ? 420 : 0;
+const left = Math.max(0, window.screen.availWidth - LINK_WIN_W - chatW - 16);
+return `width=${LINK_WIN_W},height=${LINK_WIN_H},top=80,left=${left},scrollbars=yes,resizable=yes`;
+}
+function detectarIconeLink(url) {
+try {
+const h = new URL(url).hostname.replace('www.','');
+if (h.includes('instagram')) return '📸';
+if (h.includes('linkedin')) return '💼';
+if (h.includes('youtube')) return '▶️';
+if (h.includes('notion')) return '📝';
+if (h.includes('drive.google')) return '📁';
+if (h.includes('docs.google')) return '📄';
+if (h.includes('sheets.google')) return '📊';
+if (h.includes('figma')) return '🎨';
+if (h.includes('github')) return '🐙';
+if (h.includes('openrouter')) return '🤖';
+if (h.includes('groq')) return '⚡';
+if (h.includes('rolefy') || h.includes('vercel')) return '🚀';
+if (h.includes('whatsapp')) return '💬';
+if (h.includes('typeform') || h.includes('forms')) return '📋';
+if (h.includes('calendly')) return '📅';
+if (h.includes('stripe') || h.includes('hotmart') || h.includes('kiwify')) return '💳';
+return '🔗';
+} catch(e) { return '🔗'; }
+}
+function abrirLink(url) {
+const win = _linkWins[url];
+if (win && !win.closed) {
+win.focus();
+} else {
+_linkWins[url] = window.open(url, '_blank', getLinkWinFeatures());
+}
+}
+function toggleGrupo(grupoId) {
+const g = linksExtras.find(g => g.id === grupoId);
+if (g) { g.aberto = !g.aberto; salvarLinks(); }
+const body = document.getElementById('grupo-body-' + grupoId);
+const arrow = document.getElementById('grupo-arrow-' + grupoId);
+if (body) body.style.display = g.aberto ? 'block' : 'none';
+if (arrow) arrow.textContent = g.aberto ? '▾' : '▸';
+}
+function renderizarFerramentasMain() {
+const container = document.getElementById('ferramentas-main-container');
+if (!container) return;
+container.innerHTML = linksExtras.map(g => {
+const linksHtml = (g.links || []).map(lk => `
+<div class="flex items-center gap-3 px-3 py-2.5 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition"><span class="text-xl w-8 text-center shrink-0">${detectarIconeLink(lk.url)}</span><div class="flex-1 min-w-0"><div class="font-semibold text-slate-800 text-sm truncate">${lk.titulo}</div><div class="text-xs text-slate-400 truncate">${lk.url}</div></div><div class="flex gap-1"><button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-blue-700">↗ Abrir</button><button onclick="editarLinkMain(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1.5 rounded text-xs hover:bg-slate-200">✏️</button><button onclick="removerLinkMain(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1.5 rounded text-xs">✕</button></div></div>
+`).join('') || '<p class="text-slate-400 text-xs px-3 py-2 italic">Nenhum link.</p>';
+return `
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupoMain(${g.id}, this)"><div class="flex items-center gap-2"><span class="main-grp-arrow text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span><span class="font-bold text-white text-sm">${g.grupo}</span><span class="text-[11px] text-slate-400">${(g.links||[]).length} link${(g.links||[]).length!==1?'s':''}</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="adicionarLinkMain(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded">＋ link</button><button onclick="editarGrupoMain(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️</button><button onclick="removerGrupoMain(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button></div></div><div class="main-grp-body p-3 space-y-2 bg-slate-50" style="display:${g.aberto?'block':'none'}" id="main-grp-${g.id}">
+${linksHtml}
+</div></div>`;
+}).join('') || '<p class="text-slate-400 text-sm text-center py-8">Nenhum grupo ainda.</p>';
+}
+function toggleGrupoMain(grupoId, btn) {
+const g = linksExtras.find(g => g.id === grupoId);
+if (!g) return;
+g.aberto = !g.aberto; salvarLinks(); renderizarSidebarLinks();
+const body = document.getElementById('main-grp-' + grupoId);
+const arrow = btn.querySelector('.main-grp-arrow');
+if (body) body.style.display = g.aberto ? 'block' : 'none';
+if (arrow) arrow.textContent = g.aberto ? '▾' : '▸';
+}
+let _formMainMode = null;
+function _abrirFormMain(label, showTitulo, showUrl, showGrupo) {
+document.getElementById('form-link-main-label').textContent = label;
+document.getElementById('form-link-main-titulo').style.display = showTitulo ? 'block' : 'none';
+document.getElementById('form-link-main-url').style.display = showUrl ? 'block' : 'none';
+document.getElementById('form-link-main-grupo-wrap').style.display = showGrupo ? 'block' : 'none';
+document.getElementById('form-link-main').style.display = 'block';
+}
+function adicionarGrupoMain() { _formMainMode={tipo:'grupo'}; _abrirFormMain('Novo grupo',false,false,true); document.getElementById('form-link-main-grupo').value=''; document.getElementById('form-link-main-grupo').focus(); }
+function editarGrupoMain(gid) { const g=linksExtras.find(x=>x.id===gid); if(!g) return; _formMainMode={tipo:'grupo',grupoId:gid}; _abrirFormMain('Renomear grupo',false,false,true); document.getElementById('form-link-main-grupo').value=g.grupo; document.getElementById('form-link-main-grupo').focus(); }
+function adicionarLinkMain(gid) { _formMainMode={tipo:'link',grupoId:gid}; _abrirFormMain('Novo link',true,true,false); document.getElementById('form-link-main-titulo').value=''; document.getElementById('form-link-main-url').value=''; document.getElementById('form-link-main-titulo').focus(); }
+function editarLinkMain(gid,lid) { const g=linksExtras.find(x=>x.id===gid); const lk=g&&g.links.find(x=>x.id===lid); if(!lk) return; _formMainMode={tipo:'link',grupoId:gid,linkId:lid}; _abrirFormMain('Editar link',true,true,false); document.getElementById('form-link-main-titulo').value=lk.titulo; document.getElementById('form-link-main-url').value=lk.url; document.getElementById('form-link-main-titulo').focus(); }
+function cancelarFormMain() { document.getElementById('form-link-main').style.display='none'; _formMainMode=null; }
+function removerGrupoMain(gid) { if(!confirm('Remover grupo e links?')) return; linksExtras=linksExtras.filter(g=>g.id!==gid); salvarLinks(); renderizarFerramentasMain(); renderizarSidebarLinks(); }
+function removerLinkMain(gid,lid) { if(!confirm('Remover link?')) return; const g=linksExtras.find(x=>x.id===gid); if(g) g.links=g.links.filter(l=>l.id!==lid); salvarLinks(); renderizarFerramentasMain(); renderizarSidebarLinks(); }
+function salvarFormMain() {
+if (!_formMainMode) return;
+if (_formMainMode.tipo==='grupo') {
+const nome = document.getElementById('form-link-main-grupo').value.trim();
+if (!nome) return alert('Digite o nome.');
+if (_formMainMode.grupoId) { const g=linksExtras.find(x=>x.id===_formMainMode.grupoId); if(g) g.grupo=nome; }
+else linksExtras.push({id:Date.now(),grupo:nome,aberto:true,links:[]});
+} else {
+const titulo=document.getElementById('form-link-main-titulo').value.trim();
+const url=document.getElementById('form-link-main-url').value.trim();
+if (!titulo||!url) return alert('Preencha título e URL.');
+const g=linksExtras.find(x=>x.id===_formMainMode.grupoId); if(!g) return;
+if (_formMainMode.linkId) { const lk=g.links.find(x=>x.id===_formMainMode.linkId); if(lk){lk.titulo=titulo;lk.url=url;} }
+else g.links.push({id:Date.now(),titulo,url});
+}
+salvarLinks(); cancelarFormMain(); renderizarFerramentasMain(); renderizarSidebarLinks();
+}
+function renderizarSidebarLinks() {
+const container = document.getElementById('sidebar-links-container');
+if (!container) return;
+container.innerHTML = linksExtras.map(g => {
+const linksHtml = (g.links || []).map(lk => `
+<button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}"
+class="w-full text-left flex items-center gap-2 px-3 py-1.5 rounded-md text-[12px] text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition truncate"><span class="shrink-0">${detectarIconeLink(lk.url)}</span><span class="truncate">${lk.titulo}</span></button>
+`).join('');
+return `
+<div class="mb-1"><button onclick="toggleSidebarGrupo(${g.id}, this)"
+class="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-bold text-slate-500 uppercase tracking-wide hover:bg-slate-200 transition"><span class="sidebar-arrow text-slate-400">${g.aberto ? '▾' : '▸'}</span><span class="truncate">${g.grupo}</span></button><div class="sidebar-grupo-body pl-1 space-y-0.5" style="display:${g.aberto ? 'block' : 'none'}">
+${linksHtml}
+</div></div>`;
+}).join('');
+}
+function toggleSidebarGrupo(grupoId, btn) {
+const g = linksExtras.find(g => g.id === grupoId);
+if (!g) return;
+g.aberto = !g.aberto;
+salvarLinks();
+const body = btn.nextElementSibling;
+const arrow = btn.querySelector('.sidebar-arrow');
+if (body) body.style.display = g.aberto ? 'block' : 'none';
+if (arrow) arrow.textContent = g.aberto ? '▾' : '▸';
+}
+function renderizarExtras(contentArea) {
+const grupos = linksExtras.map(g => {
+const linksHtml = (g.links || []).map(lk => `
+<div class="flex items-center gap-2 px-3 py-2 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition group"><span class="text-lg w-7 text-center shrink-0">${detectarIconeLink(lk.url)}</span><div class="flex-1 min-w-0"><div class="font-medium text-slate-800 text-sm truncate">${lk.titulo}</div><div class="text-[11px] text-slate-400 truncate">${lk.url}</div></div><div class="flex gap-1 shrink-0"><button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold hover:bg-blue-700 transition">↗</button><button onclick="editarLink(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1 rounded text-xs hover:bg-slate-200 transition">✏️</button><button onclick="removerLink(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1 rounded text-xs transition">✕</button></div></div>
+`).join('') || '<p class="text-slate-400 text-xs px-3 py-2 italic">Nenhum link neste grupo.</p>';
+return `
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupo(${g.id})"><div class="flex items-center gap-2"><span id="grupo-arrow-${g.id}" class="text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span><span class="font-bold text-white text-sm">${g.grupo}</span><span class="text-[11px] text-slate-400 ml-1">${(g.links||[]).length} link${(g.links||[]).length !== 1 ? 's' : ''}</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="adicionarLink(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded transition">＋ link</button><button onclick="editarGrupo(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded transition">✏️</button><button onclick="removerGrupo(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded transition">✕</button></div></div><div id="grupo-body-${g.id}" style="display:${g.aberto ? 'block' : 'none'}" class="p-3 space-y-2 bg-slate-50">
+${linksHtml}
+</div></div>`;
+}).join('');
+contentArea.innerHTML = `
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 border-b pb-4 gap-3"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🛠️ Ferramentas & Links</h2><button onclick="adicionarGrupo()" class="bg-slate-800 text-yellow-400 border border-slate-600 px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-700 transition flex items-center gap-2">＋ Novo grupo</button></div><div id="lista-grupos-extras">${grupos || '<p class="text-slate-400 text-sm text-center py-8">Nenhum grupo criado.</p>'}</div><div id="form-link-extras" style="display:none" class="mt-4 bg-white border border-slate-200 rounded-xl p-5 space-y-3 shadow-sm"><h4 class="font-bold text-slate-700 text-sm" id="form-link-label">Novo link</h4><input id="form-link-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"><input id="form-link-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"><div id="form-grupo-nome-wrap" style="display:none"><input id="form-grupo-nome" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"></div><div class="flex gap-2 justify-end pt-1"><button onclick="cancelarFormLink()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition">Cancelar</button><button onclick="salvarFormLink()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Salvar</button></div></div>
+`;
+}
+let _formMode = null; // {tipo:'link'|'grupo', grupoId, linkId}
+function adicionarGrupo() {
+_formMode = { tipo: 'grupo' };
+document.getElementById('form-link-label').textContent = 'Novo grupo';
+document.getElementById('form-link-titulo').style.display = 'none';
+document.getElementById('form-link-url').style.display = 'none';
+document.getElementById('form-grupo-nome-wrap').style.display = 'block';
+document.getElementById('form-grupo-nome').value = '';
+document.getElementById('form-link-extras').style.display = 'block';
+document.getElementById('form-grupo-nome').focus();
+}
+function editarGrupo(grupoId) {
+const g = linksExtras.find(g => g.id === grupoId);
+if (!g) return;
+_formMode = { tipo: 'grupo', grupoId };
+document.getElementById('form-link-label').textContent = 'Renomear grupo';
+document.getElementById('form-link-titulo').style.display = 'none';
+document.getElementById('form-link-url').style.display = 'none';
+document.getElementById('form-grupo-nome-wrap').style.display = 'block';
+document.getElementById('form-grupo-nome').value = g.grupo;
+document.getElementById('form-link-extras').style.display = 'block';
+document.getElementById('form-grupo-nome').focus();
+}
+function removerGrupo(grupoId) {
+if (!confirm('Remover este grupo e todos os links dentro?')) return;
+linksExtras = linksExtras.filter(g => g.id !== grupoId);
+salvarLinks();
+renderizarSidebarLinks();
+renderizarExtras(document.getElementById('expansao-content-area'));
+}
+function adicionarLink(grupoId) {
+_formMode = { tipo: 'link', grupoId };
+document.getElementById('form-link-label').textContent = 'Novo link';
+document.getElementById('form-link-titulo').style.display = 'block';
+document.getElementById('form-link-url').style.display = 'block';
+document.getElementById('form-grupo-nome-wrap').style.display = 'none';
+document.getElementById('form-link-titulo').value = '';
+document.getElementById('form-link-url').value = '';
+document.getElementById('form-link-extras').style.display = 'block';
+document.getElementById('form-link-titulo').focus();
+}
+function editarLink(grupoId, linkId) {
+const g = linksExtras.find(g => g.id === grupoId);
+const lk = g && g.links.find(l => l.id === linkId);
+if (!lk) return;
+_formMode = { tipo: 'link', grupoId, linkId };
+document.getElementById('form-link-label').textContent = 'Editar link';
+document.getElementById('form-link-titulo').style.display = 'block';
+document.getElementById('form-link-url').style.display = 'block';
+document.getElementById('form-grupo-nome-wrap').style.display = 'none';
+document.getElementById('form-link-titulo').value = lk.titulo;
+document.getElementById('form-link-url').value = lk.url;
+document.getElementById('form-link-extras').style.display = 'block';
+document.getElementById('form-link-titulo').focus();
+}
+function cancelarFormLink() {
+document.getElementById('form-link-extras').style.display = 'none';
+_formMode = null;
+}
+function salvarFormLink() {
+if (!_formMode) return;
+if (_formMode.tipo === 'grupo') {
+const nome = document.getElementById('form-grupo-nome').value.trim();
+if (!nome) return alert('Digite o nome do grupo.');
+if (_formMode.grupoId) {
+const g = linksExtras.find(g => g.id === _formMode.grupoId);
+if (g) g.grupo = nome;
+} else {
+linksExtras.push({ id: Date.now(), grupo: nome, aberto: true, links: [] });
+}
+} else {
+const titulo = document.getElementById('form-link-titulo').value.trim();
+const url = document.getElementById('form-link-url').value.trim();
+if (!titulo || !url) return alert('Preencha título e URL.');
+const g = linksExtras.find(g => g.id === _formMode.grupoId);
+if (!g) return;
+if (_formMode.linkId) {
+const lk = g.links.find(l => l.id === _formMode.linkId);
+if (lk) { lk.titulo = titulo; lk.url = url; }
+} else {
+g.links.push({ id: Date.now(), titulo, url });
+}
+}
+salvarLinks();
+renderizarSidebarLinks();
+cancelarFormLink();
+renderizarExtras(document.getElementById('expansao-content-area'));
+}
+function removerLink(grupoId, linkId) {
+if (!confirm('Remover este link?')) return;
+const g = linksExtras.find(g => g.id === grupoId);
+if (g) g.links = g.links.filter(l => l.id !== linkId);
+salvarLinks();
+renderizarSidebarLinks();
+renderizarExtras(document.getElementById('expansao-content-area'));
+}
+function fecharPainelExpansao() {
+document.getElementById('expansaoModal').style.display = 'none';
+document.body.classList.remove('modal-active');
+// mantém registroAtivoId para o chat continuar com contexto
+}
+function formatarMarkdownBasico(texto) {
+if(!texto) return '';
+let html = texto.replace(/^### (.*$)/gim, '<h3>$1</h3>').replace(/^## (.*$)/gim, '<h2>$1</h2>')
+.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+.replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n\n/g, '</p><p>')
+.replace(/\n- (.*)/g, '<ul><li>$1</li></ul>').replace(/<\/ul>\n<ul>/g, '\n');
+return `<p>${html}</p>`;
+}
+function verificarSenha() {
+if (modulosPremiumDesbloqueados) return true;
+const tentativa = prompt("Módulo Avançado Bloqueado.\nDigite a senha de acesso para liberar:");
+if (tentativa === 'fnw2026') {
+modulosPremiumDesbloqueados = true;
+alert("🔓 Acesso Premium Liberado com Sucesso!");
+return true;
+} else if (tentativa !== null) {
+alert("Senha Incorreta.");
+}
+return false;
+}
+function atualizarBotoesAba() {
+const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
+['base', 'negocio', 'marketing', 'vendas', 'cs', 'educacao', 'esteira', 'bsc', 'escala', 'iaprompts', 'docs', 'extras'].forEach(t => {
+const btn = document.getElementById(`tab-btn-${t}`);
+if(!btn) return;
+let isPremiumTab = abasPremium.includes(t);
+let lockBadge = (!modulosPremiumDesbloqueados && isPremiumTab) ? ' <span class="lock-icon text-[10px] bg-red-100 text-red-600 border border-red-200 px-1.5 py-0.5 rounded">🔒 Premium</span>' : '';
+let label = '';
+if(t==='base') label = '1. Framework Base Interativo';
+else if(t==='negocio') label = '2. BMC Interativo';
+else if(t==='marketing') label = '3. Marketing';
+else if(t==='vendas') label = '4. Vendas';
+else if(t==='cs') label = '5. Sucesso do Cliente';
+else if(t==='educacao') label = '6. Educação do Cliente';
+else if(t==='esteira') label = '7. Esteira de Produtos';
+else if(t==='bsc') label = '8. Balanced Scorecard';
+else if(t==='escala') label = '9. Escala e Crescimento';
+else if(t==='iaprompts') label = '10. IA com Prompts Livres';
+else if(t==='docs') label = '11. Docs & Contexto';
+else if(t==='extras') label = '12. Ferramentas (EXTRAS)';
+btn.innerHTML = label + lockBadge;
+btn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-transparent flex justify-between items-center";
+});
+}
+function obterClassesImpacto(tipo) {
+const strTipo = tipo ? String(tipo).toLowerCase() : '';
+if (strTipo === 'positivo') return { text: 'text-green-700 font-medium', border: 'border-green-400 ring-2 ring-green-100 bg-green-50', badge: 'bg-green-100 text-green-700 border-green-200', icon: '✅' };
+if (strTipo === 'negativo') return { text: 'text-red-700 font-medium', border: 'border-red-400 ring-2 ring-red-100 bg-red-50', badge: 'bg-red-100 text-red-700 border-red-200', icon: '🚨' };
+if (strTipo === 'neutro') return { text: 'text-orange-700 font-medium', border: 'border-orange-400 ring-2 ring-orange-100 bg-orange-50', badge: 'bg-orange-100 text-orange-700 border-orange-200', icon: '⚠️' };
+return { text: 'text-slate-700', border: 'border-slate-200 bg-white', badge: '', icon: '' };
+}
+function mudarAbaExpansao(tabName) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
+if (abasPremium.includes(tabName) && !verificarSenha()) return;
+abaAtiva = tabName;
+atualizarBotoesAba();
+const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+if(activeBtn) activeBtn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-blue-100 text-blue-800 border border-blue-200 flex justify-between items-center";
+const contentArea = document.getElementById('expansao-content-area');
+// --- ABA EXTRAS (Link Externo) ---
+if (tabName === 'docs') {
+renderizarDocs(contentArea);
+return;
+}
+if (tabName === 'extras') {
+renderizarExtras(contentArea);
+return;
+}
+// --- ABA IA COM PROMPTS ---
+if (tabName === 'iaprompts') {
+contentArea.innerHTML = `
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🧠 IA com Prompts Livres</h2></div><div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4"><p class="text-sm text-slate-600">Utilize todo o contexto mapeado deste cliente para gerar qualquer outro material. Digite a sua instrução abaixo:</p><textarea id="custom-ia-prompt" class="w-full text-[14px] p-4 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 min-h-[120px]" placeholder="Ex: Crie um guião de vídeo de 1 minuto para o Reels do Instagram focado na oferta principal...">${r.ia_custom_prompt || ''}</textarea><div class="flex justify-end"><button id="btn-gerar-custom-ia" onclick="acionarIAPersonalizada()" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow font-bold hover:bg-blue-700 transition flex items-center gap-2 text-sm">
+✦ Gerar com IA
+</button></div></div>
+${r.ia_custom_response ? `
+<div class="mt-8 border-t border-slate-200 pt-6"><h3 class="text-lg font-bold text-slate-800 mb-4">Resultado da IA:</h3><div class="markdown-content text-slate-700 bg-white border border-slate-200 rounded-lg p-6 shadow-sm">
+${formatarMarkdownBasico(r.ia_custom_response)}
+</div></div>
+` : ''}
+`;
+return;
+}
+// --- ABA BASE ---
+if (tabName === 'base') {
+const imp = r.impactos_base || {};
+const renderCardBase = (key, title) => {
+const impacto = imp[key];
+const cls = obterClassesImpacto(impacto ? impacto.tipo : null);
+const alertaFixo = impacto ? `
+<div class="${cls.badge} mt-2 p-2 rounded border shadow-sm"><div class="text-[10px] font-bold mb-1 flex items-center gap-1">${cls.icon} Impacto Detetado</div><div class="text-[11px] leading-snug">${impacto.motivo}</div></div>` : '';
+const camposQuemSou = ['vivencia','experiencia','demanda','oferta','mercado'];
+const isQuemSou = camposQuemSou.includes(key);
+const dropdownBtn = isQuemSou ? `
+<div class="relative ia-dropdown-wrap"><button onclick="toggleDropdownBase('${key}', event)" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA ▾</button><div id="dd-base-${key}" class="hidden absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 w-52 text-[12px] overflow-hidden"><div class="px-3 py-2 bg-slate-50 text-slate-400 text-[10px] font-semibold uppercase tracking-wide border-b">Preencher com IA</div><button onclick="preencherTodosQuemSou('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700 font-semibold border-b">↺ Todos os campos</button><button onclick="preencherAPartirDe('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700">↓ A partir deste campo</button></div></div>` : `<button onclick="aprimorarBlocoBase('${key}')" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition">✨ IA</button>`;
+return `
+<div class="${cls.border} border rounded p-3 flex flex-col relative shadow-sm transition hover:shadow-md mb-4 bg-white"><div class="flex justify-between items-center mb-2"><label class="text-[12px] font-bold text-slate-700 uppercase tracking-wide">${title}</label>
+${dropdownBtn}
+</div><textarea id="base-${key}" onblur="salvarEVerificarImpactoBase('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${cls.text} min-h-[40px] overflow-hidden" rows="2">${r[key] || ''}</textarea>
+${alertaFixo}
+</div>`;
+};
+contentArea.innerHTML = `
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">1. Framework Base Interativo</h2><div class="flex items-center gap-2"><span id="base-status" class="text-xs font-semibold text-slate-500"></span><button onclick="gerarEstrategiaComIA()" class="text-xs bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition font-bold">✦ Preencher todos</button><button onclick="abrirLimparBase()" class="text-xs border border-red-200 text-red-400 px-3 py-1.5 rounded hover:bg-red-50 transition">🗑 Limpar...</button></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5"><div class="bg-orange-50 border border-orange-200 rounded-lg p-4"><div class="flex justify-between items-center mb-2"><label class="text-xs font-bold text-orange-700 uppercase tracking-wide">🎯 Foco da Essência</label><span class="text-[10px] text-orange-400">definido no diagnóstico — editável aqui também</span></div><textarea id="campo-foco-essencia" oninput="autoResize(this);salvarCampoRegistro('foco_essencia', this.value)" class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400 min-h-[40px] resize-none" placeholder="Ex: foco em infoproduto, priorizar B2B...">${r.foco_essencia || r.foco || ''}</textarea></div><div class="bg-purple-50 border border-purple-200 rounded-lg p-4"><div class="flex justify-between items-center mb-2"><label class="text-xs font-bold text-purple-700 uppercase tracking-wide">📌 Prioridades do Cliente</label><span class="text-[10px] text-purple-400">P1, P2, P3... livre e editável</span></div><textarea id="campo-prioridades" oninput="autoResize(this);salvarCampoRegistro('prioridades', this.value)" class="w-full text-[13px] p-2 bg-white border border-purple-200 rounded outline-none focus:border-purple-400 min-h-[40px] resize-none" placeholder="P1 — lançar mentoria em grupo&#10;P2 — parcerias com empresas&#10;P3 — criar canal no YouTube...">${r.prioridades || ''}</textarea></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"><div class="border rounded-lg shadow-sm bg-blue-50/30 p-3 border-blue-200 h-max"><h4 class="bg-blue-600 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">QUEM SOU</h4>
+${renderCardBase('vivencia', 'Vivência')}
+${renderCardBase('experiencia', 'Experiência')}
+${renderCardBase('demanda', 'Demanda')}
+${renderCardBase('oferta', 'Oferta')}
+${renderCardBase('mercado', 'Mercado')}
+</div><div class="border rounded-lg shadow-sm bg-orange-50/30 p-3 border-orange-200 h-max"><h4 class="bg-orange-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">O QUE FAÇO</h4>
+${renderCardBase('oq_pessoas', 'Pessoas')}
+${renderCardBase('oq_processos', 'Processos')}
+${renderCardBase('oq_produto', 'Produto')}
+</div><div class="border rounded-lg shadow-sm bg-yellow-50/30 p-3 border-yellow-200 h-max"><h4 class="bg-yellow-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">PRA QUEM</h4>
+${renderCardBase('pq_publico', 'Público')}
+${renderCardBase('pq_praca', 'Praça')}
+${renderCardBase('pq_preco', 'Preço')}
+</div><div class="border rounded-lg shadow-sm bg-teal-50/30 p-3 border-teal-200 h-max"><h4 class="bg-teal-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">POR QUANTO</h4>
+${renderCardBase('pt_produto', 'Promessa / Produto')}
+${renderCardBase('pt_mensagem', 'Mensagem')}
+${renderCardBase('pt_oferta', 'Oferta')}
+</div><div class="border rounded-lg shadow-sm bg-green-50/30 p-3 border-green-200 h-max"><h4 class="bg-green-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">COMO</h4>
+${renderCardBase('cm_parceria', 'Parceria')}
+${renderCardBase('cm_posicionamento', 'Posicionamento')}
+${renderCardBase('cm_promocao', 'Promoção')}
+</div></div><div class="mt-6 bg-slate-900 border border-slate-700 rounded-xl p-5"><div class="flex justify-between items-center mb-3"><label class="text-sm font-bold text-yellow-400 uppercase tracking-wide flex items-center gap-2">📋 Nota Global do Cliente <span class="text-slate-400 text-xs font-normal normal-case">exclusiva deste registro — contexto, observações, histórico</span></label></div><textarea id="campo-nota-global" oninput="autoResize(this);salvarCampoRegistro('nota_global', this.value)" class="w-full text-[13px] p-3 bg-slate-800 text-slate-100 border border-slate-600 rounded-lg outline-none focus:border-yellow-400 min-h-[100px] resize-none placeholder-slate-500" placeholder="Cole aqui mensagens do cliente, contexto de reunião, observações estratégicas, prints de conversa transcritos...">${r.nota_global || ''}</textarea></div>
+`;
+reajustarTodosTextareas();
+return;
+}
+// --- ABA BMC ---
+if (tabName === 'negocio') {
+if (r.modelo_bmc) {
+const b = r.modelo_bmc;
+const imp = r.impactos_bmc || {};
+const renderCard = (key, title, icon) => {
+const isImpacted = !!imp[key];
+const textClass = isImpacted ? 'text-red-600 font-medium' : 'text-slate-700';
+const borderClass = isImpacted ? 'border-red-400 ring-2 ring-red-100 bg-red-50' : 'border-slate-200 bg-white';
+const alertaFixo = isImpacted ? `
+<div class="mt-2 p-2 bg-red-100 border border-red-200 rounded text-red-700 shadow-sm"><div class="text-[10px] font-bold mb-1 flex items-center gap-1">⚠️ Impacto Detetado</div><div class="text-[11px] leading-snug">${imp[key]}</div></div>` : '';
+return `
+<div class="${borderClass} border rounded-lg p-4 flex flex-col relative shadow-sm transition hover:shadow-md h-max mb-4"><div class="flex justify-between items-center border-b pb-2 mb-3 border-slate-100"><h4 class="font-bold text-[13px] text-slate-800 uppercase tracking-tight flex items-center gap-1">${icon} ${title}</h4><button onclick="aprimorarBlocoBMC('${key}')" class="text-[11px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA</button></div><textarea id="bmc-${key}" onblur="salvarEVerificarImpactoBMC('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${textClass} min-h-[60px] overflow-hidden" rows="2">${b[key] || ''}</textarea>
+${alertaFixo}
+</div>`;
+};
+contentArea.innerHTML = `
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🏗️ BMC Interativo</h2><div class="flex items-center gap-3"><span id="bmc-status" class="text-xs font-semibold text-slate-500"></span><button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="text-xs font-bold text-slate-600 hover:text-blue-600 transition border border-slate-300 px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm whitespace-nowrap">
+↺ Recriar Todo Canvas
+</button></div></div><div class="bg-white p-3 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-5"><div class="grid grid-cols-1 lg:grid-cols-5 gap-5"><div class="h-max">${renderCard('parcerias', 'Parcerias', '🤝')}</div><div class="flex flex-col gap-1 h-max">
+${renderCard('atividades', 'Atividades', '⚙️')}
+${renderCard('recursos', 'Recursos', '📦')}
+</div><div class="h-max">${renderCard('proposta', 'Proposta de Valor', '🎁')}</div><div class="flex flex-col gap-1 h-max">
+${renderCard('relacionamento', 'Relacionamento', '❤️')}
+${renderCard('canais', 'Canais', '🚚')}
+</div><div class="h-max">${renderCard('segmentos', 'Segmentos', '🎯')}</div></div><div class="grid grid-cols-1 lg:grid-cols-2 gap-5"><div class="h-max">${renderCard('custos', 'Estrutura de Custos', '📉')}</div><div class="h-max">${renderCard('receitas', 'Fontes de Receita', '📈')}</div></div></div>
+`;
+reajustarTodosTextareas();
+}
+else {
+const c = modulosConfig.negocio;
+contentArea.innerHTML = `
+<div class="h-full flex flex-col items-center justify-center text-center p-8 bg-white border border-dashed border-slate-300 rounded-lg"><div class="text-5xl mb-4">${c.icone}</div><h2 class="text-2xl font-bold text-slate-800 mb-2">${c.titulo}</h2><p class="text-slate-600 max-w-md mb-6">${c.desc}</p><button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition tracking-wide">✦ Gerar BMC Interativo</button></div>`;
+}
+return;
+}
+// --- ABAS GENÉRICAS (Markdown) ---
+const config = modulosConfig[tabName];
+const propriedadeDado = `modelo_${tabName}`;
+const temConteudo = !!r[propriedadeDado];
+contentArea.innerHTML = `
+<div class="flex items-center justify-between mb-4 border-b pb-4 gap-3"><div class="flex items-center gap-3"><span class="text-3xl">${config.icone}</span><div><h2 class="text-xl font-bold text-slate-800">${config.titulo}</h2><p class="text-sm text-slate-500">${config.desc}</p></div></div><div class="flex gap-2 shrink-0">
+${temConteudo ? `
+<button onclick="acionarIAExterna('${tabName}')" class="text-sm text-slate-500 hover:text-blue-600 transition border px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm">↺ Regerar</button><button onclick="limparModulo('${tabName}')" class="text-sm text-red-400 hover:text-red-600 transition border border-red-200 px-3 py-1.5 rounded bg-white hover:bg-red-50 shadow-sm">🗑 Limpar</button>
+` : `
+<button id="btn-gerar-${tabName}" onclick="acionarIAExterna('${tabName}')" class="bg-blue-600 text-white px-5 py-2 rounded-md shadow font-bold hover:bg-blue-700 transition text-sm">✦ Gerar ${config.titulo}</button>
+`}
+</div></div>
+${temConteudo ? `
+<div class="markdown-content text-slate-700 bg-white border border-slate-200 rounded-lg p-8 shadow-sm">
+${formatarMarkdownBasico(r[propriedadeDado])}
+</div>
+` : `
+<div class="flex flex-col items-center justify-center text-center py-16 bg-slate-50 border border-dashed border-slate-300 rounded-lg"><div class="text-6xl mb-4 opacity-40">${config.icone}</div><p class="text-slate-400 text-sm mb-6 max-w-sm">Nenhum conteúdo gerado ainda.<br>Clique em <strong>✦ Gerar</strong> para criar com IA.</p></div>
+`}
+`;
+}
+// ════════════════════════════════════════
+// MOTOR IA: IA PERSONALIZADA COM PROMPT LIVRE
+// ════════════════════════════════════════
+async function acionarIAPersonalizada() {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const customPrompt = document.getElementById('custom-ia-prompt').value.trim();
+if (!customPrompt) return alert("Por favor, digite uma instrução para a IA.");
+const btn = document.getElementById('btn-gerar-custom-ia');
+const txtOriginal = btn.innerHTML;
+btn.innerHTML = `<span class='spinner'></span> Gerando...`;
+btn.disabled = true;
+const systemPrompt = `Você é um Assistente de Consultoria Estratégica.
+Responda ao pedido do usuário baseando-se RIGOROSAMENTE nos dados do Cliente (Framework Base e Módulos) fornecidos. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação.
+${regrasLeiturabilidade}
+Responda em Markdown claro.`;
+const dadosParaIA = JSON.stringify(r, null, 2);
+const userPrompt = `DADOS DO CLIENTE E ESTRATÉGIAS MAPEADAS:\n\n${dadosParaIA}\n\nINSTRUÇÃO DO USUÁRIO:\n${customPrompt}`;
+try {
+const respostaTexto = await iaKit.chamar(userPrompt, systemPrompt);
+r.ia_custom_prompt = customPrompt;
+r.ia_custom_response = respostaTexto.trim();
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao('iaprompts');
+} catch (e) {
+alert(`Erro na geração: ${e.message}`);
+btn.innerHTML = txtOriginal;
+btn.disabled = false;
+}
+}
+// ════════════════════════════════════════
+// MOTOR IA: FRAMEWORK BASE (SALVAR & APRIMORAR COM PROMPT)
+// ════════════════════════════════════════
+async function salvarEVerificarImpactoBase(key) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const novoValor = document.getElementById(`base-${key}`).value;
+if (novoValor === r[key]) return;
+r[key] = novoValor;
+if(r.impactos_base && r.impactos_base[key]) delete r.impactos_base[key];
+salvarMemoria();
+registrarHistorico();
+const status = document.getElementById('base-status');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Analisando impactos estratégicos...`;
+const systemPrompt = `Você é um Consultor Estratégico. O usuário alterou o item "${key}" do Framework Base.
+Analise os impactos diretos nos outros itens do framework.
+Retorne UM OBJETO JSON VÁLIDO contendo um array "impactos". Cada item deve ter:
+"bloco" (chave impactada), "tipo" ("positivo", "negativo" ou "neutro"), e "motivo" (explicação curta).
+Chaves válidas: vivencia, experiencia, demanda, oferta, mercado, oq_pessoas, oq_processos, oq_produto, pq_publico, pq_praca, pq_preco, pt_produto, pt_mensagem, pt_oferta, cm_parceria, cm_posicionamento, cm_promocao.
+Exemplo: {"impactos": [{"bloco": "pq_publico", "tipo": "negativo", "motivo": "O foco mudou e o público não vai entender."}]}
+Se não houver impacto, retorne {"impactos": []}.`;
+const userPrompt = `FRAMEWORK ATUAL:\n${JSON.stringify(r, null, 2)}\n\nO item "${key}" foi atualizado para: "${novoValor}". Analise os impactos.`;
+try {
+const resposta = await iaKit.chamar(userPrompt, systemPrompt);
+const analise = extrairJSON(resposta);
+r.impactos_base = {};
+if (analise.impactos && Array.isArray(analise.impactos)) {
+analise.impactos.forEach(imp => {
+if (imp.bloco !== key) {
+r.impactos_base[imp.bloco] = { tipo: imp.tipo, motivo: imp.motivo };
+}
+});
+}
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao('base');
+} catch (e) {
+status.innerHTML = `<span class="text-red-500">Falha ao analisar.</span>`;
+setTimeout(() => { status.innerHTML = ''; }, 3000);
+}
+}
+function toggleDropdownBase(key, e) {
+e.stopPropagation();
+fecharDropdownsBase();
+const dd = document.getElementById('dd-base-' + key);
+if (dd) dd.classList.toggle('hidden');
+}
+function fecharDropdownsBase() {
+document.querySelectorAll('[id^="dd-base-"]').forEach(d => d.classList.add('hidden'));
+}
+document.addEventListener('click', fecharDropdownsBase);
+const CAMPOS_QUEM_SOU = [
+{ key: 'vivencia', label: 'Vivência (Habilidades)' },
+{ key: 'experiencia', label: 'Experiência' },
+{ key: 'demanda', label: 'Demanda (Reconhecida)' },
+{ key: 'oferta', label: 'Oferta (Preferidas)' },
+{ key: 'mercado', label: 'Mercado (Disposição a pagar)' }
+];
+async function preencherTodosQuemSou(origemKey) {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const status = document.getElementById('base-status');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Preenchendo todos os campos...`;
+const foco = r.foco_essencia || r.foco || '';
+const sys = `Você é um advisor estratégico. Com base no contexto do registro, preencha TODOS os 5 campos do QUEM SOU.${foco ? ' FOCO: ' + foco : ''}
+Retorne SOMENTE JSON válido: {"vivencia":"","experiencia":"","demanda":"","oferta":"","mercado":""}`;
+const prompt = `Registro atual:\n${JSON.stringify(r, null, 2)}\n\nCampo de origem (ponto de partida): ${origemKey} = "${r[origemKey] || ''}"`;
+try {
+const resp = await iaKit.chamar(prompt, sys);
+const obj = extrairJSON(resp);
+CAMPOS_QUEM_SOU.forEach(c => { if (obj[c.key]) r[c.key] = obj[c.key]; });
+salvarMemoria(); registrarHistorico(); mudarAbaExpansao('base');
+} catch(e) { alert('Erro: ' + e.message); status.innerHTML = ''; }
+}
+async function preencherAPartirDe(origemKey) {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const idx = CAMPOS_QUEM_SOU.findIndex(c => c.key === origemKey);
+const camposAlvo = CAMPOS_QUEM_SOU.slice(idx + 1);
+if (!camposAlvo.length) return alert('Este já é o último campo.');
+const status = document.getElementById('base-status');
+const labelsAlvo = camposAlvo.map(c => c.label).join(', ');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Preenchendo: ${labelsAlvo}...`;
+const foco = r.foco_essencia || r.foco || '';
+const chavesAlvo = camposAlvo.map(c => `"${c.key}":""`).join(',');
+const sys = `Você é um advisor estratégico. Com base no campo "${origemKey}" e no contexto do registro, deduza e preencha os campos seguintes.${foco ? ' FOCO: ' + foco : ''}
+Retorne SOMENTE JSON válido com exatamente estas chaves: {${chavesAlvo}}`;
+const prompt = `Registro atual:\n${JSON.stringify(r, null, 2)}\n\nCampo base: ${origemKey} = "${r[origemKey] || ''}"`;
+try {
+const resp = await iaKit.chamar(prompt, sys);
+const obj = extrairJSON(resp);
+camposAlvo.forEach(c => { if (obj[c.key]) r[c.key] = obj[c.key]; });
+salvarMemoria(); registrarHistorico(); mudarAbaExpansao('base');
+} catch(e) { alert('Erro: ' + e.message); status.innerHTML = ''; }
+}
+async function aprimorarBlocoBase(key) {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const instrucaoUser = prompt("O que deseja alterar neste bloco?\n(Deixe em branco e clique OK para aprimoramento automático focado em clareza)");
+if (instrucaoUser === null) return;
+const txtDirecional = instrucaoUser.trim() !== "" ?
+`INSTRUÇÃO ESPECÍFICA DO USUÁRIO: "${instrucaoUser.trim()}"` :
+`INSTRUÇÃO: Reescreva e eleve o nível estratégico, garantindo máxima clareza e impacto comercial.`;
+const status = document.getElementById('base-status');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Aprimorando...`;
+const systemPrompt = `Você é um Consultor Estratégico. Aprimore o texto do bloco "${key}" do Framework Base.
+Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação.
+${regrasLeiturabilidade}
+Retorne APENAS o texto direto aprimorado para o bloco, sem aspas ou json. Seja muito claro.`;
+const userPrompt = `FRAMEWORK COMPLETO:\n${JSON.stringify(r, null, 2)}\n\n${txtDirecional}\nAplique a instrução apenas no item "${key}".`;
+try {
+const resposta = await iaKit.chamar(userPrompt, systemPrompt);
+r[key] = resposta.trim();
+if(r.impactos_base && r.impactos_base[key]) delete r.impactos_base[key];
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao('base');
+} catch (e) {
+alert(`Erro ao aprimorar: ${e.message}`);
+status.innerHTML = '';
+}
+}
+// ════════════════════════════════════════
+// MOTOR IA: BMC (SALVAR & APRIMORAR COM PROMPT)
+// ════════════════════════════════════════
+async function salvarEVerificarImpactoBMC(key) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.modelo_bmc) return;
+const novoValor = document.getElementById(`bmc-${key}`).value;
+if (novoValor === r.modelo_bmc[key]) return;
+r.modelo_bmc[key] = novoValor;
+if(r.impactos_bmc && r.impactos_bmc[key]) delete r.impactos_bmc[key];
+salvarMemoria();
+registrarHistorico();
+const status = document.getElementById('bmc-status');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Analisando impactos...`;
+const systemPrompt = `Você é um Analista de Negócios. O usuário alterou o bloco "${key}" do Business Model Canvas.
+Identifique se exige adaptação de outros blocos (impactos diretos).
+Retorne UM OBJETO JSON VÁLIDO contendo um array "impactos". Cada item deve ter "bloco" e "motivo".
+Chaves: parcerias, atividades, recursos, proposta, relacionamento, canais, segmentos, custos, receitas.`;
+const userPrompt = `CANVAS ATUAL:\n${JSON.stringify(r.modelo_bmc, null, 2)}\n\nO bloco "${key}" foi atualizado. Analise os impactos.`;
+try {
+const resposta = await iaKit.chamar(userPrompt, systemPrompt);
+const analise = extrairJSON(resposta);
+r.impactos_bmc = {};
+if (analise.impactos && Array.isArray(analise.impactos)) {
+analise.impactos.forEach(imp => {
+if (imp.bloco !== key) r.impactos_bmc[imp.bloco] = imp.motivo;
+});
+}
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao('negocio');
+} catch (e) {
+status.innerHTML = `<span class="text-red-500">Falha ao analisar impactos.</span>`;
+setTimeout(() => { status.innerHTML = ''; }, 3000);
+}
+}
+async function aprimorarBlocoBMC(key) {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r || !r.modelo_bmc) return;
+const instrucaoUser = prompt("O que deseja alterar neste bloco do BMC?\n(Deixe em branco e clique OK para aprimoramento automático focado em clareza)");
+if (instrucaoUser === null) return;
+const txtDirecional = instrucaoUser.trim() !== "" ?
+`INSTRUÇÃO ESPECÍFICA DO USUÁRIO: "${instrucaoUser.trim()}"` :
+`INSTRUÇÃO: Reescreva e eleve o nível estratégico, garantindo máxima clareza.`;
+const status = document.getElementById('bmc-status');
+status.innerHTML = `<span class='spinner spinner-blue scale-75'></span> Aprimorando...`;
+const systemPrompt = `Você é um Consultor Estratégico. Aprimore o texto do bloco "${key}" do BMC.
+Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação.
+${regrasLeiturabilidade}
+Retorne APENAS o texto direto aprimorado.`;
+const userPrompt = `CANVAS COMPLETO:\n${JSON.stringify(r.modelo_bmc, null, 2)}\n\n${txtDirecional}\nAplique a instrução apenas no bloco "${key}".`;
+try {
+const resposta = await iaKit.chamar(userPrompt, systemPrompt);
+r.modelo_bmc[key] = resposta.trim();
+if(r.impactos_bmc && r.impactos_bmc[key]) delete r.impactos_bmc[key];
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao('negocio');
+} catch (e) {
+alert(`Erro ao aprimorar: ${e.message}`);
+status.innerHTML = '';
+}
+}
+// ════════════════════════════════════════
+// MOTOR GERADOR UNIFICADO (Módulos Gerais)
+// ════════════════════════════════════════
+async function acionarIAExterna(tabName) {
+if (!iaKit.temChave()) return abrirModalConfig();
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const _prop = tabName === 'negocio' ? 'modelo_bmc' : `modelo_${tabName}`;
+if (r[_prop] && !confirm(`Este módulo já tem conteúdo.\n\nDeseja substituir pelo novo resultado?`)) return;
+const config = modulosConfig[tabName];
+const btnID = document.getElementById(`btn-gerar-${tabName}`) ? `btn-gerar-${tabName}` : null;
+let targetBtn = btnID ? document.getElementById(btnID) : document.querySelector(`button[onclick="acionarIAExterna('${tabName}')"]`);
+const txtOriginal = targetBtn.innerHTML;
+targetBtn.innerHTML = `<span class='spinner spinner-blue'></span> Processando...`;
+targetBtn.disabled = true;
+const systemPrompt = config.prompt;
+const dadosParaIA = JSON.stringify(r, null, 2);
+const diretrizFoco = r.foco_essencia ? `\n\n🎯 FOCO DA ESSÊNCIA (diretriz principal): ${r.foco_essencia}` : '';
+const diretrizPrioridades = r.prioridades ? `\n\n📌 PRIORIDADES DO CLIENTE: ${r.prioridades}` : '';
+const docsExtra = (r.docs && r.docs.length) ? `\n\nDOCUMENTOS DE CONTEXTO:\n` + r.docs.map(d => `[${d.nome}]\n${d.conteudo}`).join('\n\n') : '';
+let userPrompt = `Desenvolva o plano solicitado baseado no seguinte Perfil e Framework:\n\n${dadosParaIA}${diretrizFoco}${diretrizPrioridades}${docsExtra}`;
+if (r[`modelo_${tabName}`] || (tabName === 'negocio' && r.modelo_bmc)) {
+const instrucaoUser = prompt(`Deseja dar alguma instrução extra para recriar o ${config.titulo}?\n(Deixe em branco para recriar normalmente)`);
+if (instrucaoUser === null) {
+targetBtn.innerHTML = txtOriginal;
+targetBtn.disabled = false;
+return;
+}
+if (instrucaoUser.trim() !== "") {
+userPrompt += `\n\nATENÇÃO, INSTRUÇÃO EXTRA DO USUÁRIO PARA ESTA GERAÇÃO: "${instrucaoUser.trim()}"`;
+}
+}
+try {
+const respostaTexto = await iaKit.chamar(userPrompt, systemPrompt);
+if (tabName === 'negocio') {
+r.modelo_bmc = extrairJSON(respostaTexto);
+r.impactos_bmc = {};
+} else {
+const prop = `modelo_${tabName}`;
+r[prop] = respostaTexto.trim();
+}
+salvarMemoria();
+registrarHistorico();
+mudarAbaExpansao(tabName);
+} catch (e) {
+alert(`Erro na geração: ${e.message}`);
+targetBtn.innerHTML = txtOriginal;
+targetBtn.disabled = false;
+}
+}
+window.onload = initApp;
+// ════════════════════════════════════════
+// ADVISOR IA — CHAT CONTEXTUALIZADO
+// ════════════════════════════════════════
+let _chatHistorico = []; // [{role, content}]
+let _chatAberto = false;
+function getChatContextData() {
+// Prioridade: registro ativo → campos ao vivo no form
+const r = registros.find(x => x.id === registroAtivoId);
+if (r) return r;
+// fallback: lê campos do formulário ao vivo
+const liveGet = id => (document.getElementById(id) || {}).value || '';
+const live = {
+vivencia: liveGet('qs_vivencia'),
+experiencia: liveGet('qs_experiencia'),
+demanda: liveGet('qs_demanda'),
+oferta: liveGet('qs_oferta'),
+mercado: liveGet('qs_mercado'),
+foco_essencia: liveGet('qs_foco_essencia'),
+foco: liveGet('qs_foco'),
+};
+return Object.values(live).some(v => v) ? live : null;
+}
+function getChatSystemPrompt() {
+const base = `Você é o Advisor GERiAH — consultor estratégico especializado em negócios construídos a partir da essência humana.
+MODO PADRÃO — siga sempre estas regras salvo instrução explícita do usuário:
+• Respostas curtas e diretas (máximo 3-4 linhas)
+• Faça UMA pergunta por vez, sempre contextualizada ao diagnóstico
+• Nunca despeje informação sem antes entender o que o usuário quer explorar
+• Na sua PRIMEIRA resposta de cada conversa, termine com: "Posso continuar assim — rápido e direto — ou prefere que eu vá mais fundo em algum ponto?"
+• Se o usuário pedir mais detalhe, profundidade ou disser "pode desenvolver", expanda sem limite
+• Se o usuário pedir para ser mais sucinto, volte ao modo padrão
+Quando não souber algo do contexto, pergunte ao usuário — nunca invente.
+REGRAS ANTI-INVENÇÃO (inegociáveis):
+- Use APENAS o que está no contexto fornecido. Nunca invente dados, nomes, números ou afirmações.
+- Se a informação não estiver no contexto, diga: "Não tenho essa informação no diagnóstico ainda."
+- Nunca assuma o que o cliente faz, quer ou sente além do que foi escrito.
+- Em caso de dúvida, pergunte. Nunca complete com suposições.`;
+const r = getChatContextData();
+const rReal = registros.find(x => x.id === registroAtivoId); // registro completo com docs/módulos
+if (!r) return base + '\n\nNenhum diagnóstico preenchido ainda. Peça ao usuário que compartilhe informações sobre si.';
+const ctx = [
+// ── QUEM SOU
+r.vivencia && `[VIVÊNCIA] ${r.vivencia}`,
+r.experiencia && `[EXPERIÊNCIA] ${r.experiencia}`,
+r.demanda && `[DEMANDA RECONHECIDA] ${r.demanda}`,
+r.oferta && `[OFERTA] ${r.oferta}`,
+r.mercado && `[MERCADO] ${r.mercado}`,
+r.foco_essencia && `[FOCO DA ESSÊNCIA] ${r.foco_essencia}`,
+r.foco && `[PRIORIDADE ESTRATÉGICA] ${r.foco}`,
+r.prioridades && `[PRIORIDADES DO CLIENTE] ${r.prioridades}`,
+r.nota_global && `[NOTA GLOBAL] ${r.nota_global}`,
+// ── O QUE FAÇO
+r.oq_pessoas && `[O QUE FAZ / PESSOAS] ${r.oq_pessoas}`,
+r.oq_processos && `[O QUE FAZ / PROCESSOS] ${r.oq_processos}`,
+r.oq_produto && `[O QUE FAZ / PRODUTO] ${r.oq_produto}`,
+// ── PRA QUEM
+r.pq_publico && `[PÚBLICO FOCO] ${r.pq_publico}`,
+r.pq_praca && `[PRAÇA] ${r.pq_praca}`,
+r.pq_preco && `[PREÇO] ${r.pq_preco}`,
+// ── POR QUANTO / PROMESSA
+r.pt_produto && `[PROMESSA / PRODUTO] ${r.pt_produto}`,
+r.pt_mensagem && `[MENSAGEM] ${r.pt_mensagem}`,
+r.pt_oferta && `[OFERTA ESTRATÉGICA] ${r.pt_oferta}`,
+// ── COMO
+r.cm_parceria && `[PARCERIA] ${r.cm_parceria}`,
+r.cm_posicionamento && `[POSICIONAMENTO] ${r.cm_posicionamento}`,
+r.cm_promocao && `[PROMOÇÃO] ${r.cm_promocao}`,
+].filter(Boolean).join('\n');
+// ── Módulos gerados (se existirem)
+// ── Status explícito de cada módulo (preenchido ou vazio)
+const TODOS_MODULOS = [
+{ key: null, label: 'Framework Base (QUEM SOU + 4 pilares)', check: () => rReal && (rReal.vivencia || rReal.oq_pessoas || rReal.pq_publico) },
+{ key: 'modelo_bmc', label: 'BMC Interativo' },
+{ key: 'modelo_marketing',label: 'Marketing Estratégico' },
+{ key: 'modelo_vendas', label: 'Vendas / Playbook' },
+{ key: 'modelo_cs', label: 'Sucesso do Cliente (CS)' },
+{ key: 'modelo_educacao', label: 'Educação do Cliente' },
+{ key: 'modelo_esteira', label: 'Esteira de Produtos' },
+{ key: 'modelo_bsc', label: 'Balanced Scorecard (BSC)' },
+{ key: 'modelo_escala', label: 'Escala e Crescimento' },
+{ key: 'modelo_iaprompts',label: 'IA com Prompts Livres' },
+];
+const statusModulos = TODOS_MODULOS.map(m => {
+const preenchido = m.check ? m.check() : (rReal && rReal[m.key]);
+return `${preenchido ? '✅' : '⬜'} ${m.label}`;
+}).join('\n');
+const modulosGerados = [];
+if (rReal) {
+if (rReal.modelo_bmc) modulosGerados.push(`[BMC]\n${JSON.stringify(rReal.modelo_bmc)}`);
+const modMap = {
+modelo_marketing: 'MARKETING',
+modelo_vendas: 'VENDAS / PLAYBOOK',
+modelo_cs: 'SUCESSO DO CLIENTE',
+modelo_educacao: 'EDUCAÇÃO DO CLIENTE',
+modelo_esteira: 'ESTEIRA DE PRODUTOS',
+modelo_bsc: 'BALANCED SCORECARD',
+modelo_escala: 'ESCALA E CRESCIMENTO',
+modelo_iaprompts: 'IA PROMPTS LIVRES',
+};
+Object.entries(modMap).forEach(([key, label]) => {
+if (rReal[key]) modulosGerados.push(`[${label}]\n${rReal[key]}`);
+});
+}
+const todosLinks = linksExtras.flatMap(g => (g.links||[]).map(lk => `- ${lk.titulo} (${lk.url})`)).join('\n');
+const sistemaInfo = `
+SOBRE O SISTEMA GERIAH FRACTAL:
+Módulos disponíveis (gratuitos: Framework Base, BMC, Vendas, Educação do Cliente | premium: Marketing, CS, Esteira, BSC, Escala, IA Prompts):
+Quando o usuário perguntar sobre um módulo, explique o que faz e sugira abrir no Painel de Expansão (botão 🚀 na biblioteca).
+FERRAMENTAS & LINKS DISPONÍVEIS:
+${todosLinks || 'Nenhum link cadastrado ainda.'}
+Quando o usuário mencionar o nome de uma ferramenta/link, responda com exatamente este formato no final da sua mensagem (numa linha isolada):
+ABRIR_LINK::<url completa>
+Exemplo: ABRIR_LINK::https://rolefy-neon.vercel.app/
+Use isso apenas quando o usuário pedir explicitamente para abrir, acessar ou ir para uma ferramenta.`;
+const modulosCtx = modulosGerados.length
+? `\n\nMÓDULOS JÁ GERADOS PARA ESTE REGISTRO:\n${modulosGerados.join('\n\n')}`
+: '';
+const docsCtx = (rReal && Array.isArray(rReal.docs) && rReal.docs.length)
+? `\n\nDOCUMENTOS DE CONTEXTO DO CLIENTE:\n` + rReal.docs.map(d => `[${d.nome}]\n${d.conteudo}`).join('\n\n')
+: '';
+const statusCtx = `\n\nSTATUS DOS MÓDULOS (baseado no contexto real — não invente):\n${statusModulos}\nSomente afirme que um módulo está preenchido se aparecer ✅ acima.`;
+return base + (ctx ? `\n\nCONTEXTO DO DIAGNÓSTICO ATIVO:\n${ctx}` : '') + statusCtx + modulosCtx + docsCtx + sistemaInfo;
+}
+function toggleChat() {
+_chatAberto = !_chatAberto;
+const w = document.getElementById('chat-widget');
+w.style.display = _chatAberto ? 'flex' : 'none';
+ajustarLarguraModal();
+ajustarLayoutChat();
+if (_chatAberto) {
+atualizarContextoLabel();
+if (!_chatHistorico.length) adicionarMensagemChat('assistant', 'Olá! Sou o Advisor GERiAH. Estou com acesso ao seu diagnóstico ativo. Como posso te ajudar?');
+setTimeout(() => document.getElementById('chat-input').focus(), 100);
+}
+}
+function ajustarLarguraModal() {
+// Painel de expansão
+const inner = document.getElementById('expansao-inner');
+const painelAberto = document.getElementById('expansaoModal').style.display === 'flex';
+if (inner && painelAberto) {
+inner.style.maxWidth = 'calc(100vw - 440px)';
+inner.style.marginRight = 'auto';
+inner.style.marginLeft = '12px';
+}
+}
+function ajustarLayoutChat() {
+const main = document.getElementById('main-content');
+if (!main) return;
+if (_chatAberto) {
+main.style.maxWidth = 'calc(100vw - 430px)';
+main.style.marginRight = '420px';
+} else {
+main.style.maxWidth = '';
+main.style.marginRight = '';
+}
+}
+function atualizarContextoLabel() {
+const label = document.getElementById('chat-contexto-label');
+if (!label) return;
+const r = getChatContextData();
+if (r) {
+const preview = (r.vivencia || r.experiencia || '').substring(0,35);
+label.textContent = preview ? `contexto: ${preview}...` : 'contexto carregado';
+} else {
+label.textContent = 'sem diagnóstico — preencha os campos';
+}
+}
+function adicionarMensagemChat(role, texto) {
+const box = document.getElementById('chat-messages');
+const div = document.createElement('div');
+const isUser = role === 'user';
+div.style.cssText = `max-width:88%;padding:8px 12px;border-radius:${isUser?'12px 12px 4px 12px':'12px 12px 12px 4px'};font-size:13px;line-height:1.5;word-break:break-word;align-self:${isUser?'flex-end':'flex-start'};background:${isUser?'#059669':'#fff'};color:${isUser?'#fff':'#1e293b'};border:${isUser?'none':'1px solid #e2e8f0'};box-shadow:0 1px 3px rgba(0,0,0,0.07);white-space:pre-wrap;`;
+div.textContent = texto;
+box.appendChild(div);
+box.scrollTop = box.scrollHeight;
+}
+function adicionarTyping() {
+const box = document.getElementById('chat-messages');
+const div = document.createElement('div');
+div.id = 'chat-typing';
+div.style.cssText = 'align-self:flex-start;background:#fff;border:1px solid #e2e8f0;border-radius:12px 12px 12px 4px;padding:8px 14px;font-size:18px;letter-spacing:2px;color:#94a3b8;';
+div.textContent = '···';
+box.appendChild(div);
+box.scrollTop = box.scrollHeight;
+}
+function removerTyping() {
+const t = document.getElementById('chat-typing');
+if (t) t.remove();
+}
+async function enviarChat() {
+if (!iaKit.temChave()) return abrirModalConfig();
+const input = document.getElementById('chat-input');
+const texto = input.value.trim();
+if (!texto) return;
+input.value = ''; input.style.height = 'auto';
+document.getElementById('chat-send-btn').disabled = true;
+adicionarMensagemChat('user', texto);
+_chatHistorico.push({ role: 'user', content: texto });
+adicionarTyping();
+try {
+const sys = getChatSystemPrompt();
+const r = await iaKit.chamarComHistorico(_chatHistorico, sys);
+removerTyping();
+// detecta comando de link
+const linkMatch = r.match(/ABRIR_LINK::(\S+)/);
+const textoLimpo = r.replace(/\nABRIR_LINK::\S+/g, '').replace(/ABRIR_LINK::\S+/g, '').trim();
+adicionarMensagemChat('assistant', textoLimpo);
+_chatHistorico.push({ role: 'assistant', content: textoLimpo });
+if (linkMatch) {
+const url = linkMatch[1];
+const nome = [...linksExtras.flatMap(g => g.links||[])].find(lk => lk.url === url || url.includes(new URL(lk.url).hostname))?.titulo || url;
+adicionarBotaoAbrirLink(url, nome);
+}
+// persiste no registro ativo
+const reg = registros.find(x => x.id === registroAtivoId);
+if (reg) { reg.chat_historico = _chatHistorico; salvarMemoria(); }
+} catch(e) {
+removerTyping();
+adicionarMensagemChat('assistant', '⚠️ Erro: ' + e.message);
+}
+document.getElementById('chat-send-btn').disabled = false;
+document.getElementById('chat-input').focus();
+}
+function adicionarBotaoAbrirLink(url, nome) {
+const box = document.getElementById('chat-messages');
+const div = document.createElement('div');
+div.style.cssText = 'align-self:flex-start;';
+div.innerHTML = `<button onclick="abrirLink('${url.replace(/'/g,"\'")}')"
+style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+↗ Abrir ${nome}
+</button>`;
+box.appendChild(div);
+box.scrollTop = box.scrollHeight;
+}
+function chatKeydown(e) {
+if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviarChat(); }
+}
+function limparModulo(tabName) {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const key = `modelo_${tabName}`;
+if (!confirm('Limpar o conteúdo deste módulo? A IA poderá gerar novamente.')) return;
+delete r[key];
+salvarMemoria();
+mudarAbaExpansao(tabName);
+}
+function abrirLimparBase() {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const CAMPOS_BASE = [
+{ key: 'vivencia', label: 'Vivência' },
+{ key: 'experiencia', label: 'Experiência' },
+{ key: 'demanda', label: 'Demanda' },
+{ key: 'oferta', label: 'Oferta' },
+{ key: 'mercado', label: 'Mercado' },
+{ key: 'oq_pessoas', label: 'O Que Faço / Pessoas' },
+{ key: 'oq_processos', label: 'O Que Faço / Processos' },
+{ key: 'oq_produto', label: 'O Que Faço / Produto' },
+{ key: 'pq_publico', label: 'Pra Quem / Público' },
+{ key: 'pq_praca', label: 'Pra Quem / Praça' },
+{ key: 'pq_preco', label: 'Pra Quem / Preço' },
+{ key: 'pt_produto', label: 'Promessa / Produto' },
+{ key: 'pt_mensagem', label: 'Promessa / Mensagem' },
+{ key: 'pt_oferta', label: 'Promessa / Oferta' },
+{ key: 'cm_parceria', label: 'Como / Parceria' },
+{ key: 'cm_posicionamento', label: 'Como / Posicionamento' },
+{ key: 'cm_promocao', label: 'Como / Promoção' },
+];
+// Modal de checklist
+let existing = document.getElementById('modal-limpar-base');
+if (existing) existing.remove();
+const modal = document.createElement('div');
+modal.id = 'modal-limpar-base';
+modal.style.cssText = 'position:fixed;inset:0;z-index:11000;background:rgba(15,23,42,0.6);display:flex;align-items:center;justify-content:center;padding:16px;';
+modal.innerHTML = `
+<div style="background:#fff;border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.25);"><div style="background:#1e293b;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;"><span style="font-weight:700;font-size:15px;">🗑 Escolher campos para limpar</span><button onclick="document.getElementById('modal-limpar-base').remove()" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;line-height:1;">&times;</button></div><div style="padding:16px;overflow-y:auto;flex:1;"><div style="display:flex;gap:8px;margin-bottom:12px;"><button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=true)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Todos</button><button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=false)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Nenhum</button></div>
+${CAMPOS_BASE.map(c => `
+<label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:13px;color:#334155;"><input type="checkbox" class="chk-limpar" data-key="${c.key}" ${r[c.key] ? '' : 'disabled'} style="width:16px;height:16px;accent-color:#ef4444;"><span>${c.label}</span>
+${r[c.key] ? '<span style="font-size:10px;color:#22c55e;margin-left:auto;">● preenchido</span>' : '<span style="font-size:10px;color:#94a3b8;margin-left:auto;">vazio</span>'}
+</label>
+`).join('')}
+</div><div style="padding:16px;border-top:1px solid #e2e8f0;display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;"><button onclick="document.getElementById('modal-limpar-base').remove()" style="padding:8px 16px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;">Cancelar</button><button onclick="confirmarLimparBase()" style="padding:8px 16px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">Limpar selecionados</button></div></div>
+`;
+document.body.appendChild(modal);
+}
+function confirmarLimparBase() {
+const r = registros.find(x => x.id === registroAtivoId);
+if (!r) return;
+const checks = document.querySelectorAll('.chk-limpar:checked');
+if (!checks.length) return alert('Selecione ao menos um campo.');
+checks.forEach(c => { delete r[c.dataset.key]; });
+salvarMemoria();
+document.getElementById('modal-limpar-base').remove();
+mudarAbaExpansao('base');
+}
+function limparChat() {
+if (!confirm('Limpar o histórico desta conversa?')) return;
+_chatHistorico = [];
+document.getElementById('chat-messages').innerHTML = '';
+const reg = registros.find(x => x.id === registroAtivoId);
+if (reg) { reg.chat_historico = []; salvarMemoria(); }
+adicionarMensagemChat('assistant', 'Conversa reiniciada. Como posso te ajudar?');
+}
+// ── Interceptor global de links externos ──
+document.addEventListener('click', function(e) {
+const a = e.target.closest('a[href]');
+if (!a) return;
+const href = a.getAttribute('href');
+if (!href || href === '#' || href.startsWith('javascript')) return;
+if (href.startsWith('http://') || href.startsWith('https://') || a.target === '_blank') {
+e.preventDefault();
+abrirLink(href);
+}
+}, true);</script><div id="chat-widget" style="display:none;position:fixed;bottom:24px;right:24px;width:390px;height:580px;z-index:9999;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.28);"><div class="flex items-center justify-between px-4 py-3 bg-emerald-700" style="flex-shrink:0"><div class="flex items-center gap-2"><span class="text-lg">🤖</span><div><div class="font-bold text-white text-sm">Advisor GERiAH</div><div class="text-emerald-200 text-[10px]" id="chat-contexto-label">sem registro ativo</div></div></div><div class="flex items-center gap-2"><button onclick="limparChat()" class="text-emerald-200 hover:text-white text-xs border border-emerald-500 px-2 py-1 rounded transition">🗑 Limpar</button><button onclick="toggleChat()" class="text-emerald-200 hover:text-white text-xl font-bold leading-none px-1">&times;</button></div></div><div id="chat-messages" style="flex:1;overflow-y:auto;padding:12px;background:#f8fafc;display:flex;flex-direction:column;gap:8px;"></div><div style="flex-shrink:0;background:#fff;border-top:1px solid #e2e8f0;padding:10px;display:flex;gap-8px;gap:8px;align-items:flex-end;"><textarea id="chat-input" placeholder="Pergunte algo sobre o diagnóstico..." rows="1"
+ style="flex:1;resize:none;border:1px solid #cbd5e1;border-radius:10px;padding:8px 12px;font-size:13px;outline:none;max-height:100px;overflow-y:auto;font-family:inherit;"
+ onkeydown="chatKeydown(event)" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button onclick="enviarChat()" id="chat-send-btn"
+ style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;transition:background 0.15s;">
+ ↑
+ </button></div></div></body></html>

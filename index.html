@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GERIAH Fractal v2.1| Seu negócio a partir de quem você é</title>
+<title>GERIAH Fractal v2.2| Seu negócio a partir de quem você é</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .bg-quem-sou { background-color: #ffffff; border-top: 4px solid #3b82f6; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
@@ -2834,7 +2833,6 @@ abrirLink(href);
 // ════════════════════════════════════════
 // GERiAH AUTH KIT — Micro-SaaS Serverless Engine
 // ════════════════════════════════════════
-// ════════════════════════════════════════
 // GERiAH AUTH KIT — Micro-SaaS Serverless Engine v2.0
 // ════════════════════════════════════════
 const authKit = (() => {
@@ -2843,18 +2841,12 @@ const authKit = (() => {
   const LS_EMAIL_KEY = 'geriah_auth_email';
   const LS_NIVEL_KEY = 'geriah_auth_nivel';
 
-  const DEFAULT_BACKEND_URL = "https://script.google.com/macros/s/AKfycbw-Xyf_9MWt_S3XBu3HcnsI6xKW_oPTAvUyQcByrAdHKVDArfaV_bMYY83UvWR7bTIjdQ/exec"; 
+  const DEFAULT_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwk_LpLIMEZedCZ1k0RKScwXntzIjo5lAWVSdLZklDBHrm_9awxfZjX20SBpWQyCKQ_/exec"; 
 
-  let _backendUrl = "";
   let _emailPendente = "";
 
   function getBackendUrl() {
-    return (localStorage.getItem(LS_URL_KEY) || DEFAULT_BACKEND_URL || "").trim();
-  }
-
-  function setBackendUrl(url) {
-    _backendUrl = (url || "").trim();
-    localStorage.setItem(LS_URL_KEY, _backendUrl);
+    return DEFAULT_BACKEND_URL;
   }
 
   function getEmail() { return localStorage.getItem(LS_EMAIL_KEY) || ""; }
@@ -3079,39 +3071,7 @@ const authKit = (() => {
     } catch(e) {}
   }
 
-  function toggleConfigBackend() {
-    const el = document.getElementById('auth-config-backend');
-    if (!el) return;
-    const isHidden = el.style.display === 'none';
-    el.style.display = isHidden ? 'block' : 'none';
-    if (isHidden) {
-      document.getElementById('auth-backend-url').value = getBackendUrl();
-    }
-  }
-
-  function salvarBackendUrl() {
-    const url = document.getElementById('auth-backend-url').value.trim();
-    setBackendUrl(url);
-    alert('URL do Backend salva com sucesso!');
-    toggleConfigBackend();
-  }
-
-  async function testarBackend() {
-    const url = document.getElementById('auth-backend-url').value.trim();
-    if (!url) return alert('Informe uma URL primeiro.');
-    setBackendUrl(url);
-    try {
-      const res = await apiCall('ping');
-      alert(res.message || 'Conexão bem sucedida!');
-    } catch (err) {
-      alert('Erro de conexão: ' + err.message);
-    }
-  }
-
   function init() {
-    const urlInput = document.getElementById('auth-backend-url');
-    if (urlInput) urlInput.value = getBackendUrl();
-
     if (isAutenticado()) {
       desbloquearInterface(getEmail());
       verificarSessaoRemota();
@@ -3127,12 +3087,7 @@ const authKit = (() => {
     abrirSolicitarOTP,
     solicitarCodigo,
     definirSenha,
-    sair,
-    toggleConfigBackend,
-    salvarBackendUrl,
-    testarBackend,
-    getBackendUrl,
-    setBackendUrl
+    sair
   };
 })();
 </script>
@@ -3309,22 +3264,6 @@ style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 
             <button type="button" onclick="authKit.solicitarCodigo(true)" class="text-blue-600 hover:text-blue-800 font-semibold">
               Reenviar código
             </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONFIGURAÇÃO RÁPIDA DA URL DO BACKEND (APPS SCRIPT) -->
-      <div class="mt-6 pt-4 border-t border-slate-100">
-        <button type="button" onclick="authKit.toggleConfigBackend()" class="text-[11px] text-slate-400 hover:text-slate-600 flex items-center gap-1 mx-auto">
-          ⚙️ Configurar URL do Backend (Apps Script)
-        </button>
-        <div id="auth-config-backend" style="display:none" class="mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
-          <label class="block font-bold text-slate-600 mb-1">URL do Web App do Google Apps Script:</label>
-          <input type="url" id="auth-backend-url" placeholder="https://script.google.com/macros/s/.../exec" 
-            class="w-full text-xs p-2 bg-white border border-slate-300 rounded outline-none focus:border-blue-500 mb-2">
-          <div class="flex justify-end gap-2">
-            <button type="button" onclick="authKit.testarBackend()" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded font-semibold hover:bg-slate-300">Testar Conexão</button>
-            <button type="button" onclick="authKit.salvarBackendUrl()" class="px-2.5 py-1 bg-blue-600 text-white rounded font-bold hover:bg-blue-700">Salvar URL</button>
           </div>
         </div>
       </div>

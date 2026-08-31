@@ -1,30 +1,492 @@
-<!--  geriah_fractal_SNPQVE  Versão 0.4.0.7 -  import export full - copyright FMW Assessoria & Parceiros, 2026 freenat.doc@gmail.com-->
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GERIAH Fractal | Seu negócio a partir de quem você é</title><script src="https://cdn.tailwindcss.com"></script><style>.bg-quem-sou{background-color:#ffffff;border-top:4px solid #3b82f6;border-left:1px solid #e5e7eb;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;}.bg-o-que-faco{background-color:#fff7ed;border-top:4px solid #f97316;}.bg-pra-quem{background-color:#fefce8;border-top:4px solid #eab308;}.bg-por-quanto{background-color:#f0fdfa;border-top:4px solid #14b8a6;}.bg-como{background-color:#f0fdf4;border-top:4px solid #22c55e;}.modal-active{overflow:hidden;}.spinner{display:inline-block;width:16px;height:16px;border:2px solid #ffffff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-right:8px;}.spinner-blue{border:2px solid #3b82f6;border-top-color:transparent;}@keyframes spin{to{transform:rotate(360deg);}}::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px;}::-webkit-scrollbar-thumb:hover{background:#94a3b8;}textarea{line-height:1.6 !important;letter-spacing:0.01em;overflow:hidden;}.markdown-content h1{font-size:1.5rem;font-weight:bold;color:#1e293b;margin-top:1.5rem;margin-bottom:0.75rem;}.markdown-content h2{font-size:1.25rem;font-weight:bold;color:#334155;margin-top:1.5rem;margin-bottom:0.75rem;border-bottom:1px solid #e2e8f0;padding-bottom:6px;}.markdown-content h3{font-size:1.1rem;font-weight:bold;color:#475569;margin-top:1rem;margin-bottom:0.5rem;}.markdown-content p{margin-bottom:1.25rem;line-height:1.75;font-size:0.95rem;color:#334155;}.markdown-content ul{list-style-type:none;padding-left:0;margin-bottom:1.25rem;}.markdown-content li{margin-bottom:0.75rem;line-height:1.6;position:relative;padding-left:1.5rem;}.markdown-content li::before{content:"•";color:#3b82f6;font-weight:bold;position:absolute;left:0;top:0;}.markdown-content strong{color:#0f172a;font-weight:700;background-color:#f8fafc;padding:0 2px;border-radius:2px;}.geriah-tooltip{cursor:help;border-bottom:2px dotted #6b7280;position:relative;}.geriah-tooltip::after{content:attr(data-tooltip);position:absolute;left:0;top:calc(100%+8px);background:#1e293b;color:#f8fafc;font-size:0.72rem;font-weight:500;letter-spacing:0.01em;padding:6px 12px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.2);}.geriah-tooltip::before{content:'';position:absolute;left:14px;top:calc(100%+2px);border:5px solid transparent;border-bottom-color:#1e293b;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100;}.geriah-tooltip:hover::after,.geriah-tooltip:hover::before{opacity:1;}#tabelaRegistros tr{transition:background 0.15s;}#tabelaRegistros tr.tr-hover-active{background:#eff6ff;}#tabelaRegistros tr.tr-selected{background:#dbeafe !important;border-left:3px solid #3b82f6;}#tabelaRegistros tr.tr-selected td:first-child{color:#2563eb;}#tabelaRegistros tr td:first-child{width:2.5rem;}.ia-dropdown-wrap{display:inline-block;}.ia-dropdown-wrap .hidden{display:none;}.ia-dropdown-wrap .visible{display:block;}.view-btn{color:#64748b;background:transparent;}.view-btn.active{background:#ffffff;color:#1e40af;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1);}#secao-diagnostico{overflow:visible;}</style></head><body class="bg-gray-50 font-sans text-gray-800 antialiased"><header class="sticky top-0 z-50 bg-gray-50 border-b border-gray-200 shadow-sm px-6 py-4"><div class="max-w-7xl mx-auto flex items-center justify-between gap-4"><div class="shrink-0"><h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-tight"><span class="geriah-tooltip" data-tooltip="Gênese Empreendedora para Renovação de Inteligência e Autonomia Humana">GERiAH</span><span class="text-blue-600">Fractal</span></h1><p class="text-gray-500 text-xs font-medium">Seu negócio a partir de quem você é.</p></div><nav class="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1"><button onclick="setView('diagnostico')" id="view-btn-diagnostico" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🔍 Diagnóstico</button><button onclick="setView('biblioteca')" id="view-btn-biblioteca" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">📚 Biblioteca</button><button onclick="setView('ferramentas')" id="view-btn-ferramentas" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">🛠 Ferramentas</button><button onclick="setView('tudo')" id="view-btn-tudo" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">☰ Tudo</button></nav><div class="flex items-center gap-2 shrink-0"><button type="button" onclick="abrirTutorial()" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-md hover:bg-blue-100 transition font-semibold text-sm">
- 📖 Como usar
- </button><button type="button" onclick="toggleChat()" id="btn-chat-global" class="bg-emerald-600 text-white border border-emerald-700 px-3 py-2 rounded-md hover:bg-emerald-700 transition font-semibold text-sm flex items-center gap-2">
- 💬 Advisor IA
- </button><button type="button" onclick="abrirModalConfig()" class="bg-slate-900 text-yellow-500 border border-slate-700 px-3 py-2 rounded-md hover:bg-slate-800 transition flex items-center gap-2 font-semibold text-sm"><span id="ia-status-dot" class="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></span>
- ⚙️ IA
- </button><input type="file" id="file-import" accept=".json" class="hidden" onchange="importarJSON(event)"><button type="button" onclick="document.getElementById('file-import').click()" class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-2 rounded-md hover:bg-indigo-100 transition font-semibold text-sm">
- 📥 Importar
- </button><button type="button" onclick="exportarJSON()" class="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition font-semibold text-sm">
- 📤 Exportar
- </button></div></div></header><div class="max-w-7xl mx-auto px-6 pt-6 pb-6" id="main-content" style="transition:max-width 0.25s ease,margin-right 0.25s ease;"><div id="secao-diagnostico" style="position:relative;"><div class="bg-quem-sou p-6 shadow-sm rounded-md mb-8"><h2 class="font-bold text-blue-800 mb-4 text-xl border-b pb-2">1. DIAGNÓSTICO DA ESSÊNCIA (QUEM SOU)</h2><div class="flex flex-col gap-3 mb-5 p-4 bg-slate-50 border border-slate-200 rounded-lg"><div class="flex flex-col sm:flex-row gap-3"><div class="flex-1"><label class="text-xs font-semibold text-slate-500 mb-1 block">🌐 URL (site, blog, Instagram, <span class="text-blue-600 font-bold">LinkedIn</span>...)</label><div class="flex gap-2"><input id="input-url" type="url" placeholder="https://linkedin.com/in/... ou outro" class="flex-1 text-sm p-2 border border-slate-300 rounded outline-none focus:border-blue-500 bg-white" oninput="detectarLinkedIn(this.value)"><button type="button" onclick="preencherViaURL()" id="btn-url" class="bg-slate-700 text-white px-4 py-2 rounded text-xs font-bold hover:bg-slate-900 transition whitespace-nowrap">⚡ Preencher</button></div></div><div class="flex items-end gap-2"><div><label class="text-xs font-semibold text-slate-500 mb-1 block">📄 Documento (CV, código, texto, transcrição...)</label><div class="flex gap-2"><label class="cursor-pointer bg-white border border-slate-300 text-slate-600 px-4 py-2 rounded text-xs font-semibold hover:bg-slate-50 transition flex items-center gap-1">
- 📎 Escolher arquivo
- <input type="file" id="input-documento" accept=".pdf,.txt,.doc,.docx,.html,.htm,.md,.csv,.json" class="hidden" onchange="preencherViaDocumento(this)"></label><span id="nome-documento" class="text-xs text-slate-400 self-center italic">nenhum arquivo</span></div></div></div></div><div id="linkedin-paste-area" style="display:none" class="bg-blue-50 border border-blue-200 rounded-lg p-3"><label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">
- 💼 LinkedIn detectado — cole o texto do perfil para melhor extração
- <span class="font-normal text-blue-400">(Ctrl+A no perfil → copiar → colar aqui)</span></label><textarea id="input-linkedin-texto" rows="4" placeholder="Cole aqui o texto copiado do perfil LinkedIn..." class="w-full text-xs p-2 border border-blue-200 rounded outline-none focus:border-blue-400 bg-white resize-y font-mono"></textarea><p class="text-[10px] text-blue-400 mt-1">💡 Se preferir, pode preencher só com a URL — o sistema tentará extrair o que conseguir.</p></div></div><div id="status-alimentacao" class="hidden mb-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded px-4 py-2.5"><span class="spinner"></span><span id="status-alimentacao-msg">Analisando...</span></div><div class="grid grid-cols-1 lg:grid-cols-5 gap-4"><div><label class="text-xs font-semibold text-gray-600">Vivência (Habilidades)</label><textarea id="qs_vivencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que domina..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Experiência</label><textarea id="qs_experiencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades realizadas..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Demanda (Reconhecida)</label><textarea id="qs_demanda" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Reconhecido por outros..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Oferta (Preferidas)</label><textarea id="qs_oferta" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que mais gosta de fazer..."></textarea></div><div><label class="text-xs font-semibold text-gray-600">Mercado (Disposição a pagar)</label><textarea id="qs_mercado" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades rentáveis..."></textarea></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"><div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">🔍 Foco da Essência
- <span class="font-normal text-blue-400">(perspectiva para ler o QUEM SOU — ex: "ótica de coach", "viés técnico")</span></label><input id="qs_foco_essencia" type="text" placeholder="Ex: olhar como educador, foco em liderança feminina..." class="w-full text-[13px] p-2 bg-white border border-blue-200 rounded outline-none focus:border-blue-500"></div><div class="p-3 bg-orange-50 border border-orange-200 rounded-lg"><label class="text-xs font-bold text-orange-700 flex items-center gap-1 mb-1">🎯 Prioridade Estratégica
- <span class="font-normal text-orange-400">(diretriz para extrair a base — ex: "P1: lançar mentoria", "foco B2B")</span></label><input id="qs_foco" type="text" placeholder="Ex: P1 — monetizar via infoproduto, P2 — parcerias B2B..." class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400"></div></div><div class="flex items-center justify-between mt-4"><div class="w-48"></div><button type="button" id="btn-gerar" onclick="gerarEstrategiaComIA()" class="bg-blue-600 text-white px-8 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition flex items-center tracking-wide">
- ✦ Extrair Base Estratégica
- </button><div class="w-48 flex justify-end"><button type="button" id="btn-painel-expansao" onclick="abrirPainelExpansao(registroAtivoId)" style="display:none"
- class="bg-slate-800 text-yellow-400 border border-slate-600 px-5 py-3 rounded-md shadow font-bold hover:bg-slate-700 transition text-sm flex items-center gap-2">
- 🚀 Painel de Expansão
- </button></div></div></div></div><div id="secao-biblioteca"><div class="bg-white p-6 shadow rounded-md overflow-x-auto border border-gray-100"><h3 class="text-xl font-bold text-gray-800 mb-4">Bibliotecas & Hubs de Expansão</h3><table class="w-full text-left border-collapse min-w-[800px]"><thead><tr class="bg-gray-100 text-gray-600 text-sm"><th class="p-3 border-b w-8"><input type="checkbox" id="chk-all" onclick="toggleSelecionarTodos(this)" class="w-4 h-4 accent-blue-600"></th><th class="p-3 border-b w-16">ID</th><th class="p-3 border-b w-1/3">Essência do Cliente (Resumo)</th><th class="p-3 border-b w-1/3">Público Foco (Gerado)</th><th class="p-3 border-b text-right">Ações de Expansão</th></tr></thead><tbody id="tabelaRegistros"></tbody></table><div id="barra-export" style="display:none;" class="mt-3 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-2.5"><span class="text-sm text-blue-700 font-semibold" id="barra-export-label">0 itens selecionados</span><div class="flex gap-2"><button onclick="exportarSelecionados()" class="bg-blue-600 text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-blue-700 transition">⬇ Exportar JSON</button><button onclick="limparSelecao()" class="bg-white text-slate-500 border border-slate-300 px-4 py-1.5 rounded-md text-xs font-semibold hover:bg-slate-50 transition">Limpar seleção</button></div></div></div></div></div><div id="drawer-overlay" onclick="fecharDrawer()" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(15,23,42,0.4);backdrop-filter:blur(2px);"></div><div id="drawer-ferramentas" style="position:fixed;top:0;left:0;height:100%;width:500px;z-index:8001;background:#fff;box-shadow:4px 0 32px rgba(0,0,0,0.18);transform:translateX(-100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;"><div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white shrink-0"><div class="flex items-center gap-3"><span class="text-lg">🛠</span><span class="font-bold text-base">Ferramentas & Links</span></div><div class="flex items-center gap-2"><button onclick="adicionarGrupoMain()" class="text-yellow-400 border border-slate-600 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-700 transition">＋ Grupo</button><button onclick="fecharDrawer()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none px-1 transition">&times;</button></div></div><div class="flex-1 overflow-y-auto p-4 space-y-2" id="ferramentas-main-container"></div><div id="form-link-main" style="display:none" class="shrink-0 border-t border-slate-200 bg-slate-50 p-4 space-y-2"><h4 class="font-bold text-slate-700 text-sm" id="form-link-main-label">Novo link</h4><input id="form-link-main-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><input id="form-link-main-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><div id="form-link-main-grupo-wrap" style="display:none"><input id="form-link-main-grupo" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"></div><div class="flex gap-2 justify-end pt-1"><button onclick="cancelarFormMain()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button><button onclick="salvarFormMain()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button></div></div></div><div id="expansaoModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9000;" class="bg-gray-900 bg-opacity-85 items-center justify-center backdrop-blur-sm p-2 md:p-6"><div id="expansao-inner" class="bg-white w-full h-full md:h-[95vh] rounded-xl shadow-2xl flex flex-col overflow-hidden" style="max-width:80rem;transition:max-width 0.25s ease;"><div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white"><div class="flex items-center gap-4"><h3 class="text-xl font-bold flex items-center gap-2"><span class="text-blue-400">✦</span> Central de Desdobramento</h3><div class="flex items-center gap-1 bg-slate-800 rounded-lg p-1 border border-slate-700"><button id="btn-undo" onclick="undoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Desfazer">↩️ Undo</button><div class="w-px h-4 bg-slate-600"></div><button id="btn-redo" onclick="redoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Refazer">↪️ Redo</button></div></div><div class="flex items-center gap-3"><div class="relative" id="busca-global-wrap"><input id="busca-global-input" type="text" placeholder="🔍 Buscar no sistema..." autocomplete="off"
- oninput="buscarGlobal(this.value)"
- onkeydown="navegarBusca(event)"
- class="bg-slate-800 border border-slate-600 text-white text-sm px-3 py-1.5 rounded-lg outline-none focus:border-blue-400 w-56 placeholder-slate-400"><div id="busca-global-results" style="display:none"
- class="absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 w-80 max-h-80 overflow-y-auto text-slate-800"></div></div><button type="button" onclick="abrirModalConfig()" class="text-xs bg-slate-800 border border-slate-700 hover:bg-slate-700 text-yellow-500 px-3 py-1.5 rounded transition">⚙️ Configuração IA</button><button type="button" onclick="fecharPainelExpansao()" class="text-gray-400 hover:text-red-400 font-bold text-3xl transition px-2 leading-none">&times;</button></div></div><div class="flex flex-col md:flex-row flex-1 overflow-hidden"><div class="w-full md:w-72 bg-slate-50 border-r border-slate-200 flex flex-col p-4 gap-2 overflow-y-auto"><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Módulos Estratégicos</p><button onclick="mudarAbaExpansao('base')" id="tab-btn-base" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('negocio')" id="tab-btn-negocio" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('marketing')" id="tab-btn-marketing" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('vendas')" id="tab-btn-vendas" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('cs')" id="tab-btn-cs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('educacao')" id="tab-btn-educacao" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><div class="my-2 border-t border-slate-200"></div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Crescimento & Addons</p><button onclick="mudarAbaExpansao('esteira')" id="tab-btn-esteira" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('bsc')" id="tab-btn-bsc" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('escala')" id="tab-btn-escala" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('iaprompts')" id="tab-btn-iaprompts" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('docs')" id="tab-btn-docs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><button onclick="mudarAbaExpansao('extras')" id="tab-btn-extras" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button><div class="my-2 border-t border-slate-200"></div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">🔗 Links & Ferramentas</p><div id="sidebar-links-container" class="space-y-1"></div></div><div class="flex-1 bg-slate-50 overflow-y-auto p-6 relative" id="expansao-content-area"></div></div></div></div><div id="tutorialModal" style="display:none; position:fixed; inset:0; z-index:10000;" class="bg-slate-900 bg-opacity-85 backdrop-blur-sm flex items-start justify-center p-4 overflow-y-auto"><div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl my-8 overflow-hidden flex flex-col"><div class="bg-gradient-to-r from-blue-700 to-blue-500 px-8 py-6 flex justify-between items-start"><div><h2 class="text-2xl font-bold text-white flex items-center gap-2">📖 Como usar o GERiAH Fractal</h2><p class="text-blue-100 text-sm mt-1">Seu negócio a partir de quem você é — guia rápido</p></div><button onclick="fecharTutorial()" class="text-blue-200 hover:text-white text-3xl font-bold leading-none mt-1 transition">&times;</button></div><div class="p-8 space-y-8 overflow-y-auto text-slate-700 text-[14px] leading-relaxed"><div><h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">✦ O que é o GERiAH Fractal?</h3><p>O GERiAH Fractal é uma plataforma de <strong>diagnóstico estratégico pessoal e de negócio</strong>. A ideia central é simples: antes de definir o que você vende ou para quem, você precisa entender <em>quem você é</em> — suas vivências, experiências, o que o mercado já reconhece em você.</p><p class="mt-2">A partir desse diagnóstico, a IA expande sua essência em um <strong>Framework Estratégico completo</strong>: público-alvo, posicionamento, canais, oferta, plano de marketing, playbook de vendas e muito mais.</p></div><div><h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">🔄 Fluxo de uso</h3><div class="space-y-3"><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">1</span><div><strong>Configure a IA</strong> — clique em ⚙️ Configurar IA e insira sua chave OpenRouter (gratuita) ou Groq. Os links para criar as chaves estão dentro do modal.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">2</span><div><strong>Preencha o Diagnóstico da Essência</strong> — use os 5 campos (Vivência, Experiência, Demanda, Oferta, Mercado) manualmente, ou cole uma URL/currículo para preenchimento automático via IA.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">3</span><div><strong>Defina o Foco e a Prioridade</strong> — <em>Foco da Essência</em> orienta como a IA lê o QUEM SOU (ex: "ótica de coach"). <em>Prioridade Estratégica</em> direciona a geração dos pilares (ex: "P1 lançar mentoria").</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">4</span><div><strong>Clique em ✦ Extrair Base Estratégica</strong> — a IA gera os 4 pilares do framework. O resultado vai para a Biblioteca.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">5</span><div><strong>Abra o Painel de Expansão</strong> — clique em 🚀 Painel de Expansão na biblioteca para desdobrar em módulos: BMC, Marketing, Vendas, CS, Educação e muito mais.</div></div><div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">6</span><div><strong>Revise, edite e itere</strong> — clique em qualquer linha da biblioteca para recarregar o diagnóstico. Altere o foco, mude a prioridade e gere uma nova versão. Cada geração é um registro separado.</div></div></div></div><div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-xl p-6"><h3 class="text-lg font-bold text-yellow-400 mb-3 flex items-center gap-2">🆓 Gratuito &nbsp;×&nbsp; 🔒 Premium — entenda o modelo</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"><div class="bg-slate-700 rounded-lg p-4"><div class="font-bold text-green-400 mb-2">✅ Gratuito (sempre)</div><ul class="space-y-1 text-slate-300"><li>• Diagnóstico da Essência completo</li><li>• Framework Base Interativo</li><li>• Canvas BMC</li><li>• Playbook de Vendas</li><li>• Educação do Cliente</li><li>• Biblioteca ilimitada de registros</li><li>• Export / Import JSON</li><li>• Preenchimento via URL e currículo</li></ul></div><div class="bg-slate-700 rounded-lg p-4"><div class="font-bold text-yellow-400 mb-2">🔒 Premium (senha de acesso)</div><ul class="space-y-1 text-slate-300"><li>• Plano de Marketing Estratégico</li><li>• Estratégia de Sucesso do Cliente</li><li>• Esteira de Produtos</li><li>• Balanced Scorecard (BSC)</li><li>• Estratégia de Escala e Crescimento</li><li>• IA com Prompts Livres</li></ul><p class="text-slate-400 text-xs mt-3">A senha de acesso Premium é fornecida pela equipe FNW Advisory mediante contratação.</p></div></div></div><div><h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">💡 Dicas rápidas</h3><ul class="space-y-2 text-slate-600"><li>📌 <strong>Clique em qualquer linha da biblioteca</strong> para recarregar aquele diagnóstico no formulário — edite e regere sem perder o original.</li><li>🎯 <strong>Use o campo Foco da Essência</strong> para ver perspectivas diferentes da mesma pessoa — ex: "olhar técnico" vs "olhar comercial".</li><li>📋 <strong>Nota Global do Cliente</strong> (no painel, aba Base) é o lugar para colar mensagens de WhatsApp, resumos de reunião e contexto livre.</li><li>⬇️ <strong>Marque itens na biblioteca</strong> e exporte só os selecionados — útil para entregar o dossiê de um cliente específico.</li><li>🔑 <strong>Sua chave de IA fica salva localmente</strong> no navegador. Nenhum dado é enviado para servidores FNW — apenas para OpenRouter/Groq.</li></ul></div></div><div class="px-8 py-4 border-t border-slate-100 flex justify-end bg-slate-50 rounded-b-2xl"><button onclick="fecharTutorial()" class="bg-blue-600 text-white px-6 py-2 rounded-md font-bold hover:bg-blue-700 transition text-sm">Entendido, vamos começar →</button></div></div></div><div id="configModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;" class="bg-slate-900 bg-opacity-80 items-center justify-center backdrop-blur-sm p-4"><div class="bg-slate-900 w-full max-w-2xl rounded-xl shadow-2xl border border-slate-700 flex flex-col"><div class="p-5 border-b border-slate-800 flex justify-between items-center"><h3 class="text-lg font-bold text-yellow-500 flex items-center gap-2">✦ FNW IA Kit</h3><button type="button" onclick="fecharModalConfig()" class="text-slate-400 hover:text-white font-bold text-2xl transition px-2 leading-none">&times;</button></div><div class="p-6 space-y-6"><div class="bg-slate-800 p-5 rounded-lg border border-slate-700"><div class="flex justify-between items-center mb-3"><h4 class="font-semibold text-sm text-slate-300">OpenRouter (Principal)</h4><a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://openrouter.ai/workspaces/default/keys'); return false;">🔑 Gerar chave OpenRouter ↗</a></div><div class="space-y-3"><input type="password" id="or-key" placeholder="sk-or-v1-..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"><select id="or-model" class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"><option value="google/gemma-3-27b-it:free">Gemma 3 27B (free)</option><option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B (free)</option><option value="openai/gpt-4o-mini">GPT-4o Mini</option></select></div></div><div class="bg-slate-800 p-5 rounded-lg border border-slate-700"><div class="flex justify-between items-center mb-3"><h4 class="font-semibold text-sm text-slate-300">Groq (Fallback)</h4><a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://console.groq.com/keys'); return false;">🔑 Gerar chave Groq ↗</a></div><input type="password" id="groq-key" placeholder="gsk_..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none"></div></div><div class="p-5 border-t border-slate-800 bg-slate-800/50 rounded-b-xl flex justify-between items-center"><button type="button" onclick="limparConfigIA()" class="text-slate-400 hover:text-red-400 text-sm font-semibold transition">Limpar Chaves</button><button type="button" onclick="salvarConfigIA()" class="bg-yellow-600 text-slate-900 px-6 py-2 text-sm font-bold rounded-md shadow hover:bg-yellow-500 transition tracking-wide">Salvar Configurações</button></div></div></div><script>// ════════════════════════════════════════
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GERIAH Fractal v2.1| Seu negócio a partir de quem você é</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.bg-quem-sou { background-color: #ffffff; border-top: 4px solid #3b82f6; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+.bg-o-que-faco { background-color: #fff7ed; border-top: 4px solid #f97316; }
+.bg-pra-quem { background-color: #fefce8; border-top: 4px solid #eab308; }
+.bg-por-quanto { background-color: #f0fdfa; border-top: 4px solid #14b8a6; }
+.bg-como { background-color: #f0fdf4; border-top: 4px solid #22c55e; }
+.modal-active { overflow: hidden; }
+.spinner {
+display: inline-block; width: 16px; height: 16px;
+border: 2px solid #ffffff; border-top-color: transparent;
+border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px;
+}
+.spinner-blue { border: 2px solid #3b82f6; border-top-color: transparent; }
+@keyframes spin { to { transform: rotate(360deg); } }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+textarea {
+line-height: 1.6 !important;
+letter-spacing: 0.01em;
+overflow: hidden;
+}
+.markdown-content h1 { font-size: 1.5rem; font-weight: bold; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+.markdown-content h2 { font-size: 1.25rem; font-weight: bold; color: #334155; margin-top: 1.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+.markdown-content h3 { font-size: 1.1rem; font-weight: bold; color: #475569; margin-top: 1rem; margin-bottom: 0.5rem; }
+.markdown-content p { margin-bottom: 1.25rem; line-height: 1.75; font-size: 0.95rem; color: #334155; }
+.markdown-content ul { list-style-type: none; padding-left: 0; margin-bottom: 1.25rem; }
+.markdown-content li { margin-bottom: 0.75rem; line-height: 1.6; position: relative; padding-left: 1.5rem; }
+.markdown-content li::before { content: "•"; color: #3b82f6; font-weight: bold; position: absolute; left: 0; top: 0; }
+.markdown-content strong { color: #0f172a; font-weight: 700; background-color: #f8fafc; padding: 0 2px; border-radius: 2px; }
+.geriah-tooltip {
+cursor: help;
+border-bottom: 2px dotted #6b7280;
+position: relative;
+}
+.geriah-tooltip::after {
+content: attr(data-tooltip);
+position: absolute;
+left: 0;
+top: calc(100% + 8px);
+background: #1e293b;
+color: #f8fafc;
+font-size: 0.72rem;
+font-weight: 500;
+letter-spacing: 0.01em;
+padding: 6px 12px;
+border-radius: 6px;
+white-space: nowrap;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.2s;
+z-index: 100;
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.geriah-tooltip::before {
+content: '';
+position: absolute;
+left: 14px;
+top: calc(100% + 2px);
+border: 5px solid transparent;
+border-bottom-color: #1e293b;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.2s;
+z-index: 100;
+}
+.geriah-tooltip:hover::after,
+.geriah-tooltip:hover::before { opacity: 1; }
+#tabelaRegistros tr { transition: background 0.15s; }
+#tabelaRegistros tr.tr-hover-active { background: #eff6ff; }
+#tabelaRegistros tr.tr-selected { background: #dbeafe !important; border-left: 3px solid #3b82f6; }
+#tabelaRegistros tr.tr-selected td:first-child { color: #2563eb; }
+#tabelaRegistros tr td:first-child { width: 2.5rem; }
+.ia-dropdown-wrap { display: inline-block; }
+.ia-dropdown-wrap .hidden { display: none; }
+.ia-dropdown-wrap .visible { display: block; }
+.view-btn { color: #64748b; background: transparent; }
+.view-btn.active { background: #ffffff; color: #1e40af; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+#secao-diagnostico { overflow: visible; }
+</style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+<header class="sticky top-0 z-50 bg-gray-50 border-b border-gray-200 shadow-sm px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+<!-- LOGO -->
+<div class="shrink-0">
+<h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-tight"><span class="geriah-tooltip" data-tooltip="Gênese Empreendedora para Renovação de Inteligência e Autonomia Humana">GERiAH</span> <span class="text-blue-600">Fractal</span></h1>
+<p class="text-gray-500 text-xs font-medium">Seu negócio a partir de quem você é.</p>
+</div>
+<!-- NAV TABS -->
+<nav class="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1">
+<button onclick="setView('diagnostico')" id="view-btn-diagnostico" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">� Diagnóstico</button>
+<button onclick="setView('biblioteca')" id="view-btn-biblioteca" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">� Biblioteca</button>
+<button onclick="setView('ferramentas')" id="view-btn-ferramentas" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">� Ferramentas</button>
+<button onclick="setView('tudo')" id="view-btn-tudo" class="view-btn px-4 py-2 rounded-lg text-sm font-semibold transition">☰ Tudo</button>
+</nav>
+<!-- ACTIONS -->
+<div class="flex items-center gap-2 shrink-0">
+<div id="auth-user-badge" class="hidden items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span id="auth-user-email" class="max-w-[140px] truncate">usuario@email.com</span>
+<button type="button" onclick="authKit.sair()" class="text-red-500 hover:text-red-700 hover:underline ml-1 font-bold">Sair</button>
+</div>
+<button type="button" onclick="abrirTutorial()" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-md hover:bg-blue-100 transition font-semibold text-sm">
+� Como usar
+</button>
+<button type="button" onclick="toggleChat()" id="btn-chat-global" class="bg-emerald-600 text-white border border-emerald-700 px-3 py-2 rounded-md hover:bg-emerald-700 transition font-semibold text-sm flex items-center gap-2">
+� Advisor IA
+</button>
+<button type="button" onclick="abrirModalConfig()" class="bg-slate-900 text-yellow-500 border border-slate-700 px-3 py-2 rounded-md hover:bg-slate-800 transition flex items-center gap-2 font-semibold text-sm">
+<span id="ia-status-dot" class="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></span>
+⚙️ IA
+</button>
+<input type="file" id="file-import" accept=".json" class="hidden" onchange="importarJSON(event)">
+<button type="button" onclick="document.getElementById('file-import').click()" class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-2 rounded-md hover:bg-indigo-100 transition font-semibold text-sm">
+� Importar
+</button>
+<button type="button" onclick="exportarJSON()" class="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition font-semibold text-sm">
+� Exportar
+</button>
+</div>
+</div>
+</header>
+<div class="max-w-7xl mx-auto px-6 pt-6 pb-6" id="main-content" style="transition:max-width 0.25s ease,margin-right 0.25s ease;">
+<!-- INPUT: QUEM SOU -->
+<div id="secao-diagnostico" style="position:relative;">
+<div class="bg-quem-sou p-6 shadow-sm rounded-md mb-8">
+<h2 class="font-bold text-blue-800 mb-4 text-xl border-b pb-2">1. DIAGNÓSTICO DA ESSÊNCIA (QUEM SOU)</h2>
+<!-- ALIMENTAÇÃO RÁPIDA -->
+<div class="flex flex-col gap-3 mb-5 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+<div class="flex flex-col lg:flex-row gap-3">
+<div class="flex-1">
+<label class="text-xs font-semibold text-slate-500 mb-1 block">� URL (site, blog, Instagram, <span class="text-blue-600 font-bold">LinkedIn</span>...)</label>
+<div class="flex gap-2">
+<input id="input-url" type="url" placeholder="https://linkedin.com/in/... ou outro" class="flex-1 text-sm p-2 border border-slate-300 rounded outline-none focus:border-blue-500 bg-white" oninput="detectarLinkedIn(this.value)">
+<button type="button" onclick="preencherViaURL()" id="btn-url" class="bg-slate-700 text-white px-4 py-2 rounded text-xs font-bold hover:bg-slate-900 transition whitespace-nowrap">⚡ Preencher</button>
+</div>
+</div>
+<div class="flex flex-wrap items-end gap-2">
+<div>
+<label class="text-xs font-semibold text-slate-500 mb-1 block">�️ Printscreen (Bio, Posts, Tela)</label>
+<div class="flex gap-2 items-center">
+<label class="cursor-pointer bg-blue-50 border border-blue-300 text-blue-700 px-3 py-2 rounded text-xs font-bold hover:bg-blue-100 transition flex items-center gap-1.5 shadow-sm" title="Clique para enviar imagem ou pressione Ctrl+V">
+� Colar Print <span class="text-[10px] font-normal text-blue-500 bg-white px-1 py-0.5 rounded border border-blue-200">Ctrl+V</span>
+<input type="file" id="input-print" accept="image/*" class="hidden" onchange="processarImagemAlimentacao(this.files[0])">
+</label>
+<span id="preview-print-badge" class="hidden text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded font-semibold items-center gap-1"></span>
+</div>
+</div>
+<div>
+<label class="text-xs font-semibold text-slate-500 mb-1 block">� Documento (CV, texto...)</label>
+<div class="flex gap-2">
+<label class="cursor-pointer bg-white border border-slate-300 text-slate-600 px-3 py-2 rounded text-xs font-semibold hover:bg-slate-50 transition flex items-center gap-1">
+� Arquivo
+<input type="file" id="input-documento" accept=".pdf,.txt,.doc,.docx,.html,.htm,.md,.csv,.json,.png,.jpg,.jpeg,.gif,.webp" class="hidden" onchange="preencherViaDocumento(this)">
+</label>
+<span id="nome-documento" class="text-xs text-slate-400 self-center italic truncate max-w-[100px]">nenhum</span>
+</div>
+</div>
+</div>
+</div><!-- /flex row -->
+<!-- LINKEDIN PASTE AREA -->
+<div id="linkedin-paste-area" style="display:none" class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+<label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">
+� LinkedIn detectado — cole o texto do perfil para melhor extração
+<span class="font-normal text-blue-400">(Ctrl+A no perfil → copiar → colar aqui)</span>
+</label>
+<textarea id="input-linkedin-texto" rows="4" placeholder="Cole aqui o texto copiado do perfil LinkedIn..." class="w-full text-xs p-2 border border-blue-200 rounded outline-none focus:border-blue-400 bg-white resize-y font-mono"></textarea>
+<p class="text-[10px] text-blue-400 mt-1">� Se preferir, pode preencher só com a URL — o sistema tentará extrair o que conseguir.</p>
+</div>
+</div>
+<div id="status-alimentacao" class="hidden mb-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded px-4 py-2.5">
+<span class="spinner"></span> <span id="status-alimentacao-msg">Analisando...</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+<div>
+<label class="text-xs font-semibold text-gray-600">Vivência (Habilidades)</label>
+<textarea id="qs_vivencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que domina..."></textarea>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-600">Experiência</label>
+<textarea id="qs_experiencia" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades realizadas..."></textarea>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-600">Demanda (Reconhecida)</label>
+<textarea id="qs_demanda" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Reconhecido por outros..."></textarea>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-600">Oferta (Preferidas)</label>
+<textarea id="qs_oferta" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="O que mais gosta de fazer..."></textarea>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-600">Mercado (Disposição a pagar)</label>
+<textarea id="qs_mercado" oninput="autoResize(this)" class="w-full text-[13px] p-3 bg-gray-50 border rounded mt-1 outline-none focus:border-blue-500 min-h-[80px]" placeholder="Atividades rentáveis..."></textarea>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+<label class="text-xs font-bold text-blue-700 flex items-center gap-1 mb-1">� Foco da Essência
+<span class="font-normal text-blue-400">(perspectiva para ler o QUEM SOU — ex: "ótica de coach", "viés técnico")</span>
+</label>
+<input id="qs_foco_essencia" type="text" placeholder="Ex: olhar como educador, foco em liderança feminina..." class="w-full text-[13px] p-2 bg-white border border-blue-200 rounded outline-none focus:border-blue-500">
+</div>
+<div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+<label class="text-xs font-bold text-orange-700 flex items-center gap-1 mb-1">� Prioridade Estratégica
+<span class="font-normal text-orange-400">(diretriz para extrair a base — ex: "P1: lançar mentoria", "foco B2B")</span>
+</label>
+<input id="qs_foco" type="text" placeholder="Ex: P1 — monetizar via infoproduto, P2 — parcerias B2B..." class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400">
+</div>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="w-48"></div>
+<button type="button" id="btn-gerar" onclick="gerarEstrategiaComIA()" class="bg-blue-600 text-white px-8 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition flex items-center tracking-wide">
+✦ Extrair Base Estratégica
+</button>
+<div class="w-48 flex justify-end">
+<button type="button" id="btn-painel-expansao" onclick="abrirPainelExpansao(registroAtivoId)" style="display:none"
+class="bg-slate-800 text-yellow-400 border border-slate-600 px-5 py-3 rounded-md shadow font-bold hover:bg-slate-700 transition text-sm flex items-center gap-2">
+� Painel de Expansão
+</button>
+</div>
+</div>
+</div>
+</div><!-- /secao-diagnostico -->
+<!-- BIBLIOTECA -->
+<div id="secao-biblioteca">
+<div class="bg-white p-6 shadow rounded-md overflow-x-auto border border-gray-100">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Bibliotecas & Hubs de Expansão</h3>
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-gray-100 text-gray-600 text-sm">
+<th class="p-3 border-b w-8"><input type="checkbox" id="chk-all" onclick="toggleSelecionarTodos(this)" class="w-4 h-4 accent-blue-600"></th>
+<th class="p-3 border-b w-16">ID</th>
+<th class="p-3 border-b w-1/3">Essência do Cliente (Resumo)</th>
+<th class="p-3 border-b w-1/3">Público Foco (Gerado)</th>
+<th class="p-3 border-b text-right">Ações de Expansão</th>
+</tr>
+</thead>
+<tbody id="tabelaRegistros"></tbody>
+</table>
+<div id="barra-export" style="display:none;" class="mt-3 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-2.5">
+<span class="text-sm text-blue-700 font-semibold" id="barra-export-label">0 itens selecionados</span>
+<div class="flex gap-2">
+<button onclick="exportarSelecionados()" class="bg-blue-600 text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-blue-700 transition">⬇ Exportar JSON</button>
+<button onclick="limparSelecao()" class="bg-white text-slate-500 border border-slate-300 px-4 py-1.5 rounded-md text-xs font-semibold hover:bg-slate-50 transition">Limpar seleção</button>
+</div>
+</div>
+</div>
+</div><!-- /secao-biblioteca -->
+</div>
+<!-- DRAWER FERRAMENTAS -->
+<div id="drawer-overlay" onclick="fecharDrawer()" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(15,23,42,0.4);backdrop-filter:blur(2px);"></div>
+<div id="drawer-ferramentas" style="position:fixed;top:0;left:0;height:100%;width:500px;z-index:8001;background:#fff;box-shadow:4px 0 32px rgba(0,0,0,0.18);transform:translateX(-100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;">
+<!-- Drawer header -->
+<div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white shrink-0">
+<div class="flex items-center gap-3">
+<span class="text-lg">�</span>
+<span class="font-bold text-base">Ferramentas & Links</span>
+</div>
+<div class="flex items-center gap-2">
+<button onclick="adicionarGrupoMain()" class="text-yellow-400 border border-slate-600 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-700 transition">＋ Grupo</button>
+<button onclick="fecharDrawer()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none px-1 transition">&times;</button>
+</div>
+</div>
+<!-- Drawer content -->
+<div class="flex-1 overflow-y-auto p-4 space-y-2" id="ferramentas-main-container"></div>
+<!-- Form -->
+<div id="form-link-main" style="display:none" class="shrink-0 border-t border-slate-200 bg-slate-50 p-4 space-y-2">
+<h4 class="font-bold text-slate-700 text-sm" id="form-link-main-label">Novo link</h4>
+<input id="form-link-main-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white">
+<input id="form-link-main-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white">
+<div id="form-link-main-grupo-wrap" style="display:none">
+<input id="form-link-main-grupo" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white">
+</div>
+<div class="flex gap-2 justify-end pt-1">
+<button onclick="cancelarFormMain()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button>
+<button onclick="salvarFormMain()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button>
+</div>
+</div>
+</div>
+<!-- MODAL DE EXPANSÃO -->
+<div id="expansaoModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9000;" class="bg-gray-900 bg-opacity-85 items-center justify-center backdrop-blur-sm p-2 md:p-6">
+<div id="expansao-inner" class="bg-white w-full h-full md:h-[95vh] rounded-xl shadow-2xl flex flex-col overflow-hidden" style="max-width:80rem;transition:max-width 0.25s ease;">
+<div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white">
+<div class="flex items-center gap-4">
+<h3 class="text-xl font-bold flex items-center gap-2"><span class="text-blue-400">✦</span> Central de Desdobramento</h3>
+<!-- CONTROLES DE UNDO / REDO -->
+<div class="flex items-center gap-1 bg-slate-800 rounded-lg p-1 border border-slate-700">
+<button id="btn-undo" onclick="undoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Desfazer">↩️ Undo</button>
+<div class="w-px h-4 bg-slate-600"></div>
+<button id="btn-redo" onclick="redoAcao()" disabled class="disabled:opacity-30 disabled:cursor-not-allowed text-slate-300 hover:text-white px-2 py-1 rounded transition text-sm font-bold" title="Refazer">↪️ Redo</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<!-- BUSCA GLOBAL -->
+<div class="relative" id="busca-global-wrap">
+<input id="busca-global-input" type="text" placeholder="� Buscar no sistema..." autocomplete="off"
+oninput="buscarGlobal(this.value)"
+onkeydown="navegarBusca(event)"
+class="bg-slate-800 border border-slate-600 text-white text-sm px-3 py-1.5 rounded-lg outline-none focus:border-blue-400 w-56 placeholder-slate-400">
+<div id="busca-global-results" style="display:none"
+class="absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 w-80 max-h-80 overflow-y-auto text-slate-800">
+</div>
+</div>
+<button type="button" onclick="abrirModalConfig()" class="text-xs bg-slate-800 border border-slate-700 hover:bg-slate-700 text-yellow-500 px-3 py-1.5 rounded transition">⚙️ Configuração IA</button>
+<button type="button" onclick="fecharPainelExpansao()" class="text-gray-400 hover:text-red-400 font-bold text-3xl transition px-2 leading-none">&times;</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row flex-1 overflow-hidden">
+<!-- Tabs -->
+<div class="w-full md:w-72 bg-slate-50 border-r border-slate-200 flex flex-col p-4 gap-2 overflow-y-auto">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Módulos Estratégicos</p>
+<button onclick="mudarAbaExpansao('base')" id="tab-btn-base" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('negocio')" id="tab-btn-negocio" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('marketing')" id="tab-btn-marketing" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('vendas')" id="tab-btn-vendas" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('cs')" id="tab-btn-cs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('educacao')" id="tab-btn-educacao" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<div class="my-2 border-t border-slate-200"></div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Crescimento & Addons</p>
+<button onclick="mudarAbaExpansao('esteira')" id="tab-btn-esteira" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('bsc')" id="tab-btn-bsc" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('escala')" id="tab-btn-escala" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('iaprompts')" id="tab-btn-iaprompts" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('docs')" id="tab-btn-docs" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<button onclick="mudarAbaExpansao('extras')" id="tab-btn-extras" class="text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition"></button>
+<!-- LINKS SIDEBAR -->
+<div class="my-2 border-t border-slate-200"></div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">� Links & Ferramentas</p>
+<div id="sidebar-links-container" class="space-y-1"></div>
+</div>
+<!-- Conteúdo -->
+<div class="flex-1 bg-slate-50 overflow-y-auto p-6 relative" id="expansao-content-area"></div>
+</div>
+</div>
+</div>
+<!-- MODAL TUTORIAL -->
+<div id="tutorialModal" style="display:none; position:fixed; inset:0; z-index:10000;" class="bg-slate-900 bg-opacity-85 backdrop-blur-sm flex items-start justify-center p-4 overflow-y-auto">
+<div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl my-8 overflow-hidden flex flex-col">
+<!-- Header -->
+<div class="bg-gradient-to-r from-blue-700 to-blue-500 px-8 py-6 flex justify-between items-start">
+<div>
+<h2 class="text-2xl font-bold text-white flex items-center gap-2">� Como usar o GERiAH Fractal</h2>
+<p class="text-blue-100 text-sm mt-1">Seu negócio a partir de quem você é — guia rápido</p>
+</div>
+<button onclick="fecharTutorial()" class="text-blue-200 hover:text-white text-3xl font-bold leading-none mt-1 transition">&times;</button>
+</div>
+<div class="p-8 space-y-8 overflow-y-auto text-slate-700 text-[14px] leading-relaxed">
+<!-- O que é -->
+<div>
+<h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">✦ O que é o GERiAH Fractal?</h3>
+<p>O GERiAH Fractal é uma plataforma de <strong>diagnóstico estratégico pessoal e de negócio</strong>. A ideia central é simples: antes de definir o que você vende ou para quem, você precisa entender <em>quem você é</em> — suas vivências, experiências, o que o mercado já reconhece em você.</p>
+<p class="mt-2">A partir desse diagnóstico, a IA expande sua essência em um <strong>Framework Estratégico completo</strong>: público-alvo, posicionamento, canais, oferta, plano de marketing, playbook de vendas e muito mais.</p>
+</div>
+<!-- Fluxo de uso -->
+<div>
+<h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">� Fluxo de uso</h3>
+<div class="space-y-3">
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">1</span>
+<div><strong>Configure a IA</strong> — clique em ⚙️ Configurar IA e insira sua chave OpenRouter (gratuita) ou Groq. Os links para criar as chaves estão dentro do modal.</div>
+</div>
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">2</span>
+<div><strong>Preencha o Diagnóstico da Essência</strong> — use os 5 campos (Vivência, Experiência, Demanda, Oferta, Mercado) manualmente, ou cole uma URL/currículo para preenchimento automático via IA.</div>
+</div>
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">3</span>
+<div><strong>Defina o Foco e a Prioridade</strong> — <em>Foco da Essência</em> orienta como a IA lê o QUEM SOU (ex: "ótica de coach"). <em>Prioridade Estratégica</em> direciona a geração dos pilares (ex: "P1 lançar mentoria").</div>
+</div>
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">4</span>
+<div><strong>Clique em ✦ Extrair Base Estratégica</strong> — a IA gera os 4 pilares do framework. O resultado vai para a Biblioteca.</div>
+</div>
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">5</span>
+<div><strong>Abra o Painel de Expansão</strong> — clique em � Painel de Expansão na biblioteca para desdobrar em módulos: BMC, Marketing, Vendas, CS, Educação e muito mais.</div>
+</div>
+<div class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-lg p-3">
+<span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shrink-0">6</span>
+<div><strong>Revise, edite e itere</strong> — clique em qualquer linha da biblioteca para recarregar o diagnóstico. Altere o foco, mude a prioridade e gere uma nova versão. Cada geração é um registro separado.</div>
+</div>
+</div>
+</div>
+<!-- Freemium -->
+<div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-xl p-6">
+<h3 class="text-lg font-bold text-yellow-400 mb-3 flex items-center gap-2">� Gratuito &nbsp;×&nbsp; � Premium — entenda o modelo</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+<div class="bg-slate-700 rounded-lg p-4">
+<div class="font-bold text-green-400 mb-2">✅ Gratuito (sempre)</div>
+<ul class="space-y-1 text-slate-300">
+<li>• Diagnóstico da Essência completo</li>
+<li>• Framework Base Interativo</li>
+<li>• Canvas BMC</li>
+<li>• Playbook de Vendas</li>
+<li>• Educação do Cliente</li>
+<li>• Biblioteca ilimitada de registros</li>
+<li>• Export / Import JSON</li>
+<li>• Preenchimento via URL e currículo</li>
+</ul>
+</div>
+<div class="bg-slate-700 rounded-lg p-4">
+<div class="font-bold text-yellow-400 mb-2">� Premium (senha de acesso)</div>
+<ul class="space-y-1 text-slate-300">
+<li>• Plano de Marketing Estratégico</li>
+<li>• Estratégia de Sucesso do Cliente</li>
+<li>• Esteira de Produtos</li>
+<li>• Balanced Scorecard (BSC)</li>
+<li>• Estratégia de Escala e Crescimento</li>
+<li>• IA com Prompts Livres</li>
+</ul>
+<p class="text-slate-400 text-xs mt-3">A senha de acesso Premium é fornecida pela equipe FNW Advisory mediante contratação.</p>
+</div>
+</div>
+</div>
+<!-- Dicas -->
+<div>
+<h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">� Dicas rápidas</h3>
+<ul class="space-y-2 text-slate-600">
+<li>� <strong>Clique em qualquer linha da biblioteca</strong> para recarregar aquele diagnóstico no formulário — edite e regere sem perder o original.</li>
+<li>� <strong>Use o campo Foco da Essência</strong> para ver perspectivas diferentes da mesma pessoa — ex: "olhar técnico" vs "olhar comercial".</li>
+<li>� <strong>Nota Global do Cliente</strong> (no painel, aba Base) é o lugar para colar mensagens de WhatsApp, resumos de reunião e contexto livre.</li>
+<li>⬇️ <strong>Marque itens na biblioteca</strong> e exporte só os selecionados — útil para entregar o dossiê de um cliente específico.</li>
+<li>� <strong>Sua chave de IA fica salva localmente</strong> no navegador. Nenhum dado é enviado para servidores FNW — apenas para OpenRouter/Groq.</li>
+</ul>
+</div>
+</div>
+<div class="px-8 py-4 border-t border-slate-100 flex justify-end bg-slate-50 rounded-b-2xl">
+<button onclick="fecharTutorial()" class="bg-blue-600 text-white px-6 py-2 rounded-md font-bold hover:bg-blue-700 transition text-sm">Entendido, vamos começar →</button>
+</div>
+</div>
+</div>
+<!-- MODAL DE CONFIGURAÇÕES IA -->
+<div id="configModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;" class="bg-slate-900 bg-opacity-80 items-center justify-center backdrop-blur-sm p-4">
+<div class="bg-slate-900 w-full max-w-2xl rounded-xl shadow-2xl border border-slate-700 flex flex-col">
+<div class="p-5 border-b border-slate-800 flex justify-between items-center">
+<h3 class="text-lg font-bold text-yellow-500 flex items-center gap-2">✦ FNW IA Kit</h3>
+<button type="button" onclick="fecharModalConfig()" class="text-slate-400 hover:text-white font-bold text-2xl transition px-2 leading-none">&times;</button>
+</div>
+<div class="p-6 space-y-6">
+<div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-semibold text-sm text-slate-300">OpenRouter (Principal)</h4>
+<a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://openrouter.ai/workspaces/default/keys'); return false;">� Gerar chave OpenRouter ↗</a>
+</div>
+<div class="space-y-3">
+<input type="password" id="or-key" placeholder="sk-or-v1-..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none">
+<select id="or-model" class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none" onchange="atualizarAvisoVisao()">
+<optgroup label="� Gratuitos (sem visão)">
+<option value="google/gemma-3-27b-it:free">Gemma 3 27B (free)</option>
+<option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B (free)</option>
+</optgroup>
+<optgroup label="� Com visão (imagens)">
+<option value="openai/gpt-4o-mini">GPT-4o Mini �</option>
+<option value="openai/gpt-4o">GPT-4o �</option>
+<option value="mistralai/mistral-small-3.1-24b-instruct:free">Mistral Small 3.1 � (free)</option>
+<option value="google/gemini-2.0-flash-001">Gemini 2.0 Flash �</option>
+</optgroup>
+</select>
+<div id="aviso-visao" style="display:none" class="mt-2 text-[11px] text-yellow-400 bg-yellow-900 bg-opacity-30 border border-yellow-700 rounded px-3 py-2">
+⚠️ Modelo atual não suporta visão. Para enviar imagens no chat, escolha um modelo com �.
+</div>
+</div>
+</div>
+<div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-semibold text-sm text-slate-300">Groq (Fallback)</h4>
+<a href="#" class="text-[11px] text-yellow-400 hover:text-yellow-300 underline transition" onclick="abrirLink('https://console.groq.com/keys'); return false;">� Gerar chave Groq ↗</a>
+</div>
+<input type="password" id="groq-key" placeholder="gsk_..." class="w-full text-sm p-2.5 bg-slate-900 border border-slate-600 rounded text-white focus:border-yellow-500 outline-none">
+</div>
+</div>
+<div class="p-5 border-t border-slate-800 bg-slate-800/50 rounded-b-xl flex justify-between items-center">
+<button type="button" onclick="limparConfigIA()" class="text-slate-400 hover:text-red-400 text-sm font-semibold transition">Limpar Chaves</button>
+<button type="button" onclick="salvarConfigIA()" class="bg-yellow-600 text-slate-900 px-6 py-2 text-sm font-bold rounded-md shadow hover:bg-yellow-500 transition tracking-wide">Salvar Configurações</button>
+</div>
+</div>
+</div>
+<script>
+// ════════════════════════════════════════
 // FUNÇÃO GLOBAL DE AUTO-RESIZE
 // ════════════════════════════════════════
 function abrirTutorial() {
@@ -85,6 +547,7 @@ const LS_GROQ_KEY = 'fnw-ia-groq-key';
 const LS_MODEL = 'fnw-ia-modelo';
 const DEFAULT_MODEL_OR = 'google/gemma-3-27b-it:free';
 const DEFAULT_MODEL_GROQ = 'llama-3.3-70b-versatile';
+const MODELOS_COM_VISAO = ['gpt-4o','gpt-4o-mini','gpt-4-vision','claude-3','claude-sonnet','claude-opus','gemini','llava','pixtral','qwen-vl','internvl','mistral-small-3.1'];
 let _orKey = '', _groqKey = '', _modelo = DEFAULT_MODEL_OR;
 function carregar() {
 _orKey = localStorage.getItem(LS_OR_KEY) || '';
@@ -130,7 +593,10 @@ catch(e) { if (!_groqKey) throw e; }
 }
 return await _req('https://api.groq.com/openai/v1/chat/completions', _groqKey, bodyGroq);
 }
-return { carregar, chamar, chamarComHistorico, salvarKeys, temChave, getOR: ()=>_orKey, getGroq: ()=>_groqKey, getMod: ()=>_modelo };
+function modeloSuportaVisao() {
+return MODELOS_COM_VISAO.some(m => (_modelo || '').toLowerCase().includes(m));
+}
+return { carregar, chamar, chamarComHistorico, salvarKeys, temChave, modeloSuportaVisao, getOR: ()=>_orKey, getGroq: ()=>_groqKey, getMod: ()=>_modelo };
 })();
 // ════════════════════════════════════════
 // Lógica da Aplicação Global & Histórico
@@ -214,40 +680,41 @@ throw new Error("Falha na interpretação da resposta da IA. Verifique se o mode
 const regrasLeiturabilidade = "MANDATÓRIO: Estruture a resposta para máxima clareza. Use parágrafos MUITO CURTOS (máximo 3 linhas). Use TÓPICOS (bullet points). Use **NEGRITO** para destacar termos vitais.";
 const modulosConfig = {
 negocio: {
-titulo: "Canvas BMC Interativo", icone: "🏗️", desc: "Gere os 9 blocos do BMC.",
+titulo: "Canvas BMC Interativo", icone: "�️", desc: "Gere os 9 blocos do BMC.",
 prompt: `Você é um Consultor Estratégico. Gere o "Modelo de Negócio" baseado nos dados. Foco em propulsão de vendas. PROIBIDO metáforas de aviação.
 Sua resposta DEVE SER UM OBJETO JSON VÁLIDO contendo EXATAMENTE: {"parcerias":"","atividades":"","recursos":"","proposta":"","relacionamento":"","canais":"","segmentos":"","custos":"","receitas":""}`
 },
 marketing: {
-titulo: "Plano de Marketing Estratégico", icone: "🎯", desc: "Ações de aquisição, branding e tráfego.",
+titulo: "Plano de Marketing Estratégico", icone: "�", desc: "Ações de aquisição, branding e tráfego.",
 prompt: `Você é um CMO. Gere o "Plano de Marketing". Inclua: Posicionamento, Pilares de Conteúdo, Captação e Esteira. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 vendas: {
-titulo: "Playbook de Vendas", icone: "🤝", desc: "Scripts, qualificação e fechamento.",
+titulo: "Playbook de Vendas", icone: "�", desc: "Scripts, qualificação e fechamento.",
 prompt: `Você é um Diretor de Vendas. Gere o "Playbook de Vendas". Inclua: Pitch, Qualificação, Objeções e Fechamento. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 cs: {
-titulo: "Estratégia de Sucesso do Cliente", icone: "💎", desc: "Jornada de retenção e LTV.",
+titulo: "Estratégia de Sucesso do Cliente", icone: "�", desc: "Jornada de retenção e LTV.",
 prompt: `Você é um Especialista em CS. Gere o "Plano de CS". Inclua: Onboarding, Touchpoints, Retenção e Upsell. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 educacao: {
-titulo: "Educação do Cliente", icone: "📚", desc: "Trilhas de aprendizado e apoio.",
+titulo: "Educação do Cliente", icone: "�", desc: "Trilhas de aprendizado e apoio.",
 prompt: `Você é um Especialista em Customer Education. Gere o "Plano de Educação do Cliente". Inclua: Conscientização, Capacitação e Formatos. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 esteira: {
-titulo: "Esteira de Produtos e Previsibilidade", icone: "🛤️", desc: "Crie um portfólio estruturado em escada de valor.",
+titulo: "Esteira de Produtos e Previsibilidade", icone: "�️", desc: "Crie um portfólio estruturado em escada de valor.",
 prompt: `Você é um Estrategista de Produtos. Gere a "Esteira de Produtos". Inclua: Isca (Front-end), Produto Core, Upsell/Cross-sell (Back-end) e Estratégia de Previsibilidade de Caixa. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 bsc: {
-titulo: "Balanced Scorecard (BSC)", icone: "📊", desc: "Objetivos e indicadores nas 4 perspectivas.",
+titulo: "Balanced Scorecard (BSC)", icone: "�", desc: "Objetivos e indicadores nas 4 perspectivas.",
 prompt: `Você é um Especialista em Gestão. Gere o "Balanced Scorecard". Inclua as 4 perspectivas: 1) Financeira, 2) Clientes, 3) Processos, 4) Aprendizado/Inovação. Defina Objetivos e KPIs para cada. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 },
 escala: {
-titulo: "Estratégia de Escala e Crescimento", icone: "🚀", desc: "Motores de crescimento e escala.",
+titulo: "Estratégia de Escala e Crescimento", icone: "�", desc: "Motores de crescimento e escala.",
 prompt: `Você é um Diretor de Crescimento (Growth). Gere o plano de "Crescimento e Escala". Estruture em: Lucratividade, Previsibilidade, Crescimento, Recorrência e Escala. Foco em propulsão de vendas a jato. PROIBIDO metáforas de aviação. ${regrasLeiturabilidade} Responda em Markdown.`
 }
 };
 function initApp() {
+authKit.init();
 try {
 const saved = localStorage.getItem('consultoria_regs_v3');
 if (saved) { registros = JSON.parse(saved); if (!Array.isArray(registros)) registros = []; }
@@ -269,9 +736,19 @@ dot.className = iaKit.temChave() ? "w-2.5 h-2.5 rounded-full bg-green-500 shadow
 }
 function abrirModalConfig() {
 document.getElementById('configModal').style.display = 'flex';
+setTimeout(atualizarAvisoVisao, 50);
 }
 function fecharModalConfig() {
 document.getElementById('configModal').style.display = 'none';
+}
+function atualizarAvisoVisao() {
+const sel = document.getElementById('or-model');
+const aviso = document.getElementById('aviso-visao');
+if (!sel || !aviso) return;
+const modelo = sel.value || '';
+const VISAO = ['gpt-4o','gpt-4o-mini','gemini','mistral-small-3.1','llava','pixtral','claude-3','internvl'];
+const suporta = VISAO.some(m => modelo.toLowerCase().includes(m));
+aviso.style.display = suporta ? 'none' : 'block';
 }
 function salvarConfigIA() {
 iaKit.salvarKeys(document.getElementById('or-key').value, document.getElementById('groq-key').value, document.getElementById('or-model').value);
@@ -378,28 +855,26 @@ function getSysAlimentacao() {
 const foco = (document.getElementById('qs_foco_essencia') || {}).value || '';
 return `Você é um consultor estratégico especialista em diagnóstico de essência humana e posicionamento de negócio.
 INTERPRETAÇÃO DA FONTE — leia a intenção:
-A fonte pode ser qualquer coisa: currículo, transcrição, perfil, site, app, código HTML, sistema.
+A fonte pode ser qualquer coisa: print de perfil/bio (Instagram, LinkedIn, YouTube, TikTok, site), currículo, transcrição, perfil, site, app, código HTML, sistema.
 Sua missão é sempre a mesma: entender o NEGÓCIO ou PESSOA por trás da fonte e extrair a essência estratégica.
+- Print de rede social (Instagram, LinkedIn...) → leia bio, destaques, títulos de posts, métricas visíveis, fotos, propostas de valor e posicionamento
 - Texto / transcrição / currículo / perfil → extraia a essência da pessoa diretamente
 - Site / landing page / blog → extraia o negócio: o que faz, para quem, como se posiciona
-- App ou sistema em HTML → leia o propósito do produto: que problema resolve, quem usa, que valor entrega, como funciona — use isso para preencher os campos como se fosse o diagnóstico do negócio por trás do produto
-- Se a fonte for o próprio GERiAH Fractal com registros preenchidos → leia os dados dos registros salvos no localStorage ou no código como origem do diagnóstico
-- Em qualquer caso: extraia valor real, não descreva tecnicamente o código
-Analise o conteúdo fornecido e extraia o diagnóstico real da pessoa — preserve contradições, anseios, frustrações, bastidores, o que ela NÃO quer mais, tentativas anteriores, habilidades latentes ainda não monetizadas.
+- App ou sistema em HTML → leia o propósito do produto: que problema resolve, quem usa, que valor entrega, como funciona
 NÃO simplifique. NÃO normalize. Capture a textura real da trajetória.${foco ? ' PERSPECTIVA DE LEITURA: ' + foco : ''}
 Responda SOMENTE com JSON válido, sem markdown, com exatamente estas chaves:
 {
 "vivencia": "o que a fonte domina, conhece, opera ou entrega — pode ser técnico, relacional, criativo, operacional, comercial, qualquer domínio real presente na fonte",
 "experiencia": "o que foi feito, construído, tentado ou vivido — projetos, produtos, serviços, mercados, contextos, erros e acertos — exatamente como aparece na fonte",
-"demanda": "o que o mercado, clientes ou usuários reconhecem, pedem ou buscam — baseado apenas no que está na fonte, sem inferir categorias genéricas",
-"oferta": "o que é entregue, vendido, oferecido ou pretende oferecer — produtos, serviços, sistemas, conteúdos, processos — conforme a fonte",
-"mercado": "quem compra, usa ou se beneficia — segmentos, perfis, contextos reais identificados na fonte"
+"demanda": "o que o mercado, clientes ou usuários reconhecem, pedem ou buscam — baseado no que está na fonte",
+"oferta": "o que é entregue, vendido, oferecido ou pretende oferecer — produtos, serviços, mentorias, consultorias, cursos, processos — conforme a fonte",
+"mercado": "quem compra, usa ou se beneficia — segmentos, perfis, nichos, contextos reais identificados na fonte"
 }
-Seja fiel à fonte. Não projete categorias genéricas como coaching, mentoria ou consultoria a menos que estejam explicitamente na fonte. Se não houver dados suficientes num campo, deixe-o vazio.`; }
+Seja fiel à fonte. Se não houver dados suficientes num campo, deixe-o vazio.`; }
 function setStatusAlimentacao(msg) {
 const el = document.getElementById('status-alimentacao');
 const txt = document.getElementById('status-alimentacao-msg');
-if (msg) { el.style.display = 'flex'; txt.textContent = msg; }
+if (msg) { el.style.display = 'flex'; txt.innerHTML = msg; }
 else { el.style.display = 'none'; }
 }
 function distribuirNoCampos(obj) {
@@ -456,15 +931,62 @@ setStatusAlimentacao(null);
 } catch(e) { alert('Erro: ' + e.message); setStatusAlimentacao(null); }
 finally { btn.disabled = false; btn.textContent = '⚡ Preencher'; }
 }
+async function processarImagemAlimentacao(file) {
+if (!file) return;
+if (!file.type.startsWith('image/')) {
+return alert('Arquivo não é uma imagem válida.');
+}
+if (!iaKit.temChave()) return alert('Configure a chave de IA primeiro.');
+
+registroAtivoId = null;
+const btnPainel = document.getElementById('btn-painel-expansao');
+if (btnPainel) btnPainel.style.display = 'none';
+
+const badge = document.getElementById('preview-print-badge');
+if (badge) {
+badge.textContent = '�️ ' + (file.name || 'print copiado');
+badge.classList.remove('hidden');
+badge.classList.add('inline-flex');
+}
+
+setStatusAlimentacao('<span class="spinner"></span> �️ Analisando print da tela via IA (visão)...');
+try {
+const b64 = await new Promise((res, rej) => {
+const r = new FileReader();
+r.onload = e => res(e.target.result.split(',')[1]);
+r.onerror = rej;
+r.readAsDataURL(file);
+});
+const msgImg = [
+{ type: 'image_url', image_url: { url: `data:${file.type};base64,${b64}` } },
+{ type: 'text', text: 'Analise detalhadamente este printscreen/imagem (bio, perfil, fotos, posts, proposta) e extraia todas as informações da pessoa ou negócio.' }
+];
+const resposta = await iaKit.chamarComHistorico([{ role: 'user', content: msgImg }], getSysAlimentacao());
+const obj = extrairJSON(resposta);
+distribuirNoCampos(obj);
+setStatusAlimentacao(null);
+} catch(e) {
+alert('Erro ao analisar imagem: ' + e.message + '\n\nCertifique-se de estar usando um modelo com visão (ex: GPT-4o Mini � em ⚙️ IA).');
+setStatusAlimentacao(null);
+}
+}
 async function preencherViaDocumento(input) {
 if (!iaKit.temChave()) return alert('Configure a chave de IA primeiro.');
 const file = input.files[0]; if (!file) return;
+
+// Se o usuário selecionou uma imagem pelo botão de documento, redireciona para processamento visual
+if (file.type.startsWith('image/') || ['.png','.jpg','.jpeg','.webp','.gif'].some(ext => file.name.toLowerCase().endsWith(ext))) {
+processarImagemAlimentacao(file);
+input.value = '';
+return;
+}
+
 document.getElementById('nome-documento').textContent = file.name;
 // isola — não contamina registro anterior
 registroAtivoId = null;
 const btnPainel = document.getElementById('btn-painel-expansao');
 if (btnPainel) btnPainel.style.display = 'none';
-setStatusAlimentacao('📄 Lendo documento...');
+setStatusAlimentacao('� Lendo documento...');
 try {
 let texto = '';
 if (file.type === 'application/pdf') {
@@ -489,7 +1011,7 @@ r.readAsText(file);
 // HTML: extrai texto visível
 const isHtml = file.name.endsWith('.html') || file.name.endsWith('.htm') || file.type === 'text/html';
 if (isHtml) {
-setStatusAlimentacao('🔍 Escaneando documento HTML...');
+setStatusAlimentacao('� Escaneando documento HTML...');
 const parser = new DOMParser();
 const doc = parser.parseFromString(texto, 'text/html');
 doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove());
@@ -498,7 +1020,7 @@ texto = texto.split('\n').filter(l => l.trim()).join('\n').trim();
 }
 texto = texto.substring(0, 12000);
 }
-setStatusAlimentacao('🧠 Escaneando documento...');
+setStatusAlimentacao('� Escaneando documento...');
 const resposta = await iaKit.chamar(`Documento a seguir:\n\n${texto}`, getSysAlimentacao());
 const obj = extrairJSON(resposta);
 distribuirNoCampos(obj);
@@ -506,6 +1028,20 @@ setStatusAlimentacao(null);
 } catch(e) { alert('Erro: ' + e.message); setStatusAlimentacao(null); }
 input.value = '';
 }
+// Listener Global de Paste (Ctrl+V) para capturar Prints diretamente no Diagnóstico
+window.addEventListener('paste', function(e) {
+const target = e.target;
+// Se o chat estiver aberto e o foco for o campo do chat, deixa o chat processar
+if (_chatAberto && target && target.id === 'chat-input') return;
+
+const items = Array.from((e.clipboardData || {}).items || []);
+const imgItem = items.find(item => item.type.startsWith('image/'));
+if (imgItem) {
+e.preventDefault();
+const file = imgItem.getAsFile();
+processarImagemAlimentacao(file);
+}
+});
 async function gerarEstrategiaComIA() {
 if (!iaKit.temChave()) return abrirModalConfig();
 const inputData = {
@@ -560,9 +1096,18 @@ document.querySelectorAll('#tabelaRegistros tr').forEach(t => t.classList.remove
 this.classList.add('tr-selected');
 });
 tr.innerHTML = `
-<td class="p-3 align-middle" onclick="event.stopPropagation()"><input type="checkbox" class="chk-item w-4 h-4 accent-blue-600" data-id="${r.id}" onchange="atualizarBarraExport()"></td><td class="p-3 font-semibold text-gray-400 whitespace-nowrap align-middle">#${registros.length - idx}</td><td class="p-3 align-middle text-slate-700 max-w-xs text-sm">${esc(r.vivencia || '-')}</td><td class="p-3 align-middle text-yellow-700 font-medium max-w-sm text-sm">${esc(r.pq_publico || '-')}</td><td class="p-3 align-middle"><div class="flex gap-2 items-center justify-end"><button onclick="carregarDiagnosticoEAbrir(${r.id})" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700 text-xs font-bold transition inline-flex items-center gap-1 whitespace-nowrap">
-🚀 Painel de Expansão
-</button><button onclick="deletarRegistro(${r.id})" class="text-red-400 hover:text-red-600 font-semibold text-xs transition whitespace-nowrap">Excluir</button></div></td>
+<td class="p-3 align-middle" onclick="event.stopPropagation()"><input type="checkbox" class="chk-item w-4 h-4 accent-blue-600" data-id="${r.id}" onchange="atualizarBarraExport()"></td>
+<td class="p-3 font-semibold text-gray-400 whitespace-nowrap align-middle">#${registros.length - idx}</td>
+<td class="p-3 align-middle text-slate-700 max-w-xs text-sm">${esc(r.vivencia || '-')}</td>
+<td class="p-3 align-middle text-yellow-700 font-medium max-w-sm text-sm">${esc(r.pq_publico || '-')}</td>
+<td class="p-3 align-middle">
+<div class="flex gap-2 items-center justify-end">
+<button onclick="carregarDiagnosticoEAbrir(${r.id})" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700 text-xs font-bold transition inline-flex items-center gap-1 whitespace-nowrap">
+� Painel de Expansão
+</button>
+<button onclick="deletarRegistro(${r.id})" class="text-red-400 hover:text-red-600 font-semibold text-xs transition whitespace-nowrap">Excluir</button>
+</div>
+</td>
 `;
 tbody.appendChild(tr);
 });
@@ -750,12 +1295,19 @@ box.innerHTML = '<div class="px-4 py-3 text-sm text-slate-400 italic">Nenhum res
 box.style.display = 'block';
 return;
 }
-const TIPO_ICONE = { modulo: '📋', campo: '✏️', registro: '📁', link: '🔗', doc: '📄', chat: '💬' };
+const TIPO_ICONE = { modulo: '�', campo: '✏️', registro: '�', link: '�', doc: '�', chat: '�' };
 box.innerHTML = _buscaResultados.map((res, i) => `
 <div class="busca-result-item px-4 py-2.5 cursor-pointer border-b border-slate-100 last:border-0 hover:bg-blue-50 transition"
-data-idx="${i}" onmousedown="selecionarBusca(${i})"><div class="flex items-center gap-2"><span class="text-base">${TIPO_ICONE[res.tipo] || '🔍'}</span><div class="min-w-0"><div class="text-sm font-semibold text-slate-800 truncate">${res.label}</div><div class="text-[11px] text-slate-400 truncate">${res.sub}</div></div>
+data-idx="${i}" onmousedown="selecionarBusca(${i})">
+<div class="flex items-center gap-2">
+<span class="text-base">${TIPO_ICONE[res.tipo] || '�'}</span>
+<div class="min-w-0">
+<div class="text-sm font-semibold text-slate-800 truncate">${res.label}</div>
+<div class="text-[11px] text-slate-400 truncate">${res.sub}</div>
+</div>
 ${res.grupoLabel ? '<span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded shrink-0">' + res.grupoLabel + '</span>' : ''}
-</div></div>
+</div>
+</div>
 `).join('');
 box.style.display = 'block';
 }
@@ -808,13 +1360,46 @@ const r = registros.find(x => x.id === registroAtivoId);
 if (!r) return;
 if (!Array.isArray(r.docs)) r.docs = [];
 const docsHtml = r.docs.map((doc, i) => `
-<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleDocItem(${i}, this)"><div class="flex items-center gap-2"><span class="doc-arrow text-slate-400 font-bold text-sm">▸</span><span class="text-sm font-bold text-white">${doc.nome}</span><span class="text-[11px] text-slate-400">${doc.tipo || 'texto'} · ${(doc.conteudo||'').length} chars</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="editarNomeDoc(${i})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️ Nome</button><button onclick="substituirConteudoDoc(${i})" class="text-yellow-400 hover:text-yellow-200 text-xs border border-slate-600 px-2 py-1 rounded">📋 Substituir</button><button onclick="removerDoc(${i})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button></div></div><div class="doc-body p-4 bg-slate-50" style="display:none" id="doc-body-${i}"><textarea onblur="salvarDocConteudo(${i}, this.value)" class="w-full text-[12px] font-mono p-3 bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-400 min-h-[120px] resize-y text-slate-700">${doc.conteudo||''}</textarea></div></div>
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm">
+<div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleDocItem(${i}, this)">
+<div class="flex items-center gap-2">
+<span class="doc-arrow text-slate-400 font-bold text-sm">▸</span>
+<span class="text-sm font-bold text-white">${doc.nome}</span>
+<span class="text-[11px] text-slate-400">${doc.tipo || 'texto'} · ${(doc.conteudo||'').length} chars</span>
+</div>
+<div class="flex gap-1" onclick="event.stopPropagation()">
+<button onclick="editarNomeDoc(${i})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️ Nome</button>
+<button onclick="substituirConteudoDoc(${i})" class="text-yellow-400 hover:text-yellow-200 text-xs border border-slate-600 px-2 py-1 rounded">� Substituir</button>
+<button onclick="removerDoc(${i})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button>
+</div>
+</div>
+<div class="doc-body p-4 bg-slate-50" style="display:none" id="doc-body-${i}">
+<textarea onblur="salvarDocConteudo(${i}, this.value)" class="w-full text-[12px] font-mono p-3 bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-400 min-h-[120px] resize-y text-slate-700">${doc.conteudo||''}</textarea>
+</div>
+</div>
 `).join('') || '<p class="text-slate-400 text-sm text-center py-8 italic">Nenhum documento ainda.</p>';
 contentArea.innerHTML = `
-<div class="flex flex-col sm:flex-row justify-between items-center mb-5 border-b pb-4 gap-3"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">📁 Docs & Contexto</h2><div class="flex gap-2"><button onclick="adicionarDocTexto()" class="bg-slate-700 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-900 transition">✏️ Colar texto</button><label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-blue-700 transition flex items-center gap-1">
-📎 Upload arquivo
-<input type="file" accept=".pdf,.txt,.doc,.docx,.md" class="hidden" onchange="uploadDoc(this)"></label></div></div><div id="docs-lista">${docsHtml}</div><div id="form-doc" style="display:none" class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3"><input id="form-doc-nome" type="text" placeholder="Nome do documento" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white"><textarea id="form-doc-conteudo" placeholder="Cole o conteúdo aqui..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white min-h-[140px] resize-y font-mono"></textarea><div class="flex gap-2 justify-end"><button onclick="cancelarFormDoc()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button><button onclick="salvarFormDoc()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button></div></div><div class="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700">
-💡 Docs salvos aqui são lidos automaticamente pelo <strong>Advisor IA</strong> e pelos módulos de geração.
+<div class="flex flex-col sm:flex-row justify-between items-center mb-5 border-b pb-4 gap-3">
+<h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">� Docs & Contexto</h2>
+<div class="flex gap-2">
+<button onclick="adicionarDocTexto()" class="bg-slate-700 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-900 transition">✏️ Colar texto</button>
+<label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-blue-700 transition flex items-center gap-1">
+� Upload arquivo
+<input type="file" accept=".pdf,.txt,.doc,.docx,.md" class="hidden" onchange="uploadDoc(this)">
+</label>
+</div>
+</div>
+<div id="docs-lista">${docsHtml}</div>
+<div id="form-doc" style="display:none" class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
+<input id="form-doc-nome" type="text" placeholder="Nome do documento" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white">
+<textarea id="form-doc-conteudo" placeholder="Cole o conteúdo aqui..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-white min-h-[140px] resize-y font-mono"></textarea>
+<div class="flex gap-2 justify-end">
+<button onclick="cancelarFormDoc()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50">Cancelar</button>
+<button onclick="salvarFormDoc()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Salvar</button>
+</div>
+</div>
+<div class="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700">
+� Docs salvos aqui são lidos automaticamente pelo <strong>Advisor IA</strong> e pelos módulos de geração.
 </div>
 `;
 }
@@ -895,7 +1480,28 @@ const file = input.files[0]; if (!file) return;
 const r = registros.find(x => x.id === registroAtivoId); if (!r) return;
 if (!Array.isArray(r.docs)) r.docs = [];
 input.value = '';
-const isTxt = file.type === 'text/plain' || file.type === 'text/html' || file.name.endsWith('.txt') || file.name.endsWith('.md') || file.name.endsWith('.html') || file.name.endsWith('.htm');
+const isImg = file.type.startsWith('image/');
+const isTxt = !isImg && (file.type === 'text/plain' || file.type === 'text/html' || file.name.endsWith('.txt') || file.name.endsWith('.md') || file.name.endsWith('.html') || file.name.endsWith('.htm'));
+if (isImg) {
+setStatusAlimentacao('� Analisando imagem via IA...');
+const b64 = await new Promise((res, rej) => {
+const r = new FileReader();
+r.onload = e => res(e.target.result.split(',')[1]);
+r.onerror = rej;
+r.readAsDataURL(file);
+});
+const msgImg = [
+{ type: 'image_url', image_url: { url: `data:${file.type};base64,${b64}` } },
+{ type: 'text', text: 'Analise esta imagem e extraia informações sobre a pessoa ou negócio retratado.' }
+];
+try {
+const resposta = await iaKit.chamarComHistorico([{ role: 'user', content: msgImg }], getSysAlimentacao());
+const obj = extrairJSON(resposta);
+distribuirNoCampos(obj);
+} catch(e) { alert('Erro ao analisar imagem: ' + e.message); }
+setStatusAlimentacao(null);
+return;
+}
 if (isTxt) {
 // TXT/MD/HTML: lê como texto
 let conteudo = await new Promise((res, rej) => {
@@ -958,31 +1564,49 @@ return `width=${LINK_WIN_W},height=${LINK_WIN_H},top=80,left=${left},scrollbars=
 function detectarIconeLink(url) {
 try {
 const h = new URL(url).hostname.replace('www.','');
-if (h.includes('instagram')) return '📸';
-if (h.includes('linkedin')) return '💼';
+if (h.includes('instagram')) return '�';
+if (h.includes('linkedin')) return '�';
 if (h.includes('youtube')) return '▶️';
-if (h.includes('notion')) return '📝';
-if (h.includes('drive.google')) return '📁';
-if (h.includes('docs.google')) return '📄';
-if (h.includes('sheets.google')) return '📊';
-if (h.includes('figma')) return '🎨';
-if (h.includes('github')) return '🐙';
-if (h.includes('openrouter')) return '🤖';
+if (h.includes('notion')) return '�';
+if (h.includes('drive.google')) return '�';
+if (h.includes('docs.google')) return '�';
+if (h.includes('sheets.google')) return '�';
+if (h.includes('figma')) return '�';
+if (h.includes('github')) return '�';
+if (h.includes('openrouter')) return '�';
 if (h.includes('groq')) return '⚡';
-if (h.includes('rolefy') || h.includes('vercel')) return '🚀';
-if (h.includes('whatsapp')) return '💬';
-if (h.includes('typeform') || h.includes('forms')) return '📋';
-if (h.includes('calendly')) return '📅';
-if (h.includes('stripe') || h.includes('hotmart') || h.includes('kiwify')) return '💳';
-return '🔗';
-} catch(e) { return '🔗'; }
+if (h.includes('rolefy') || h.includes('vercel')) return '�';
+if (h.includes('whatsapp')) return '�';
+if (h.includes('typeform') || h.includes('forms')) return '�';
+if (h.includes('calendly')) return '�';
+if (h.includes('stripe') || h.includes('hotmart') || h.includes('kiwify')) return '�';
+return '�';
+} catch(e) { return '�'; }
+}
+function isLinkLocal(url) {
+if (!url) return false;
+return url.startsWith('file://') || url.startsWith('C:') || url.startsWith('D:')
+|| url.startsWith('E:') || /^[A-Za-z]:[\\\/]/.test(url) || url.startsWith('localhost')
+|| url.startsWith('127.0.0.1') || url.startsWith('192.168.');
 }
 function abrirLink(url) {
+if (!url) return;
+const local = isLinkLocal(url);
+const rodandoLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+if (local && !rodandoLocal) {
+// Link local tentado em ambiente publicado — avisa
+const continuar = confirm(
+'⚠️ Este link aponta para um endereço local (PC/rede):\n' + url +
+'\n\nEle só funciona quando o GERiAH está aberto localmente.\n\nDeseja tentar mesmo assim?'
+);
+if (!continuar) return;
+}
 const win = _linkWins[url];
 if (win && !win.closed) {
 win.focus();
 } else {
-_linkWins[url] = window.open(url, '_blank', getLinkWinFeatures());
+const features = local ? '' : getLinkWinFeatures(); // link local: aba normal
+_linkWins[url] = window.open(url, '_blank', features || undefined);
 }
 }
 function toggleGrupo(grupoId) {
@@ -998,12 +1622,37 @@ const container = document.getElementById('ferramentas-main-container');
 if (!container) return;
 container.innerHTML = linksExtras.map(g => {
 const linksHtml = (g.links || []).map(lk => `
-<div class="flex items-center gap-3 px-3 py-2.5 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition"><span class="text-xl w-8 text-center shrink-0">${detectarIconeLink(lk.url)}</span><div class="flex-1 min-w-0"><div class="font-semibold text-slate-800 text-sm truncate">${lk.titulo}</div><div class="text-xs text-slate-400 truncate">${lk.url}</div></div><div class="flex gap-1"><button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-blue-700">↗ Abrir</button><button onclick="editarLinkMain(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1.5 rounded text-xs hover:bg-slate-200">✏️</button><button onclick="removerLinkMain(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1.5 rounded text-xs">✕</button></div></div>
+<div class="flex items-center gap-3 px-3 py-2.5 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition">
+<span class="text-xl w-8 text-center shrink-0">${detectarIconeLink(lk.url)}</span>
+<div class="flex-1 min-w-0">
+<div class="font-semibold text-slate-800 text-sm truncate flex items-center gap-1">${lk.titulo}${isLinkLocal(lk.url) ? '<span class="text-[9px] bg-amber-100 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded font-bold">� local</span>' : ''}</div>
+<div class="text-xs text-slate-400 truncate">${lk.url}</div>
+</div>
+<div class="flex gap-1">
+<button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-blue-700">↗ Abrir</button>
+<button onclick="editarLinkMain(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1.5 rounded text-xs hover:bg-slate-200">✏️</button>
+<button onclick="removerLinkMain(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1.5 rounded text-xs">✕</button>
+</div>
+</div>
 `).join('') || '<p class="text-slate-400 text-xs px-3 py-2 italic">Nenhum link.</p>';
 return `
-<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupoMain(${g.id}, this)"><div class="flex items-center gap-2"><span class="main-grp-arrow text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span><span class="font-bold text-white text-sm">${g.grupo}</span><span class="text-[11px] text-slate-400">${(g.links||[]).length} link${(g.links||[]).length!==1?'s':''}</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="adicionarLinkMain(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded">＋ link</button><button onclick="editarGrupoMain(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️</button><button onclick="removerGrupoMain(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button></div></div><div class="main-grp-body p-3 space-y-2 bg-slate-50" style="display:${g.aberto?'block':'none'}" id="main-grp-${g.id}">
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm">
+<div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupoMain(${g.id}, this)">
+<div class="flex items-center gap-2">
+<span class="main-grp-arrow text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span>
+<span class="font-bold text-white text-sm">${g.grupo}</span>
+<span class="text-[11px] text-slate-400">${(g.links||[]).length} link${(g.links||[]).length!==1?'s':''}</span>
+</div>
+<div class="flex gap-1" onclick="event.stopPropagation()">
+<button onclick="adicionarLinkMain(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded">＋ link</button>
+<button onclick="editarGrupoMain(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">✏️</button>
+<button onclick="removerGrupoMain(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded">✕</button>
+</div>
+</div>
+<div class="main-grp-body p-3 space-y-2 bg-slate-50" style="display:${g.aberto?'block':'none'}" id="main-grp-${g.id}">
 ${linksHtml}
-</div></div>`;
+</div>
+</div>`;
 }).join('') || '<p class="text-slate-400 text-sm text-center py-8">Nenhum grupo ainda.</p>';
 }
 function toggleGrupoMain(grupoId, btn) {
@@ -1053,13 +1702,22 @@ if (!container) return;
 container.innerHTML = linksExtras.map(g => {
 const linksHtml = (g.links || []).map(lk => `
 <button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}"
-class="w-full text-left flex items-center gap-2 px-3 py-1.5 rounded-md text-[12px] text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition truncate"><span class="shrink-0">${detectarIconeLink(lk.url)}</span><span class="truncate">${lk.titulo}</span></button>
+class="w-full text-left flex items-center gap-2 px-3 py-1.5 rounded-md text-[12px] text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition truncate">
+<span class="shrink-0">${detectarIconeLink(lk.url)}</span>
+<span class="truncate">${lk.titulo}${isLinkLocal(lk.url) ? ' �' : ''}</span>
+</button>
 `).join('');
 return `
-<div class="mb-1"><button onclick="toggleSidebarGrupo(${g.id}, this)"
-class="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-bold text-slate-500 uppercase tracking-wide hover:bg-slate-200 transition"><span class="sidebar-arrow text-slate-400">${g.aberto ? '▾' : '▸'}</span><span class="truncate">${g.grupo}</span></button><div class="sidebar-grupo-body pl-1 space-y-0.5" style="display:${g.aberto ? 'block' : 'none'}">
+<div class="mb-1">
+<button onclick="toggleSidebarGrupo(${g.id}, this)"
+class="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-bold text-slate-500 uppercase tracking-wide hover:bg-slate-200 transition">
+<span class="sidebar-arrow text-slate-400">${g.aberto ? '▾' : '▸'}</span>
+<span class="truncate">${g.grupo}</span>
+</button>
+<div class="sidebar-grupo-body pl-1 space-y-0.5" style="display:${g.aberto ? 'block' : 'none'}">
 ${linksHtml}
-</div></div>`;
+</div>
+</div>`;
 }).join('');
 }
 function toggleSidebarGrupo(grupoId, btn) {
@@ -1075,15 +1733,56 @@ if (arrow) arrow.textContent = g.aberto ? '▾' : '▸';
 function renderizarExtras(contentArea) {
 const grupos = linksExtras.map(g => {
 const linksHtml = (g.links || []).map(lk => `
-<div class="flex items-center gap-2 px-3 py-2 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition group"><span class="text-lg w-7 text-center shrink-0">${detectarIconeLink(lk.url)}</span><div class="flex-1 min-w-0"><div class="font-medium text-slate-800 text-sm truncate">${lk.titulo}</div><div class="text-[11px] text-slate-400 truncate">${lk.url}</div></div><div class="flex gap-1 shrink-0"><button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold hover:bg-blue-700 transition">↗</button><button onclick="editarLink(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1 rounded text-xs hover:bg-slate-200 transition">✏️</button><button onclick="removerLink(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1 rounded text-xs transition">✕</button></div></div>
+<div class="flex items-center gap-2 px-3 py-2 bg-white border border-slate-100 rounded-lg hover:shadow-sm transition group">
+<span class="text-lg w-7 text-center shrink-0">${detectarIconeLink(lk.url)}</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-slate-800 text-sm truncate">${lk.titulo}</div>
+<div class="text-[11px] text-slate-400 truncate">${lk.url}</div>
+</div>
+<div class="flex gap-1 shrink-0">
+<button onclick="abrirLink(this.dataset.url)" data-url="${lk.url}" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold hover:bg-blue-700 transition">↗</button>
+<button onclick="editarLink(${g.id},${lk.id})" class="bg-slate-100 border border-slate-200 text-slate-500 px-2 py-1 rounded text-xs hover:bg-slate-200 transition">✏️</button>
+<button onclick="removerLink(${g.id},${lk.id})" class="text-red-400 hover:text-red-600 px-2 py-1 rounded text-xs transition">✕</button>
+</div>
+</div>
 `).join('') || '<p class="text-slate-400 text-xs px-3 py-2 italic">Nenhum link neste grupo.</p>';
 return `
-<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm"><div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupo(${g.id})"><div class="flex items-center gap-2"><span id="grupo-arrow-${g.id}" class="text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span><span class="font-bold text-white text-sm">${g.grupo}</span><span class="text-[11px] text-slate-400 ml-1">${(g.links||[]).length} link${(g.links||[]).length !== 1 ? 's' : ''}</span></div><div class="flex gap-1" onclick="event.stopPropagation()"><button onclick="adicionarLink(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded transition">＋ link</button><button onclick="editarGrupo(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded transition">✏️</button><button onclick="removerGrupo(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded transition">✕</button></div></div><div id="grupo-body-${g.id}" style="display:${g.aberto ? 'block' : 'none'}" class="p-3 space-y-2 bg-slate-50">
+<div class="border border-slate-200 rounded-xl overflow-hidden mb-3 shadow-sm">
+<div class="flex items-center justify-between px-4 py-3 bg-slate-800 cursor-pointer select-none" onclick="toggleGrupo(${g.id})">
+<div class="flex items-center gap-2">
+<span id="grupo-arrow-${g.id}" class="text-slate-400 font-bold text-sm">${g.aberto ? '▾' : '▸'}</span>
+<span class="font-bold text-white text-sm">${g.grupo}</span>
+<span class="text-[11px] text-slate-400 ml-1">${(g.links||[]).length} link${(g.links||[]).length !== 1 ? 's' : ''}</span>
+</div>
+<div class="flex gap-1" onclick="event.stopPropagation()">
+<button onclick="adicionarLink(${g.id})" class="text-blue-400 hover:text-blue-300 text-xs border border-slate-600 px-2 py-1 rounded transition">＋ link</button>
+<button onclick="editarGrupo(${g.id})" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded transition">✏️</button>
+<button onclick="removerGrupo(${g.id})" class="text-red-500 hover:text-red-400 text-xs border border-slate-600 px-2 py-1 rounded transition">✕</button>
+</div>
+</div>
+<div id="grupo-body-${g.id}" style="display:${g.aberto ? 'block' : 'none'}" class="p-3 space-y-2 bg-slate-50">
 ${linksHtml}
-</div></div>`;
+</div>
+</div>`;
 }).join('');
 contentArea.innerHTML = `
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 border-b pb-4 gap-3"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🛠️ Ferramentas & Links</h2><button onclick="adicionarGrupo()" class="bg-slate-800 text-yellow-400 border border-slate-600 px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-700 transition flex items-center gap-2">＋ Novo grupo</button></div><div id="lista-grupos-extras">${grupos || '<p class="text-slate-400 text-sm text-center py-8">Nenhum grupo criado.</p>'}</div><div id="form-link-extras" style="display:none" class="mt-4 bg-white border border-slate-200 rounded-xl p-5 space-y-3 shadow-sm"><h4 class="font-bold text-slate-700 text-sm" id="form-link-label">Novo link</h4><input id="form-link-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"><input id="form-link-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"><div id="form-grupo-nome-wrap" style="display:none"><input id="form-grupo-nome" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500"></div><div class="flex gap-2 justify-end pt-1"><button onclick="cancelarFormLink()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition">Cancelar</button><button onclick="salvarFormLink()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Salvar</button></div></div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 border-b pb-4 gap-3">
+<h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">�️ Ferramentas & Links</h2>
+<button onclick="adicionarGrupo()" class="bg-slate-800 text-yellow-400 border border-slate-600 px-4 py-2 rounded-md text-sm font-bold hover:bg-slate-700 transition flex items-center gap-2">＋ Novo grupo</button>
+</div>
+<div id="lista-grupos-extras">${grupos || '<p class="text-slate-400 text-sm text-center py-8">Nenhum grupo criado.</p>'}</div>
+<div id="form-link-extras" style="display:none" class="mt-4 bg-white border border-slate-200 rounded-xl p-5 space-y-3 shadow-sm">
+<h4 class="font-bold text-slate-700 text-sm" id="form-link-label">Novo link</h4>
+<input id="form-link-titulo" type="text" placeholder="Título" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500">
+<input id="form-link-url" type="url" placeholder="https://..." class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500">
+<div id="form-grupo-nome-wrap" style="display:none">
+<input id="form-grupo-nome" type="text" placeholder="Nome do grupo" class="w-full text-sm p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500">
+</div>
+<div class="flex gap-2 justify-end pt-1">
+<button onclick="cancelarFormLink()" class="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition">Cancelar</button>
+<button onclick="salvarFormLink()" class="px-4 py-2 text-sm bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Salvar</button>
+</div>
+</div>
 `;
 }
 let _formMode = null; // {tipo:'link'|'grupo', grupoId, linkId}
@@ -1200,7 +1899,7 @@ if (modulosPremiumDesbloqueados) return true;
 const tentativa = prompt("Módulo Avançado Bloqueado.\nDigite a senha de acesso para liberar:");
 if (tentativa === 'fnw2026') {
 modulosPremiumDesbloqueados = true;
-alert("🔓 Acesso Premium Liberado com Sucesso!");
+alert("� Acesso Premium Liberado com Sucesso!");
 return true;
 } else if (tentativa !== null) {
 alert("Senha Incorreta.");
@@ -1213,7 +1912,7 @@ const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts']
 const btn = document.getElementById(`tab-btn-${t}`);
 if(!btn) return;
 let isPremiumTab = abasPremium.includes(t);
-let lockBadge = (!modulosPremiumDesbloqueados && isPremiumTab) ? ' <span class="lock-icon text-[10px] bg-red-100 text-red-600 border border-red-200 px-1.5 py-0.5 rounded">🔒 Premium</span>' : '';
+let lockBadge = (!modulosPremiumDesbloqueados && isPremiumTab) ? ' <span class="lock-icon text-[10px] bg-red-100 text-red-600 border border-red-200 px-1.5 py-0.5 rounded">� Premium</span>' : '';
 let label = '';
 if(t==='base') label = '1. Framework Base Interativo';
 else if(t==='negocio') label = '2. BMC Interativo';
@@ -1234,7 +1933,7 @@ btn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold tran
 function obterClassesImpacto(tipo) {
 const strTipo = tipo ? String(tipo).toLowerCase() : '';
 if (strTipo === 'positivo') return { text: 'text-green-700 font-medium', border: 'border-green-400 ring-2 ring-green-100 bg-green-50', badge: 'bg-green-100 text-green-700 border-green-200', icon: '✅' };
-if (strTipo === 'negativo') return { text: 'text-red-700 font-medium', border: 'border-red-400 ring-2 ring-red-100 bg-red-50', badge: 'bg-red-100 text-red-700 border-red-200', icon: '🚨' };
+if (strTipo === 'negativo') return { text: 'text-red-700 font-medium', border: 'border-red-400 ring-2 ring-red-100 bg-red-50', badge: 'bg-red-100 text-red-700 border-red-200', icon: '�' };
 if (strTipo === 'neutro') return { text: 'text-orange-700 font-medium', border: 'border-orange-400 ring-2 ring-orange-100 bg-orange-50', badge: 'bg-orange-100 text-orange-700 border-orange-200', icon: '⚠️' };
 return { text: 'text-slate-700', border: 'border-slate-200 bg-white', badge: '', icon: '' };
 }
@@ -1260,13 +1959,25 @@ return;
 // --- ABA IA COM PROMPTS ---
 if (tabName === 'iaprompts') {
 contentArea.innerHTML = `
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🧠 IA com Prompts Livres</h2></div><div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4"><p class="text-sm text-slate-600">Utilize todo o contexto mapeado deste cliente para gerar qualquer outro material. Digite a sua instrução abaixo:</p><textarea id="custom-ia-prompt" class="w-full text-[14px] p-4 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 min-h-[120px]" placeholder="Ex: Crie um guião de vídeo de 1 minuto para o Reels do Instagram focado na oferta principal...">${r.ia_custom_prompt || ''}</textarea><div class="flex justify-end"><button id="btn-gerar-custom-ia" onclick="acionarIAPersonalizada()" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow font-bold hover:bg-blue-700 transition flex items-center gap-2 text-sm">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4">
+<h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">� IA com Prompts Livres</h2>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4">
+<p class="text-sm text-slate-600">Utilize todo o contexto mapeado deste cliente para gerar qualquer outro material. Digite a sua instrução abaixo:</p>
+<textarea id="custom-ia-prompt" class="w-full text-[14px] p-4 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 min-h-[120px]" placeholder="Ex: Crie um guião de vídeo de 1 minuto para o Reels do Instagram focado na oferta principal...">${r.ia_custom_prompt || ''}</textarea>
+<div class="flex justify-end">
+<button id="btn-gerar-custom-ia" onclick="acionarIAPersonalizada()" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow font-bold hover:bg-blue-700 transition flex items-center gap-2 text-sm">
 ✦ Gerar com IA
-</button></div></div>
+</button>
+</div>
+</div>
 ${r.ia_custom_response ? `
-<div class="mt-8 border-t border-slate-200 pt-6"><h3 class="text-lg font-bold text-slate-800 mb-4">Resultado da IA:</h3><div class="markdown-content text-slate-700 bg-white border border-slate-200 rounded-lg p-6 shadow-sm">
+<div class="mt-8 border-t border-slate-200 pt-6">
+<h3 class="text-lg font-bold text-slate-800 mb-4">Resultado da IA:</h3>
+<div class="markdown-content text-slate-700 bg-white border border-slate-200 rounded-lg p-6 shadow-sm">
 ${formatarMarkdownBasico(r.ia_custom_response)}
-</div></div>
+</div>
+</div>
 ` : ''}
 `;
 return;
@@ -1278,42 +1989,99 @@ const renderCardBase = (key, title) => {
 const impacto = imp[key];
 const cls = obterClassesImpacto(impacto ? impacto.tipo : null);
 const alertaFixo = impacto ? `
-<div class="${cls.badge} mt-2 p-2 rounded border shadow-sm"><div class="text-[10px] font-bold mb-1 flex items-center gap-1">${cls.icon} Impacto Detetado</div><div class="text-[11px] leading-snug">${impacto.motivo}</div></div>` : '';
+<div class="${cls.badge} mt-2 p-2 rounded border shadow-sm">
+<div class="text-[10px] font-bold mb-1 flex items-center gap-1">${cls.icon} Impacto Detetado</div>
+<div class="text-[11px] leading-snug">${impacto.motivo}</div>
+</div>` : '';
 const camposQuemSou = ['vivencia','experiencia','demanda','oferta','mercado'];
 const isQuemSou = camposQuemSou.includes(key);
 const dropdownBtn = isQuemSou ? `
-<div class="relative ia-dropdown-wrap"><button onclick="toggleDropdownBase('${key}', event)" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA ▾</button><div id="dd-base-${key}" class="hidden absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 w-52 text-[12px] overflow-hidden"><div class="px-3 py-2 bg-slate-50 text-slate-400 text-[10px] font-semibold uppercase tracking-wide border-b">Preencher com IA</div><button onclick="preencherTodosQuemSou('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700 font-semibold border-b">↺ Todos os campos</button><button onclick="preencherAPartirDe('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700">↓ A partir deste campo</button></div></div>` : `<button onclick="aprimorarBlocoBase('${key}')" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition">✨ IA</button>`;
+<div class="relative ia-dropdown-wrap">
+<button onclick="toggleDropdownBase('${key}', event)" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA ▾</button>
+<div id="dd-base-${key}" class="hidden absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 w-52 text-[12px] overflow-hidden">
+<div class="px-3 py-2 bg-slate-50 text-slate-400 text-[10px] font-semibold uppercase tracking-wide border-b">Preencher com IA</div>
+<button onclick="preencherTodosQuemSou('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700 font-semibold border-b">↺ Todos os campos</button>
+<button onclick="preencherAPartirDe('${key}');fecharDropdownsBase()" class="w-full text-left px-3 py-2.5 hover:bg-blue-50 text-slate-700">↓ A partir deste campo</button>
+</div>
+</div>` : `<button onclick="aprimorarBlocoBase('${key}')" class="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition">✨ IA</button>`;
 return `
-<div class="${cls.border} border rounded p-3 flex flex-col relative shadow-sm transition hover:shadow-md mb-4 bg-white"><div class="flex justify-between items-center mb-2"><label class="text-[12px] font-bold text-slate-700 uppercase tracking-wide">${title}</label>
+<div class="${cls.border} border rounded p-3 flex flex-col relative shadow-sm transition hover:shadow-md mb-4 bg-white">
+<div class="flex justify-between items-center mb-2">
+<label class="text-[12px] font-bold text-slate-700 uppercase tracking-wide">${title}</label>
 ${dropdownBtn}
-</div><textarea id="base-${key}" onblur="salvarEVerificarImpactoBase('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${cls.text} min-h-[40px] overflow-hidden" rows="2">${r[key] || ''}</textarea>
+</div>
+<textarea id="base-${key}" onblur="salvarEVerificarImpactoBase('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${cls.text} min-h-[40px] overflow-hidden" rows="2">${r[key] || ''}</textarea>
 ${alertaFixo}
 </div>`;
 };
 contentArea.innerHTML = `
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">1. Framework Base Interativo</h2><div class="flex items-center gap-2"><span id="base-status" class="text-xs font-semibold text-slate-500"></span><button onclick="gerarEstrategiaComIA()" class="text-xs bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition font-bold">✦ Preencher todos</button><button onclick="abrirLimparBase()" class="text-xs border border-red-200 text-red-400 px-3 py-1.5 rounded hover:bg-red-50 transition">🗑 Limpar...</button></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5"><div class="bg-orange-50 border border-orange-200 rounded-lg p-4"><div class="flex justify-between items-center mb-2"><label class="text-xs font-bold text-orange-700 uppercase tracking-wide">🎯 Foco da Essência</label><span class="text-[10px] text-orange-400">definido no diagnóstico — editável aqui também</span></div><textarea id="campo-foco-essencia" oninput="autoResize(this);salvarCampoRegistro('foco_essencia', this.value)" class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400 min-h-[40px] resize-none" placeholder="Ex: foco em infoproduto, priorizar B2B...">${r.foco_essencia || r.foco || ''}</textarea></div><div class="bg-purple-50 border border-purple-200 rounded-lg p-4"><div class="flex justify-between items-center mb-2"><label class="text-xs font-bold text-purple-700 uppercase tracking-wide">📌 Prioridades do Cliente</label><span class="text-[10px] text-purple-400">P1, P2, P3... livre e editável</span></div><textarea id="campo-prioridades" oninput="autoResize(this);salvarCampoRegistro('prioridades', this.value)" class="w-full text-[13px] p-2 bg-white border border-purple-200 rounded outline-none focus:border-purple-400 min-h-[40px] resize-none" placeholder="P1 — lançar mentoria em grupo&#10;P2 — parcerias com empresas&#10;P3 — criar canal no YouTube...">${r.prioridades || ''}</textarea></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"><div class="border rounded-lg shadow-sm bg-blue-50/30 p-3 border-blue-200 h-max"><h4 class="bg-blue-600 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">QUEM SOU</h4>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b pb-4 gap-4">
+<h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">1. Framework Base Interativo</h2>
+<div class="flex items-center gap-2">
+<span id="base-status" class="text-xs font-semibold text-slate-500"></span>
+<button onclick="gerarEstrategiaComIA()" class="text-xs bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition font-bold">✦ Preencher todos</button>
+<button onclick="abrirLimparBase()" class="text-xs border border-red-200 text-red-400 px-3 py-1.5 rounded hover:bg-red-50 transition">� Limpar...</button>
+</div>
+</div>
+<!-- PRIORIDADES + FOCO REFERÊNCIA -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+<div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+<div class="flex justify-between items-center mb-2">
+<label class="text-xs font-bold text-orange-700 uppercase tracking-wide">� Foco da Essência</label>
+<span class="text-[10px] text-orange-400">definido no diagnóstico — editável aqui também</span>
+</div>
+<textarea id="campo-foco-essencia" oninput="autoResize(this);salvarCampoRegistro('foco_essencia', this.value)" class="w-full text-[13px] p-2 bg-white border border-orange-200 rounded outline-none focus:border-orange-400 min-h-[40px] resize-none" placeholder="Ex: foco em infoproduto, priorizar B2B...">${r.foco_essencia || r.foco || ''}</textarea>
+</div>
+<div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+<div class="flex justify-between items-center mb-2">
+<label class="text-xs font-bold text-purple-700 uppercase tracking-wide">� Prioridades do Cliente</label>
+<span class="text-[10px] text-purple-400">P1, P2, P3... livre e editável</span>
+</div>
+<textarea id="campo-prioridades" oninput="autoResize(this);salvarCampoRegistro('prioridades', this.value)" class="w-full text-[13px] p-2 bg-white border border-purple-200 rounded outline-none focus:border-purple-400 min-h-[40px] resize-none" placeholder="P1 — lançar mentoria em grupo&#10;P2 — parcerias com empresas&#10;P3 — criar canal no YouTube...">${r.prioridades || ''}</textarea>
+</div>
+</div>
+<!-- FRAMEWORK GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="border rounded-lg shadow-sm bg-blue-50/30 p-3 border-blue-200 h-max">
+<h4 class="bg-blue-600 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">QUEM SOU</h4>
 ${renderCardBase('vivencia', 'Vivência')}
 ${renderCardBase('experiencia', 'Experiência')}
 ${renderCardBase('demanda', 'Demanda')}
 ${renderCardBase('oferta', 'Oferta')}
 ${renderCardBase('mercado', 'Mercado')}
-</div><div class="border rounded-lg shadow-sm bg-orange-50/30 p-3 border-orange-200 h-max"><h4 class="bg-orange-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">O QUE FAÇO</h4>
+</div>
+<div class="border rounded-lg shadow-sm bg-orange-50/30 p-3 border-orange-200 h-max">
+<h4 class="bg-orange-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">O QUE FAÇO</h4>
 ${renderCardBase('oq_pessoas', 'Pessoas')}
 ${renderCardBase('oq_processos', 'Processos')}
 ${renderCardBase('oq_produto', 'Produto')}
-</div><div class="border rounded-lg shadow-sm bg-yellow-50/30 p-3 border-yellow-200 h-max"><h4 class="bg-yellow-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">PRA QUEM</h4>
+</div>
+<div class="border rounded-lg shadow-sm bg-yellow-50/30 p-3 border-yellow-200 h-max">
+<h4 class="bg-yellow-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">PRA QUEM</h4>
 ${renderCardBase('pq_publico', 'Público')}
 ${renderCardBase('pq_praca', 'Praça')}
 ${renderCardBase('pq_preco', 'Preço')}
-</div><div class="border rounded-lg shadow-sm bg-teal-50/30 p-3 border-teal-200 h-max"><h4 class="bg-teal-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">POR QUANTO</h4>
+</div>
+<div class="border rounded-lg shadow-sm bg-teal-50/30 p-3 border-teal-200 h-max">
+<h4 class="bg-teal-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">POR QUANTO</h4>
 ${renderCardBase('pt_produto', 'Promessa / Produto')}
 ${renderCardBase('pt_mensagem', 'Mensagem')}
 ${renderCardBase('pt_oferta', 'Oferta')}
-</div><div class="border rounded-lg shadow-sm bg-green-50/30 p-3 border-green-200 h-max"><h4 class="bg-green-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">COMO</h4>
+</div>
+<div class="border rounded-lg shadow-sm bg-green-50/30 p-3 border-green-200 h-max">
+<h4 class="bg-green-500 text-white text-center py-2 font-bold text-xs rounded mb-4 tracking-wider">COMO</h4>
 ${renderCardBase('cm_parceria', 'Parceria')}
 ${renderCardBase('cm_posicionamento', 'Posicionamento')}
 ${renderCardBase('cm_promocao', 'Promoção')}
-</div></div><div class="mt-6 bg-slate-900 border border-slate-700 rounded-xl p-5"><div class="flex justify-between items-center mb-3"><label class="text-sm font-bold text-yellow-400 uppercase tracking-wide flex items-center gap-2">📋 Nota Global do Cliente <span class="text-slate-400 text-xs font-normal normal-case">exclusiva deste registro — contexto, observações, histórico</span></label></div><textarea id="campo-nota-global" oninput="autoResize(this);salvarCampoRegistro('nota_global', this.value)" class="w-full text-[13px] p-3 bg-slate-800 text-slate-100 border border-slate-600 rounded-lg outline-none focus:border-yellow-400 min-h-[100px] resize-none placeholder-slate-500" placeholder="Cole aqui mensagens do cliente, contexto de reunião, observações estratégicas, prints de conversa transcritos...">${r.nota_global || ''}</textarea></div>
+</div>
+</div>
+<!-- NOTA GLOBAL DO CLIENTE -->
+<div class="mt-6 bg-slate-900 border border-slate-700 rounded-xl p-5">
+<div class="flex justify-between items-center mb-3">
+<label class="text-sm font-bold text-yellow-400 uppercase tracking-wide flex items-center gap-2">� Nota Global do Cliente <span class="text-slate-400 text-xs font-normal normal-case">exclusiva deste registro — contexto, observações, histórico</span></label>
+</div>
+<textarea id="campo-nota-global" oninput="autoResize(this);salvarCampoRegistro('nota_global', this.value)" class="w-full text-[13px] p-3 bg-slate-800 text-slate-100 border border-slate-600 rounded-lg outline-none focus:border-yellow-400 min-h-[100px] resize-none placeholder-slate-500" placeholder="Cole aqui mensagens do cliente, contexto de reunião, observações estratégicas, prints de conversa transcritos...">${r.nota_global || ''}</textarea>
+</div>
 `;
 reajustarTodosTextareas();
 return;
@@ -1328,29 +2096,61 @@ const isImpacted = !!imp[key];
 const textClass = isImpacted ? 'text-red-600 font-medium' : 'text-slate-700';
 const borderClass = isImpacted ? 'border-red-400 ring-2 ring-red-100 bg-red-50' : 'border-slate-200 bg-white';
 const alertaFixo = isImpacted ? `
-<div class="mt-2 p-2 bg-red-100 border border-red-200 rounded text-red-700 shadow-sm"><div class="text-[10px] font-bold mb-1 flex items-center gap-1">⚠️ Impacto Detetado</div><div class="text-[11px] leading-snug">${imp[key]}</div></div>` : '';
+<div class="mt-2 p-2 bg-red-100 border border-red-200 rounded text-red-700 shadow-sm">
+<div class="text-[10px] font-bold mb-1 flex items-center gap-1">⚠️ Impacto Detetado</div>
+<div class="text-[11px] leading-snug">${imp[key]}</div>
+</div>` : '';
 return `
-<div class="${borderClass} border rounded-lg p-4 flex flex-col relative shadow-sm transition hover:shadow-md h-max mb-4"><div class="flex justify-between items-center border-b pb-2 mb-3 border-slate-100"><h4 class="font-bold text-[13px] text-slate-800 uppercase tracking-tight flex items-center gap-1">${icon} ${title}</h4><button onclick="aprimorarBlocoBMC('${key}')" class="text-[11px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA</button></div><textarea id="bmc-${key}" onblur="salvarEVerificarImpactoBMC('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${textClass} min-h-[60px] overflow-hidden" rows="2">${b[key] || ''}</textarea>
+<div class="${borderClass} border rounded-lg p-4 flex flex-col relative shadow-sm transition hover:shadow-md h-max mb-4">
+<div class="flex justify-between items-center border-b pb-2 mb-3 border-slate-100">
+<h4 class="font-bold text-[13px] text-slate-800 uppercase tracking-tight flex items-center gap-1">${icon} ${title}</h4>
+<button onclick="aprimorarBlocoBMC('${key}')" class="text-[11px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 font-bold transition flex items-center gap-1">✨ IA</button>
+</div>
+<textarea id="bmc-${key}" onblur="salvarEVerificarImpactoBMC('${key}')" oninput="autoResize(this)" class="w-full resize-none text-[13px] outline-none bg-transparent ${textClass} min-h-[60px] overflow-hidden" rows="2">${b[key] || ''}</textarea>
 ${alertaFixo}
 </div>`;
 };
 contentArea.innerHTML = `
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4"><h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">🏗️ BMC Interativo</h2><div class="flex items-center gap-3"><span id="bmc-status" class="text-xs font-semibold text-slate-500"></span><button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="text-xs font-bold text-slate-600 hover:text-blue-600 transition border border-slate-300 px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm whitespace-nowrap">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4">
+<h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">�️ BMC Interativo</h2>
+<div class="flex items-center gap-3">
+<span id="bmc-status" class="text-xs font-semibold text-slate-500"></span>
+<button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="text-xs font-bold text-slate-600 hover:text-blue-600 transition border border-slate-300 px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm whitespace-nowrap">
 ↺ Recriar Todo Canvas
-</button></div></div><div class="bg-white p-3 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-5"><div class="grid grid-cols-1 lg:grid-cols-5 gap-5"><div class="h-max">${renderCard('parcerias', 'Parcerias', '🤝')}</div><div class="flex flex-col gap-1 h-max">
+</button>
+</div>
+</div>
+<div class="bg-white p-3 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-5">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+<div class="h-max">${renderCard('parcerias', 'Parcerias', '�')}</div>
+<div class="flex flex-col gap-1 h-max">
 ${renderCard('atividades', 'Atividades', '⚙️')}
-${renderCard('recursos', 'Recursos', '📦')}
-</div><div class="h-max">${renderCard('proposta', 'Proposta de Valor', '🎁')}</div><div class="flex flex-col gap-1 h-max">
+${renderCard('recursos', 'Recursos', '�')}
+</div>
+<div class="h-max">${renderCard('proposta', 'Proposta de Valor', '�')}</div>
+<div class="flex flex-col gap-1 h-max">
 ${renderCard('relacionamento', 'Relacionamento', '❤️')}
-${renderCard('canais', 'Canais', '🚚')}
-</div><div class="h-max">${renderCard('segmentos', 'Segmentos', '🎯')}</div></div><div class="grid grid-cols-1 lg:grid-cols-2 gap-5"><div class="h-max">${renderCard('custos', 'Estrutura de Custos', '📉')}</div><div class="h-max">${renderCard('receitas', 'Fontes de Receita', '📈')}</div></div></div>
+${renderCard('canais', 'Canais', '�')}
+</div>
+<div class="h-max">${renderCard('segmentos', 'Segmentos', '�')}</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+<div class="h-max">${renderCard('custos', 'Estrutura de Custos', '�')}</div>
+<div class="h-max">${renderCard('receitas', 'Fontes de Receita', '�')}</div>
+</div>
+</div>
 `;
 reajustarTodosTextareas();
 }
 else {
 const c = modulosConfig.negocio;
 contentArea.innerHTML = `
-<div class="h-full flex flex-col items-center justify-center text-center p-8 bg-white border border-dashed border-slate-300 rounded-lg"><div class="text-5xl mb-4">${c.icone}</div><h2 class="text-2xl font-bold text-slate-800 mb-2">${c.titulo}</h2><p class="text-slate-600 max-w-md mb-6">${c.desc}</p><button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition tracking-wide">✦ Gerar BMC Interativo</button></div>`;
+<div class="h-full flex flex-col items-center justify-center text-center p-8 bg-white border border-dashed border-slate-300 rounded-lg">
+<div class="text-5xl mb-4">${c.icone}</div>
+<h2 class="text-2xl font-bold text-slate-800 mb-2">${c.titulo}</h2>
+<p class="text-slate-600 max-w-md mb-6">${c.desc}</p>
+<button id="btn-gerar-negocio" onclick="acionarIAExterna('negocio')" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg font-bold hover:bg-blue-700 transition tracking-wide">✦ Gerar BMC Interativo</button>
+</div>`;
 }
 return;
 }
@@ -1359,19 +2159,33 @@ const config = modulosConfig[tabName];
 const propriedadeDado = `modelo_${tabName}`;
 const temConteudo = !!r[propriedadeDado];
 contentArea.innerHTML = `
-<div class="flex items-center justify-between mb-4 border-b pb-4 gap-3"><div class="flex items-center gap-3"><span class="text-3xl">${config.icone}</span><div><h2 class="text-xl font-bold text-slate-800">${config.titulo}</h2><p class="text-sm text-slate-500">${config.desc}</p></div></div><div class="flex gap-2 shrink-0">
+<!-- TELA DE MÓDULO — sempre visível -->
+<div class="flex items-center justify-between mb-4 border-b pb-4 gap-3">
+<div class="flex items-center gap-3">
+<span class="text-3xl">${config.icone}</span>
+<div>
+<h2 class="text-xl font-bold text-slate-800">${config.titulo}</h2>
+<p class="text-sm text-slate-500">${config.desc}</p>
+</div>
+</div>
+<div class="flex gap-2 shrink-0">
 ${temConteudo ? `
-<button onclick="acionarIAExterna('${tabName}')" class="text-sm text-slate-500 hover:text-blue-600 transition border px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm">↺ Regerar</button><button onclick="limparModulo('${tabName}')" class="text-sm text-red-400 hover:text-red-600 transition border border-red-200 px-3 py-1.5 rounded bg-white hover:bg-red-50 shadow-sm">🗑 Limpar</button>
+<button onclick="acionarIAExterna('${tabName}')" class="text-sm text-slate-500 hover:text-blue-600 transition border px-3 py-1.5 rounded bg-white hover:bg-blue-50 shadow-sm">↺ Regerar</button>
+<button onclick="limparModulo('${tabName}')" class="text-sm text-red-400 hover:text-red-600 transition border border-red-200 px-3 py-1.5 rounded bg-white hover:bg-red-50 shadow-sm">� Limpar</button>
 ` : `
 <button id="btn-gerar-${tabName}" onclick="acionarIAExterna('${tabName}')" class="bg-blue-600 text-white px-5 py-2 rounded-md shadow font-bold hover:bg-blue-700 transition text-sm">✦ Gerar ${config.titulo}</button>
 `}
-</div></div>
+</div>
+</div>
 ${temConteudo ? `
 <div class="markdown-content text-slate-700 bg-white border border-slate-200 rounded-lg p-8 shadow-sm">
 ${formatarMarkdownBasico(r[propriedadeDado])}
 </div>
 ` : `
-<div class="flex flex-col items-center justify-center text-center py-16 bg-slate-50 border border-dashed border-slate-300 rounded-lg"><div class="text-6xl mb-4 opacity-40">${config.icone}</div><p class="text-slate-400 text-sm mb-6 max-w-sm">Nenhum conteúdo gerado ainda.<br>Clique em <strong>✦ Gerar</strong> para criar com IA.</p></div>
+<div class="flex flex-col items-center justify-center text-center py-16 bg-slate-50 border border-dashed border-slate-300 rounded-lg">
+<div class="text-6xl mb-4 opacity-40">${config.icone}</div>
+<p class="text-slate-400 text-sm mb-6 max-w-sm">Nenhum conteúdo gerado ainda.<br>Clique em <strong>✦ Gerar</strong> para criar com IA.</p>
+</div>
 `}
 `;
 }
@@ -1613,8 +2427,8 @@ targetBtn.innerHTML = `<span class='spinner spinner-blue'></span> Processando...
 targetBtn.disabled = true;
 const systemPrompt = config.prompt;
 const dadosParaIA = JSON.stringify(r, null, 2);
-const diretrizFoco = r.foco_essencia ? `\n\n🎯 FOCO DA ESSÊNCIA (diretriz principal): ${r.foco_essencia}` : '';
-const diretrizPrioridades = r.prioridades ? `\n\n📌 PRIORIDADES DO CLIENTE: ${r.prioridades}` : '';
+const diretrizFoco = r.foco_essencia ? `\n\n� FOCO DA ESSÊNCIA (diretriz principal): ${r.foco_essencia}` : '';
+const diretrizPrioridades = r.prioridades ? `\n\n� PRIORIDADES DO CLIENTE: ${r.prioridades}` : '';
 const docsExtra = (r.docs && r.docs.length) ? `\n\nDOCUMENTOS DE CONTEXTO:\n` + r.docs.map(d => `[${d.nome}]\n${d.conteudo}`).join('\n\n') : '';
 let userPrompt = `Desenvolva o plano solicitado baseado no seguinte Perfil e Framework:\n\n${dadosParaIA}${diretrizFoco}${diretrizPrioridades}${docsExtra}`;
 if (r[`modelo_${tabName}`] || (tabName === 'negocio' && r.modelo_bmc)) {
@@ -1754,7 +2568,7 @@ const todosLinks = linksExtras.flatMap(g => (g.links||[]).map(lk => `- ${lk.titu
 const sistemaInfo = `
 SOBRE O SISTEMA GERIAH FRACTAL:
 Módulos disponíveis (gratuitos: Framework Base, BMC, Vendas, Educação do Cliente | premium: Marketing, CS, Esteira, BSC, Escala, IA Prompts):
-Quando o usuário perguntar sobre um módulo, explique o que faz e sugira abrir no Painel de Expansão (botão 🚀 na biblioteca).
+Quando o usuário perguntar sobre um módulo, explique o que faz e sugira abrir no Painel de Expansão (botão � na biblioteca).
 FERRAMENTAS & LINKS DISPONÍVEIS:
 ${todosLinks || 'Nenhum link cadastrado ainda.'}
 Quando o usuário mencionar o nome de uma ferramenta/link, responda com exatamente este formato no final da sua mensagem (numa linha isolada):
@@ -1836,31 +2650,70 @@ function removerTyping() {
 const t = document.getElementById('chat-typing');
 if (t) t.remove();
 }
+// ── Imagem no chat
+let _chatImgPendente = null;
+function _processarImgChat(file) {
+if (!file || !file.type.startsWith('image/')) return;
+if (!iaKit.modeloSuportaVisao()) {
+alert('⚠️ O modelo atual (' + (iaKit.getMod()||'').split('/').pop() + ') não suporta imagens.\n\nVá em ⚙️ IA → escolha um modelo com � como GPT-4o Mini.');
+return;
+}
+var reader = new FileReader();
+reader.onload = function(ev) {
+var dataUrl = ev.target.result;
+_chatImgPendente = { base64: dataUrl.split(',')[1], mediaType: file.type, nome: file.name };
+var thumb = document.getElementById('chat-img-thumb');
+if (thumb) thumb.src = dataUrl;
+document.getElementById('chat-img-nome').textContent = file.name;
+document.getElementById('chat-img-preview').style.display = 'flex';
+};
+reader.readAsDataURL(file);
+}
+function selecionarImgChat(input) {
+_processarImgChat(input.files[0]);
+input.value = '';
+}
+function cancelarImgChat() {
+_chatImgPendente = null;
+document.getElementById('chat-img-preview').style.display = 'none';
+}
+function chatPasteHandler(e) {
+var items = Array.from((e.clipboardData || {}).items || []);
+var imgItem = items.find(function(item) { return item.type.startsWith('image/'); });
+if (imgItem) { e.preventDefault(); _processarImgChat(imgItem.getAsFile()); }
+}
 async function enviarChat() {
 if (!iaKit.temChave()) return abrirModalConfig();
 const input = document.getElementById('chat-input');
 const texto = input.value.trim();
-if (!texto) return;
+if (!texto && !_chatImgPendente) return;
 input.value = ''; input.style.height = 'auto';
 document.getElementById('chat-send-btn').disabled = true;
+let userContent;
+if (_chatImgPendente) {
+userContent = [{ type: 'image_url', image_url: { url: 'data:' + _chatImgPendente.mediaType + ';base64,' + _chatImgPendente.base64 } }];
+if (texto) userContent.push({ type: 'text', text: texto });
+adicionarMensagemChat('user', (texto ? texto + '\n' : '') + '[imagem: ' + _chatImgPendente.nome + ']');
+cancelarImgChat();
+} else {
+userContent = texto;
 adicionarMensagemChat('user', texto);
-_chatHistorico.push({ role: 'user', content: texto });
+}
+_chatHistorico.push({ role: 'user', content: userContent });
 adicionarTyping();
 try {
 const sys = getChatSystemPrompt();
 const r = await iaKit.chamarComHistorico(_chatHistorico, sys);
 removerTyping();
-// detecta comando de link
 const linkMatch = r.match(/ABRIR_LINK::(\S+)/);
-const textoLimpo = r.replace(/\nABRIR_LINK::\S+/g, '').replace(/ABRIR_LINK::\S+/g, '').trim();
+const textoLimpo = r.replace(/ABRIR_LINK::\S+/g, '').trim();
 adicionarMensagemChat('assistant', textoLimpo);
 _chatHistorico.push({ role: 'assistant', content: textoLimpo });
 if (linkMatch) {
 const url = linkMatch[1];
-const nome = [...linksExtras.flatMap(g => g.links||[])].find(lk => lk.url === url || url.includes(new URL(lk.url).hostname))?.titulo || url;
-adicionarBotaoAbrirLink(url, nome);
+const lk = [...linksExtras.flatMap(g => g.links||[])].find(l => l.url === url);
+adicionarBotaoAbrirLink(url, lk ? lk.titulo : url);
 }
-// persiste no registro ativo
 const reg = registros.find(x => x.id === registroAtivoId);
 if (reg) { reg.chat_historico = _chatHistorico; salvarMemoria(); }
 } catch(e) {
@@ -1922,13 +2775,29 @@ const modal = document.createElement('div');
 modal.id = 'modal-limpar-base';
 modal.style.cssText = 'position:fixed;inset:0;z-index:11000;background:rgba(15,23,42,0.6);display:flex;align-items:center;justify-content:center;padding:16px;';
 modal.innerHTML = `
-<div style="background:#fff;border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.25);"><div style="background:#1e293b;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;"><span style="font-weight:700;font-size:15px;">🗑 Escolher campos para limpar</span><button onclick="document.getElementById('modal-limpar-base').remove()" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;line-height:1;">&times;</button></div><div style="padding:16px;overflow-y:auto;flex:1;"><div style="display:flex;gap:8px;margin-bottom:12px;"><button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=true)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Todos</button><button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=false)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Nenhum</button></div>
+<div style="background:#fff;border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.25);">
+<div style="background:#1e293b;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+<span style="font-weight:700;font-size:15px;">� Escolher campos para limpar</span>
+<button onclick="document.getElementById('modal-limpar-base').remove()" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+</div>
+<div style="padding:16px;overflow-y:auto;flex:1;">
+<div style="display:flex;gap:8px;margin-bottom:12px;">
+<button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=true)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Todos</button>
+<button onclick="document.querySelectorAll('.chk-limpar').forEach(c=>c.checked=false)" style="font-size:11px;border:1px solid #e2e8f0;background:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;">Nenhum</button>
+</div>
 ${CAMPOS_BASE.map(c => `
-<label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:13px;color:#334155;"><input type="checkbox" class="chk-limpar" data-key="${c.key}" ${r[c.key] ? '' : 'disabled'} style="width:16px;height:16px;accent-color:#ef4444;"><span>${c.label}</span>
+<label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:13px;color:#334155;">
+<input type="checkbox" class="chk-limpar" data-key="${c.key}" ${r[c.key] ? '' : 'disabled'} style="width:16px;height:16px;accent-color:#ef4444;">
+<span>${c.label}</span>
 ${r[c.key] ? '<span style="font-size:10px;color:#22c55e;margin-left:auto;">● preenchido</span>' : '<span style="font-size:10px;color:#94a3b8;margin-left:auto;">vazio</span>'}
 </label>
 `).join('')}
-</div><div style="padding:16px;border-top:1px solid #e2e8f0;display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;"><button onclick="document.getElementById('modal-limpar-base').remove()" style="padding:8px 16px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;">Cancelar</button><button onclick="confirmarLimparBase()" style="padding:8px 16px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">Limpar selecionados</button></div></div>
+</div>
+<div style="padding:16px;border-top:1px solid #e2e8f0;display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;">
+<button onclick="document.getElementById('modal-limpar-base').remove()" style="padding:8px 16px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;">Cancelar</button>
+<button onclick="confirmarLimparBase()" style="padding:8px 16px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">Limpar selecionados</button>
+</div>
+</div>
 `;
 document.body.appendChild(modal);
 }
@@ -1960,9 +2829,508 @@ if (href.startsWith('http://') || href.startsWith('https://') || a.target === '_
 e.preventDefault();
 abrirLink(href);
 }
-}, true);</script><div id="chat-widget" style="display:none;position:fixed;bottom:24px;right:24px;width:390px;height:580px;z-index:9999;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.28);"><div class="flex items-center justify-between px-4 py-3 bg-emerald-700" style="flex-shrink:0"><div class="flex items-center gap-2"><span class="text-lg">🤖</span><div><div class="font-bold text-white text-sm">Advisor GERiAH</div><div class="text-emerald-200 text-[10px]" id="chat-contexto-label">sem registro ativo</div></div></div><div class="flex items-center gap-2"><button onclick="limparChat()" class="text-emerald-200 hover:text-white text-xs border border-emerald-500 px-2 py-1 rounded transition">🗑 Limpar</button><button onclick="toggleChat()" class="text-emerald-200 hover:text-white text-xl font-bold leading-none px-1">&times;</button></div></div><div id="chat-messages" style="flex:1;overflow-y:auto;padding:12px;background:#f8fafc;display:flex;flex-direction:column;gap:8px;"></div><div style="flex-shrink:0;background:#fff;border-top:1px solid #e2e8f0;padding:10px;display:flex;gap-8px;gap:8px;align-items:flex-end;"><textarea id="chat-input" placeholder="Pergunte algo sobre o diagnóstico..." rows="1"
- style="flex:1;resize:none;border:1px solid #cbd5e1;border-radius:10px;padding:8px 12px;font-size:13px;outline:none;max-height:100px;overflow-y:auto;font-family:inherit;"
- onkeydown="chatKeydown(event)" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button onclick="enviarChat()" id="chat-send-btn"
- style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;transition:background 0.15s;">
- ↑
- </button></div></div></body></html>
+}, true);
+
+// ════════════════════════════════════════
+// GERiAH AUTH KIT — Micro-SaaS Serverless Engine
+// ════════════════════════════════════════
+// ════════════════════════════════════════
+// GERiAH AUTH KIT — Micro-SaaS Serverless Engine v2.0
+// ════════════════════════════════════════
+const authKit = (() => {
+  const LS_URL_KEY = 'geriah_apps_script_url';
+  const LS_TOKEN_KEY = 'geriah_auth_token';
+  const LS_EMAIL_KEY = 'geriah_auth_email';
+  const LS_NIVEL_KEY = 'geriah_auth_nivel';
+
+  const DEFAULT_BACKEND_URL = "https://script.google.com/macros/s/AKfycbw-Xyf_9MWt_S3XBu3HcnsI6xKW_oPTAvUyQcByrAdHKVDArfaV_bMYY83UvWR7bTIjdQ/exec"; 
+
+  let _backendUrl = "";
+  let _emailPendente = "";
+
+  function getBackendUrl() {
+    return (localStorage.getItem(LS_URL_KEY) || DEFAULT_BACKEND_URL || "").trim();
+  }
+
+  function setBackendUrl(url) {
+    _backendUrl = (url || "").trim();
+    localStorage.setItem(LS_URL_KEY, _backendUrl);
+  }
+
+  function getEmail() { return localStorage.getItem(LS_EMAIL_KEY) || ""; }
+  function getToken() { return localStorage.getItem(LS_TOKEN_KEY) || ""; }
+  function getNivel() { return localStorage.getItem(LS_NIVEL_KEY) || "FREE"; }
+  function isAutenticado() { return !!(getEmail() && getToken()); }
+
+  function setStatusMsg(elId, msg, isError = false) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    if (!msg) { el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    el.className = isError 
+      ? "text-xs p-3 rounded-lg border bg-red-50 text-red-700 border-red-200 mb-3"
+      : "text-xs p-3 rounded-lg border bg-blue-50 text-blue-700 border-blue-200 mb-3";
+    el.innerHTML = msg;
+  }
+
+  async function apiCall(action, payload = {}) {
+    const url = getBackendUrl();
+    if (!url) {
+      throw new Error("URL do backend não configurada. Clique em 'Configurar URL do Backend' abaixo.");
+    }
+    const bodyData = { action, appName: "GERiAH Fractal", ...payload };
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(bodyData)
+    });
+    return await res.json();
+  }
+
+  function abrirLogin() {
+    document.getElementById('auth-view-login').style.display = 'block';
+    document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+    document.getElementById('auth-view-definir-senha').style.display = 'none';
+    setStatusMsg('auth-login-status-msg', null);
+  }
+
+  function abrirSolicitarOTP(motivo = "primeiro_acesso") {
+    document.getElementById('auth-view-login').style.display = 'none';
+    document.getElementById('auth-view-solicitar-otp').style.display = 'block';
+    document.getElementById('auth-view-definir-senha').style.display = 'none';
+    
+    const titulo = document.getElementById('auth-titulo-otp');
+    const desc = document.getElementById('auth-desc-otp');
+    if (motivo === 'recuperar') {
+      titulo.textContent = 'Recuperar Senha';
+      desc.textContent = 'Digite seu e-mail para receber um código de verificação e redefinir sua senha.';
+    } else {
+      titulo.textContent = 'Criar Minha Senha';
+      desc.textContent = 'Digite seu e-mail para receber um código de segurança e cadastrar sua senha.';
+    }
+
+    const emailLoginVal = (document.getElementById('auth-login-email') || {}).value || '';
+    if (emailLoginVal.trim()) {
+      document.getElementById('auth-otp-email').value = emailLoginVal.trim();
+    }
+
+    setStatusMsg('auth-solicitar-status-msg', null);
+  }
+
+  async function loginComSenha() {
+    const email = document.getElementById('auth-login-email').value.trim();
+    const senha = document.getElementById('auth-login-senha').value.trim();
+    const btn = document.getElementById('btn-auth-entrar');
+
+    if (!email || !email.includes('@')) {
+      return setStatusMsg('auth-login-status-msg', 'Informe um e-mail válido.', true);
+    }
+    if (!senha) {
+      return setStatusMsg('auth-login-status-msg', 'Informe sua senha de acesso.', true);
+    }
+
+    setStatusMsg('auth-login-status-msg', '<span class="spinner spinner-blue"></span> Entrando...', false);
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+
+    try {
+      const res = await apiCall('login_senha', { email, senha });
+      if (res.success && res.token) {
+        localStorage.setItem(LS_TOKEN_KEY, res.token);
+        localStorage.setItem(LS_EMAIL_KEY, res.email);
+        localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
+        desbloquearInterface(res.email);
+      } else if (res.precisa_criar_senha) {
+        _emailPendente = email;
+        document.getElementById('auth-view-login').style.display = 'none';
+        document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+        document.getElementById('auth-view-definir-senha').style.display = 'block';
+        document.getElementById('auth-target-email').textContent = email;
+        setStatusMsg('auth-definir-status-msg', res.message, false);
+      } else {
+        setStatusMsg('auth-login-status-msg', res.message || 'E-mail ou senha incorretos.', true);
+      }
+    } catch (err) {
+      setStatusMsg('auth-login-status-msg', err.message || 'Erro de conexão.', true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  async function solicitarCodigo(isReenvio = false) {
+    const inputEmail = document.getElementById('auth-otp-email');
+    const email = isReenvio ? _emailPendente : (inputEmail ? inputEmail.value.trim() : '');
+    const btn = document.getElementById('btn-auth-enviar-codigo');
+
+    if (!email || !email.includes('@')) {
+      return setStatusMsg('auth-solicitar-status-msg', 'Informe um e-mail válido.', true);
+    }
+
+    _emailPendente = email;
+    setStatusMsg('auth-solicitar-status-msg', '<span class="spinner spinner-blue"></span> Enviando código por e-mail...', false);
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+
+    try {
+      const res = await apiCall('solicitar_codigo', { email, motivo: 'definir_senha' });
+      if (res.success) {
+        document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+        document.getElementById('auth-view-definir-senha').style.display = 'block';
+        document.getElementById('auth-target-email').textContent = email;
+        setStatusMsg('auth-solicitar-status-msg', null);
+        setStatusMsg('auth-definir-status-msg', res.message || 'Código enviado com sucesso!', false);
+        const inputCod = document.getElementById('auth-input-codigo');
+        if (inputCod) { inputCod.value = ''; inputCod.focus(); }
+      } else {
+        setStatusMsg('auth-solicitar-status-msg', res.message || 'Falha ao solicitar código.', true);
+      }
+    } catch (err) {
+      setStatusMsg('auth-solicitar-status-msg', err.message || 'Erro de conexão.', true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  async function definirSenha() {
+    const codigo = document.getElementById('auth-input-codigo').value.trim();
+    const novaSenha = document.getElementById('auth-nova-senha').value.trim();
+    const confirma = document.getElementById('auth-confirma-senha').value.trim();
+    const btn = document.getElementById('btn-auth-salvar-senha');
+
+    if (!codigo || codigo.length < 6) {
+      return setStatusMsg('auth-definir-status-msg', 'Digite o código de 6 dígitos recebido por e-mail.', true);
+    }
+    if (!novaSenha || novaSenha.length < 6) {
+      return setStatusMsg('auth-definir-status-msg', 'A senha deve conter no mínimo 6 caracteres.', true);
+    }
+    if (novaSenha !== confirma) {
+      return setStatusMsg('auth-definir-status-msg', 'As senhas digitadas não coincidem.', true);
+    }
+
+    setStatusMsg('auth-definir-status-msg', '<span class="spinner spinner-blue"></span> Salvando senha segura...', false);
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+
+    try {
+      const res = await apiCall('definir_senha_com_codigo', {
+        email: _emailPendente,
+        codigo,
+        novaSenha
+      });
+
+      if (res.success && res.token) {
+        localStorage.setItem(LS_TOKEN_KEY, res.token);
+        localStorage.setItem(LS_EMAIL_KEY, res.email);
+        localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
+        desbloquearInterface(res.email);
+      } else {
+        setStatusMsg('auth-definir-status-msg', res.message || 'Código incorreto ou expirado.', true);
+      }
+    } catch (err) {
+      setStatusMsg('auth-definir-status-msg', err.message || 'Erro de conexão.', true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  function desbloquearInterface(email) {
+    const gatekeeper = document.getElementById('authGatekeeper');
+    if (gatekeeper) gatekeeper.style.display = 'none';
+    
+    const badge = document.getElementById('auth-user-badge');
+    const emailEl = document.getElementById('auth-user-email');
+    if (badge && emailEl) {
+      emailEl.textContent = email;
+      badge.classList.remove('hidden');
+      badge.classList.add('flex');
+    }
+  }
+
+  function bloquearInterface() {
+    const gatekeeper = document.getElementById('authGatekeeper');
+    if (gatekeeper) {
+      gatekeeper.style.display = 'flex';
+      abrirLogin();
+    }
+    const badge = document.getElementById('auth-user-badge');
+    if (badge) {
+      badge.classList.add('hidden');
+      badge.classList.remove('flex');
+    }
+  }
+
+  async function sair() {
+    if (!confirm('Deseja realmente sair da sua conta?')) return;
+    try {
+      await apiCall('sair', { email: getEmail(), token: getToken() });
+    } catch(e) {}
+    localStorage.removeItem(LS_TOKEN_KEY);
+    localStorage.removeItem(LS_EMAIL_KEY);
+    localStorage.removeItem(LS_NIVEL_KEY);
+    bloquearInterface();
+  }
+
+  async function verificarSessaoRemota() {
+    if (!isAutenticado()) return;
+    try {
+      const res = await apiCall('verificar_sessao', { email: getEmail(), token: getToken() });
+      if (!res.success || !res.valid) {
+        localStorage.removeItem(LS_TOKEN_KEY);
+        localStorage.removeItem(LS_EMAIL_KEY);
+        bloquearInterface();
+      }
+    } catch(e) {}
+  }
+
+  function toggleConfigBackend() {
+    const el = document.getElementById('auth-config-backend');
+    if (!el) return;
+    const isHidden = el.style.display === 'none';
+    el.style.display = isHidden ? 'block' : 'none';
+    if (isHidden) {
+      document.getElementById('auth-backend-url').value = getBackendUrl();
+    }
+  }
+
+  function salvarBackendUrl() {
+    const url = document.getElementById('auth-backend-url').value.trim();
+    setBackendUrl(url);
+    alert('URL do Backend salva com sucesso!');
+    toggleConfigBackend();
+  }
+
+  async function testarBackend() {
+    const url = document.getElementById('auth-backend-url').value.trim();
+    if (!url) return alert('Informe uma URL primeiro.');
+    setBackendUrl(url);
+    try {
+      const res = await apiCall('ping');
+      alert(res.message || 'Conexão bem sucedida!');
+    } catch (err) {
+      alert('Erro de conexão: ' + err.message);
+    }
+  }
+
+  function init() {
+    const urlInput = document.getElementById('auth-backend-url');
+    if (urlInput) urlInput.value = getBackendUrl();
+
+    if (isAutenticado()) {
+      desbloquearInterface(getEmail());
+      verificarSessaoRemota();
+    } else {
+      bloquearInterface();
+    }
+  }
+
+  return {
+    init,
+    loginComSenha,
+    abrirLogin,
+    abrirSolicitarOTP,
+    solicitarCodigo,
+    definirSenha,
+    sair,
+    toggleConfigBackend,
+    salvarBackendUrl,
+    testarBackend,
+    getBackendUrl,
+    setBackendUrl
+  };
+})();
+</script>
+<!-- CHAT ADVISOR IA -->
+<div id="chat-widget" style="display:none;position:fixed;bottom:24px;right:24px;width:390px;height:580px;z-index:9999;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.28);">
+<!-- Header -->
+<div class="flex items-center justify-between px-4 py-3 bg-emerald-700" style="flex-shrink:0">
+<div class="flex items-center gap-2">
+<span class="text-lg">�</span>
+<div>
+<div class="font-bold text-white text-sm">Advisor GERiAH</div>
+<div class="text-emerald-200 text-[10px]" id="chat-contexto-label">sem registro ativo</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button onclick="limparChat()" class="text-emerald-200 hover:text-white text-xs border border-emerald-500 px-2 py-1 rounded transition">� Limpar</button>
+<button onclick="toggleChat()" class="text-emerald-200 hover:text-white text-xl font-bold leading-none px-1">&times;</button>
+</div>
+</div>
+<!-- Messages -->
+<div id="chat-messages" style="flex:1;overflow-y:auto;padding:12px;background:#f8fafc;display:flex;flex-direction:column;gap:8px;"></div>
+<!-- Preview imagem pendente -->
+<div id="chat-img-preview" style="display:none;flex-direction:row;align-items:center;gap:8px;flex-shrink:0;padding:6px 10px;background:#f0fdf4;border-top:1px solid #bbf7d0;font-size:12px;color:#15803d;">
+<img id="chat-img-thumb" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:1px solid #bbf7d0;">
+<span id="chat-img-nome" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+<button onclick="cancelarImgChat()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-weight:700;font-size:16px;padding:0 4px;flex-shrink:0;">&#x2715;</button>
+</div>
+<!-- Input -->
+<div style="flex-shrink:0;background:#fff;border-top:1px solid #e2e8f0;padding:10px;display:flex;gap:8px;align-items:flex-end;">
+<label title="Enviar imagem" style="cursor:pointer;flex-shrink:0;color:#94a3b8;display:flex;align-items:center;padding:6px;">
+�
+<input type="file" id="chat-img-input" accept="image/*" class="hidden" onchange="selecionarImgChat(this)">
+</label>
+<textarea id="chat-input" placeholder="Pergunte algo ou envie uma imagem..." rows="1"
+style="flex:1;resize:none;border:1px solid #cbd5e1;border-radius:10px;padding:8px 12px;font-size:13px;outline:none;max-height:100px;overflow-y:auto;font-family:inherit;"
+onkeydown="chatKeydown(event)" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'" onpaste="chatPasteHandler(event)"></textarea>
+<button onclick="enviarChat()" id="chat-send-btn"
+style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;transition:background 0.15s;">
+↑
+</button>
+</div>
+</div>
+
+<!-- ================================================================= -->
+<!-- MODAL DE CONTROLE DE ACESSO (GATEKEEPER MICRO-SAAS v2.0)          -->
+<!-- ================================================================= -->
+<div id="authGatekeeper" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(15,23,42,0.94); backdrop-filter:blur(8px);" class="items-center justify-center p-4">
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-slate-200">
+    
+    <!-- Gatekeeper Header -->
+    <div class="bg-slate-900 px-8 py-6 text-center text-white border-b border-slate-800">
+      <h2 class="text-2xl font-bold tracking-tight">
+        GERiAH <span class="text-blue-500">Fractal</span>
+      </h2>
+      <p class="text-slate-400 text-xs mt-1">Seu negócio a partir de quem você é.</p>
+    </div>
+
+    <!-- Gatekeeper Body -->
+    <div class="p-8">
+      
+      <!-- TELA 1: LOGIN COM E-MAIL E SENHA -->
+      <div id="auth-view-login">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Entrar na Plataforma</h3>
+        <p class="text-xs text-slate-500 mb-5 leading-relaxed">
+          Digite seu e-mail e sua senha de acesso.
+        </p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">E-mail</label>
+            <input type="email" id="auth-login-email" placeholder="seuemail@gmail.com" 
+              class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.loginComSenha()">
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-xs font-bold text-slate-600">Senha</label>
+              <button type="button" onclick="authKit.abrirSolicitarOTP('recuperar')" class="text-xs text-blue-600 hover:text-blue-800 underline font-semibold">
+                Esqueci minha senha
+              </button>
+            </div>
+            <input type="password" id="auth-login-senha" placeholder="Sua senha" 
+              class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.loginComSenha()">
+          </div>
+
+          <div id="auth-login-status-msg" style="display:none"></div>
+
+          <button type="button" id="btn-auth-entrar" onclick="authKit.loginComSenha()" 
+            class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm shadow">
+            Entrar na Conta →
+          </button>
+
+          <div class="pt-2 text-center text-xs text-slate-500 border-t border-slate-100">
+            Primeiro acesso ou ainda não tem senha?
+            <button type="button" onclick="authKit.abrirSolicitarOTP('primeiro_acesso')" class="text-blue-600 hover:text-blue-800 font-bold ml-1">
+              Criar minha senha
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 2: SOLICITAR CÓDIGO OTP (PRIMEIRO ACESSO OU RECUPERAÇÃO) -->
+      <div id="auth-view-solicitar-otp" style="display:none">
+        <h3 id="auth-titulo-otp" class="text-lg font-bold text-slate-800 mb-1">Criar Minha Senha</h3>
+        <p id="auth-desc-otp" class="text-xs text-slate-500 mb-5 leading-relaxed">
+          Digite seu e-mail para receber um código de 6 dígitos e cadastrar sua senha.
+        </p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Seu E-mail</label>
+            <input type="email" id="auth-otp-email" placeholder="seuemail@gmail.com" 
+              class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.solicitarCodigo()">
+          </div>
+
+          <div id="auth-solicitar-status-msg" style="display:none"></div>
+
+          <button type="button" id="btn-auth-enviar-codigo" onclick="authKit.solicitarCodigo()" 
+            class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm shadow">
+            Enviar Código por E-mail →
+          </button>
+
+          <div class="pt-2 text-left">
+            <button type="button" onclick="authKit.abrirLogin()" class="text-xs text-slate-500 hover:text-slate-800 underline">
+              ← Voltar para login com senha
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 3: VALIDAR CÓDIGO E DEFINIR NOVA SENHA -->
+      <div id="auth-view-definir-senha" style="display:none">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Cadastrar Nova Senha</h3>
+        <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+          Enviamos um código para <strong id="auth-target-email" class="text-slate-800"></strong>.
+        </p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1 text-center">Código de 6 dígitos</label>
+            <input type="text" id="auth-input-codigo" maxlength="6" placeholder="000000" 
+              class="w-full text-center text-2xl font-mono font-bold tracking-widest p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') document.getElementById('auth-nova-senha').focus()">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Nova Senha (mínimo 6 caracteres)</label>
+            <input type="password" id="auth-nova-senha" placeholder="••••••••" 
+              class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') document.getElementById('auth-confirma-senha').focus()">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Confirmar Nova Senha</label>
+            <input type="password" id="auth-confirma-senha" placeholder="••••••••" 
+              class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.definirSenha()">
+          </div>
+
+          <div id="auth-definir-status-msg" style="display:none"></div>
+
+          <button type="button" id="btn-auth-salvar-senha" onclick="authKit.definirSenha()" 
+            class="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-emerald-700 transition flex items-center justify-center gap-2 text-sm shadow">
+            Salvar Senha e Entrar ✦
+          </button>
+
+          <div class="flex items-center justify-between pt-2 text-xs">
+            <button type="button" onclick="authKit.abrirSolicitarOTP('trocar')" class="text-slate-500 hover:text-slate-800 underline">
+              ← Trocar e-mail
+            </button>
+            <button type="button" onclick="authKit.solicitarCodigo(true)" class="text-blue-600 hover:text-blue-800 font-semibold">
+              Reenviar código
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIGURAÇÃO RÁPIDA DA URL DO BACKEND (APPS SCRIPT) -->
+      <div class="mt-6 pt-4 border-t border-slate-100">
+        <button type="button" onclick="authKit.toggleConfigBackend()" class="text-[11px] text-slate-400 hover:text-slate-600 flex items-center gap-1 mx-auto">
+          ⚙️ Configurar URL do Backend (Apps Script)
+        </button>
+        <div id="auth-config-backend" style="display:none" class="mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
+          <label class="block font-bold text-slate-600 mb-1">URL do Web App do Google Apps Script:</label>
+          <input type="url" id="auth-backend-url" placeholder="https://script.google.com/macros/s/.../exec" 
+            class="w-full text-xs p-2 bg-white border border-slate-300 rounded outline-none focus:border-blue-500 mb-2">
+          <div class="flex justify-end gap-2">
+            <button type="button" onclick="authKit.testarBackend()" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded font-semibold hover:bg-slate-300">Testar Conexão</button>
+            <button type="button" onclick="authKit.salvarBackendUrl()" class="px-2.5 py-1 bg-blue-600 text-white rounded font-bold hover:bg-blue-700">Salvar URL</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

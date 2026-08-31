@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GERIAH Fractal | Seu negócio a partir de quem você é</title>
+<title>GERIAH Fractal v2.1| Seu negócio a partir de quem você é</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .bg-quem-sou { background-color: #ffffff; border-top: 4px solid #3b82f6; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
@@ -2834,13 +2834,15 @@ abrirLink(href);
 // ════════════════════════════════════════
 // GERiAH AUTH KIT — Micro-SaaS Serverless Engine
 // ════════════════════════════════════════
+// ════════════════════════════════════════
+// GERiAH AUTH KIT — Micro-SaaS Serverless Engine v2.0
+// ════════════════════════════════════════
 const authKit = (() => {
   const LS_URL_KEY = 'geriah_apps_script_url';
   const LS_TOKEN_KEY = 'geriah_auth_token';
   const LS_EMAIL_KEY = 'geriah_auth_email';
   const LS_NIVEL_KEY = 'geriah_auth_nivel';
 
-  // URL padrão configurável no código ou via interface
   const DEFAULT_BACKEND_URL = "https://script.google.com/macros/s/AKfycbw-Xyf_9MWt_S3XBu3HcnsI6xKW_oPTAvUyQcByrAdHKVDArfaV_bMYY83UvWR7bTIjdQ/exec"; 
 
   let _backendUrl = "";
@@ -2855,115 +2857,177 @@ const authKit = (() => {
     localStorage.setItem(LS_URL_KEY, _backendUrl);
   }
 
-  function getEmail() {
-    return localStorage.getItem(LS_EMAIL_KEY) || "";
-  }
-
-  function getToken() {
-    return localStorage.getItem(LS_TOKEN_KEY) || "";
-  }
-
-  function isAutenticado() {
-    return !!(getEmail() && getToken());
-  }
+  function getEmail() { return localStorage.getItem(LS_EMAIL_KEY) || ""; }
+  function getToken() { return localStorage.getItem(LS_TOKEN_KEY) || ""; }
+  function getNivel() { return localStorage.getItem(LS_NIVEL_KEY) || "FREE"; }
+  function isAutenticado() { return !!(getEmail() && getToken()); }
 
   function setStatusMsg(elId, msg, isError = false) {
     const el = document.getElementById(elId);
     if (!el) return;
-    if (!msg) {
-      el.style.display = 'none';
-      return;
-    }
+    if (!msg) { el.style.display = 'none'; return; }
     el.style.display = 'block';
     el.className = isError 
-      ? "text-xs p-3 rounded-lg border bg-red-50 text-red-700 border-red-200"
-      : "text-xs p-3 rounded-lg border bg-blue-50 text-blue-700 border-blue-200";
+      ? "text-xs p-3 rounded-lg border bg-red-50 text-red-700 border-red-200 mb-3"
+      : "text-xs p-3 rounded-lg border bg-blue-50 text-blue-700 border-blue-200 mb-3";
     el.innerHTML = msg;
   }
 
   async function apiCall(action, payload = {}) {
     const url = getBackendUrl();
     if (!url) {
-      throw new Error("URL do backend (Google Apps Script) não configurada. Clique em 'Configurar URL do Backend' abaixo.");
+      throw new Error("URL do backend não configurada. Clique em 'Configurar URL do Backend' abaixo.");
     }
-    const bodyData = { action, ...payload };
+    const bodyData = { action, appName: "GERiAH Fractal", ...payload };
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(bodyData)
     });
-    const json = await res.json();
-    return json;
+    return await res.json();
   }
 
-  async function solicitarCodigo(isReenvio = false) {
-    const emailInput = document.getElementById('auth-input-email');
-    const email = isReenvio ? _emailPendente : (emailInput ? emailInput.value.trim() : "");
-    const btn = document.getElementById('btn-auth-solicitar');
+  function abrirLogin() {
+    document.getElementById('auth-view-login').style.display = 'block';
+    document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+    document.getElementById('auth-view-definir-senha').style.display = 'none';
+    setStatusMsg('auth-login-status-msg', null);
+  }
+
+  function abrirSolicitarOTP(motivo = "primeiro_acesso") {
+    document.getElementById('auth-view-login').style.display = 'none';
+    document.getElementById('auth-view-solicitar-otp').style.display = 'block';
+    document.getElementById('auth-view-definir-senha').style.display = 'none';
     
-    if (!email || !email.includes('@')) {
-      setStatusMsg('auth-status-msg', 'Por favor, informe um e-mail válido.', true);
-      return;
+    const titulo = document.getElementById('auth-titulo-otp');
+    const desc = document.getElementById('auth-desc-otp');
+    if (motivo === 'recuperar') {
+      titulo.textContent = 'Recuperar Senha';
+      desc.textContent = 'Digite seu e-mail para receber um código de verificação e redefinir sua senha.';
+    } else {
+      titulo.textContent = 'Criar Minha Senha';
+      desc.textContent = 'Digite seu e-mail para receber um código de segurança e cadastrar sua senha.';
     }
 
-    _emailPendente = email;
-    setStatusMsg('auth-status-msg', '<span class="spinner spinner-blue"></span> Enviando código por e-mail...', false);
+    const emailLoginVal = (document.getElementById('auth-login-email') || {}).value || '';
+    if (emailLoginVal.trim()) {
+      document.getElementById('auth-otp-email').value = emailLoginVal.trim();
+    }
+
+    setStatusMsg('auth-solicitar-status-msg', null);
+  }
+
+  async function loginComSenha() {
+    const email = document.getElementById('auth-login-email').value.trim();
+    const senha = document.getElementById('auth-login-senha').value.trim();
+    const btn = document.getElementById('btn-auth-entrar');
+
+    if (!email || !email.includes('@')) {
+      return setStatusMsg('auth-login-status-msg', 'Informe um e-mail válido.', true);
+    }
+    if (!senha) {
+      return setStatusMsg('auth-login-status-msg', 'Informe sua senha de acesso.', true);
+    }
+
+    setStatusMsg('auth-login-status-msg', '<span class="spinner spinner-blue"></span> Entrando...', false);
     if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
 
     try {
-      const res = await apiCall('solicitar_codigo', { email });
-      if (res.success) {
-        document.getElementById('auth-step-email').style.display = 'none';
-        document.getElementById('auth-step-otp').style.display = 'block';
+      const res = await apiCall('login_senha', { email, senha });
+      if (res.success && res.token) {
+        localStorage.setItem(LS_TOKEN_KEY, res.token);
+        localStorage.setItem(LS_EMAIL_KEY, res.email);
+        localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
+        desbloquearInterface(res.email);
+      } else if (res.precisa_criar_senha) {
+        _emailPendente = email;
+        document.getElementById('auth-view-login').style.display = 'none';
+        document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+        document.getElementById('auth-view-definir-senha').style.display = 'block';
         document.getElementById('auth-target-email').textContent = email;
-        setStatusMsg('auth-status-msg', null);
-        setStatusMsg('auth-otp-status-msg', res.message || 'Código enviado com sucesso!', false);
-        const otpInput = document.getElementById('auth-input-codigo');
-        if (otpInput) { otpInput.value = ''; otpInput.focus(); }
+        setStatusMsg('auth-definir-status-msg', res.message, false);
       } else {
-        setStatusMsg('auth-status-msg', res.message || 'Falha ao solicitar código.', true);
+        setStatusMsg('auth-login-status-msg', res.message || 'E-mail ou senha incorretos.', true);
       }
     } catch (err) {
-      setStatusMsg('auth-status-msg', err.message || 'Erro de conexão com o servidor.', true);
+      setStatusMsg('auth-login-status-msg', err.message || 'Erro de conexão.', true);
     } finally {
       if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
     }
   }
 
-  async function validarCodigo() {
-    const codigoInput = document.getElementById('auth-input-codigo');
-    const codigo = codigoInput ? codigoInput.value.trim() : "";
-    const btn = document.getElementById('btn-auth-validar');
+  async function solicitarCodigo(isReenvio = false) {
+    const inputEmail = document.getElementById('auth-otp-email');
+    const email = isReenvio ? _emailPendente : (inputEmail ? inputEmail.value.trim() : '');
+    const btn = document.getElementById('btn-auth-enviar-codigo');
 
-    if (!codigo || codigo.length < 6) {
-      setStatusMsg('auth-otp-status-msg', 'Digite o código de 6 dígitos recebido por e-mail.', true);
-      return;
+    if (!email || !email.includes('@')) {
+      return setStatusMsg('auth-solicitar-status-msg', 'Informe um e-mail válido.', true);
     }
 
-    setStatusMsg('auth-otp-status-msg', '<span class="spinner spinner-blue"></span> Validando código...', false);
+    _emailPendente = email;
+    setStatusMsg('auth-solicitar-status-msg', '<span class="spinner spinner-blue"></span> Enviando código por e-mail...', false);
     if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
 
     try {
-      const res = await apiCall('validar_codigo', { email: _emailPendente, codigo });
+      const res = await apiCall('solicitar_codigo', { email, motivo: 'definir_senha' });
+      if (res.success) {
+        document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+        document.getElementById('auth-view-definir-senha').style.display = 'block';
+        document.getElementById('auth-target-email').textContent = email;
+        setStatusMsg('auth-solicitar-status-msg', null);
+        setStatusMsg('auth-definir-status-msg', res.message || 'Código enviado com sucesso!', false);
+        const inputCod = document.getElementById('auth-input-codigo');
+        if (inputCod) { inputCod.value = ''; inputCod.focus(); }
+      } else {
+        setStatusMsg('auth-solicitar-status-msg', res.message || 'Falha ao solicitar código.', true);
+      }
+    } catch (err) {
+      setStatusMsg('auth-solicitar-status-msg', err.message || 'Erro de conexão.', true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  async function definirSenha() {
+    const codigo = document.getElementById('auth-input-codigo').value.trim();
+    const novaSenha = document.getElementById('auth-nova-senha').value.trim();
+    const confirma = document.getElementById('auth-confirma-senha').value.trim();
+    const btn = document.getElementById('btn-auth-salvar-senha');
+
+    if (!codigo || codigo.length < 6) {
+      return setStatusMsg('auth-definir-status-msg', 'Digite o código de 6 dígitos recebido por e-mail.', true);
+    }
+    if (!novaSenha || novaSenha.length < 6) {
+      return setStatusMsg('auth-definir-status-msg', 'A senha deve conter no mínimo 6 caracteres.', true);
+    }
+    if (novaSenha !== confirma) {
+      return setStatusMsg('auth-definir-status-msg', 'As senhas digitadas não coincidem.', true);
+    }
+
+    setStatusMsg('auth-definir-status-msg', '<span class="spinner spinner-blue"></span> Salvando senha segura...', false);
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+
+    try {
+      const res = await apiCall('definir_senha_com_codigo', {
+        email: _emailPendente,
+        codigo,
+        novaSenha
+      });
+
       if (res.success && res.token) {
         localStorage.setItem(LS_TOKEN_KEY, res.token);
         localStorage.setItem(LS_EMAIL_KEY, res.email);
         localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
         desbloquearInterface(res.email);
       } else {
-        setStatusMsg('auth-otp-status-msg', res.message || 'Código inválido ou expirado.', true);
+        setStatusMsg('auth-definir-status-msg', res.message || 'Código incorreto ou expirado.', true);
       }
     } catch (err) {
-      setStatusMsg('auth-otp-status-msg', err.message || 'Erro ao validar código.', true);
+      setStatusMsg('auth-definir-status-msg', err.message || 'Erro de conexão.', true);
     } finally {
       if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
     }
-  }
-
-  function voltarParaEmail() {
-    document.getElementById('auth-step-otp').style.display = 'none';
-    document.getElementById('auth-step-email').style.display = 'block';
-    setStatusMsg('auth-otp-status-msg', null);
   }
 
   function desbloquearInterface(email) {
@@ -2983,8 +3047,7 @@ const authKit = (() => {
     const gatekeeper = document.getElementById('authGatekeeper');
     if (gatekeeper) {
       gatekeeper.style.display = 'flex';
-      document.getElementById('auth-step-email').style.display = 'block';
-      document.getElementById('auth-step-otp').style.display = 'none';
+      abrirLogin();
     }
     const badge = document.getElementById('auth-user-badge');
     if (badge) {
@@ -3013,9 +3076,7 @@ const authKit = (() => {
         localStorage.removeItem(LS_EMAIL_KEY);
         bloquearInterface();
       }
-    } catch(e) {
-      // Falhas temporárias de rede não deslogam imediatamente
-    }
+    } catch(e) {}
   }
 
   function toggleConfigBackend() {
@@ -3061,9 +3122,11 @@ const authKit = (() => {
 
   return {
     init,
+    loginComSenha,
+    abrirLogin,
+    abrirSolicitarOTP,
     solicitarCodigo,
-    validarCodigo,
-    voltarParaEmail,
+    definirSenha,
     sair,
     toggleConfigBackend,
     salvarBackendUrl,
@@ -3114,7 +3177,7 @@ style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 
 </div>
 
 <!-- ================================================================= -->
-<!-- MODAL DE CONTROLE DE ACESSO (GATEKEEPER MICRO-SAAS)               -->
+<!-- MODAL DE CONTROLE DE ACESSO (GATEKEEPER MICRO-SAAS v2.0)          -->
 <!-- ================================================================= -->
 <div id="authGatekeeper" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(15,23,42,0.94); backdrop-filter:blur(8px);" class="items-center justify-center p-4">
   <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-slate-200">
@@ -3130,54 +3193,117 @@ style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 
     <!-- Gatekeeper Body -->
     <div class="p-8">
       
-      <!-- STEP 1: SOLICITAR CÓDIGO -->
-      <div id="auth-step-email">
-        <h3 class="text-lg font-bold text-slate-800 mb-1">Acesso à Plataforma</h3>
+      <!-- TELA 1: LOGIN COM E-MAIL E SENHA -->
+      <div id="auth-view-login">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Entrar na Plataforma</h3>
         <p class="text-xs text-slate-500 mb-5 leading-relaxed">
-          Informe seu e-mail cadastrado no Google ou corporativo. Enviaremos um código de acesso seguro para confirmação.
+          Digite seu e-mail e sua senha de acesso.
+        </p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">E-mail</label>
+            <input type="email" id="auth-login-email" placeholder="seuemail@gmail.com" 
+              class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.loginComSenha()">
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-xs font-bold text-slate-600">Senha</label>
+              <button type="button" onclick="authKit.abrirSolicitarOTP('recuperar')" class="text-xs text-blue-600 hover:text-blue-800 underline font-semibold">
+                Esqueci minha senha
+              </button>
+            </div>
+            <input type="password" id="auth-login-senha" placeholder="Sua senha" 
+              class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.loginComSenha()">
+          </div>
+
+          <div id="auth-login-status-msg" style="display:none"></div>
+
+          <button type="button" id="btn-auth-entrar" onclick="authKit.loginComSenha()" 
+            class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm shadow">
+            Entrar na Conta →
+          </button>
+
+          <div class="pt-2 text-center text-xs text-slate-500 border-t border-slate-100">
+            Primeiro acesso ou ainda não tem senha?
+            <button type="button" onclick="authKit.abrirSolicitarOTP('primeiro_acesso')" class="text-blue-600 hover:text-blue-800 font-bold ml-1">
+              Criar minha senha
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 2: SOLICITAR CÓDIGO OTP (PRIMEIRO ACESSO OU RECUPERAÇÃO) -->
+      <div id="auth-view-solicitar-otp" style="display:none">
+        <h3 id="auth-titulo-otp" class="text-lg font-bold text-slate-800 mb-1">Criar Minha Senha</h3>
+        <p id="auth-desc-otp" class="text-xs text-slate-500 mb-5 leading-relaxed">
+          Digite seu e-mail para receber um código de 6 dígitos e cadastrar sua senha.
         </p>
 
         <div class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-600 mb-1">Seu E-mail</label>
-            <input type="email" id="auth-input-email" placeholder="exemplo@gmail.com" 
+            <input type="email" id="auth-otp-email" placeholder="seuemail@gmail.com" 
               class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
               onkeydown="if(event.key==='Enter') authKit.solicitarCodigo()">
           </div>
 
-          <div id="auth-status-msg" style="display:none" class="text-xs p-3 rounded-lg border"></div>
+          <div id="auth-solicitar-status-msg" style="display:none"></div>
 
-          <button type="button" id="btn-auth-solicitar" onclick="authKit.solicitarCodigo()" 
+          <button type="button" id="btn-auth-enviar-codigo" onclick="authKit.solicitarCodigo()" 
             class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm shadow">
-            Enviar Código de Acesso →
+            Enviar Código por E-mail →
           </button>
+
+          <div class="pt-2 text-left">
+            <button type="button" onclick="authKit.abrirLogin()" class="text-xs text-slate-500 hover:text-slate-800 underline">
+              ← Voltar para login com senha
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- STEP 2: DIGITAR CÓDIGO OTP -->
-      <div id="auth-step-otp" style="display:none">
-        <h3 class="text-lg font-bold text-slate-800 mb-1">Confirme seu Código</h3>
+      <!-- TELA 3: VALIDAR CÓDIGO E DEFINIR NOVA SENHA -->
+      <div id="auth-view-definir-senha" style="display:none">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Cadastrar Nova Senha</h3>
         <p class="text-xs text-slate-500 mb-4 leading-relaxed">
-          Enviamos um código de 6 dígitos para <strong id="auth-target-email" class="text-slate-800"></strong>.
+          Enviamos um código para <strong id="auth-target-email" class="text-slate-800"></strong>.
         </p>
 
         <div class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-600 mb-1 text-center">Código de 6 dígitos</label>
             <input type="text" id="auth-input-codigo" maxlength="6" placeholder="000000" 
-              class="w-full text-center text-2xl font-mono font-bold tracking-widest p-3 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
-              onkeydown="if(event.key==='Enter') authKit.validarCodigo()">
+              class="w-full text-center text-2xl font-mono font-bold tracking-widest p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') document.getElementById('auth-nova-senha').focus()">
           </div>
 
-          <div id="auth-otp-status-msg" style="display:none" class="text-xs p-3 rounded-lg border"></div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Nova Senha (mínimo 6 caracteres)</label>
+            <input type="password" id="auth-nova-senha" placeholder="••••••••" 
+              class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') document.getElementById('auth-confirma-senha').focus()">
+          </div>
 
-          <button type="button" id="btn-auth-validar" onclick="authKit.validarCodigo()" 
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Confirmar Nova Senha</label>
+            <input type="password" id="auth-confirma-senha" placeholder="••••••••" 
+              class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition"
+              onkeydown="if(event.key==='Enter') authKit.definirSenha()">
+          </div>
+
+          <div id="auth-definir-status-msg" style="display:none"></div>
+
+          <button type="button" id="btn-auth-salvar-senha" onclick="authKit.definirSenha()" 
             class="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-emerald-700 transition flex items-center justify-center gap-2 text-sm shadow">
-            Confirmar e Entrar ✦
+            Salvar Senha e Entrar ✦
           </button>
 
           <div class="flex items-center justify-between pt-2 text-xs">
-            <button type="button" onclick="authKit.voltarParaEmail()" class="text-slate-500 hover:text-slate-800 underline">
+            <button type="button" onclick="authKit.abrirSolicitarOTP('trocar')" class="text-slate-500 hover:text-slate-800 underline">
               ← Trocar e-mail
             </button>
             <button type="button" onclick="authKit.solicitarCodigo(true)" class="text-blue-600 hover:text-blue-800 font-semibold">

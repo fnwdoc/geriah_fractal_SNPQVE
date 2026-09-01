@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GERIAH Fractal 3.0| Seu negócio a partir de quem você é</title>
+<title>GERIAH Fractal v3.1 | Seu negócio a partir de quem você é</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .bg-quem-sou { background-color: #ffffff; border-top: 4px solid #3b82f6; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
@@ -1894,59 +1894,60 @@ let html = texto.replace(/^### (.*$)/gim, '<h3>$1</h3>').replace(/^## (.*$)/gim,
 .replace(/\n- (.*)/g, '<ul><li>$1</li></ul>').replace(/<\/ul>\n<ul>/g, '\n');
 return `<p>${html}</p>`;
 }
-function verificarSenha() {
-if (modulosPremiumDesbloqueados) return true;
-const tentativa = prompt("Módulo Avançado Bloqueado.\nDigite a senha de acesso para liberar:");
-if (tentativa === 'fnw2026') {
-modulosPremiumDesbloqueados = true;
-alert("� Acesso Premium Liberado com Sucesso!");
-return true;
-} else if (tentativa !== null) {
-alert("Senha Incorreta.");
+function obterTituloAba(t) {
+  const titulos = {
+    'base': '1. Framework Base Interativo',
+    'negocio': '2. BMC Interativo',
+    'marketing': '3. Marketing',
+    'vendas': '4. Vendas',
+    'cs': '5. Sucesso do Cliente',
+    'educacao': '6. Educação do Cliente',
+    'esteira': '7. Esteira de Produtos',
+    'bsc': '8. Balanced Scorecard',
+    'escala': '9. Escala e Crescimento',
+    'iaprompts': '10. IA com Prompts Livres',
+    'docs': '11. Docs & Contexto',
+    'extras': '12. Ferramentas (EXTRAS)'
+  };
+  return titulos[t] || t;
 }
-return false;
-}
+
 function atualizarBotoesAba() {
-const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
-['base', 'negocio', 'marketing', 'vendas', 'cs', 'educacao', 'esteira', 'bsc', 'escala', 'iaprompts', 'docs', 'extras'].forEach(t => {
-const btn = document.getElementById(`tab-btn-${t}`);
-if(!btn) return;
-let isPremiumTab = abasPremium.includes(t);
-let lockBadge = (!modulosPremiumDesbloqueados && isPremiumTab) ? ' <span class="lock-icon text-[10px] bg-red-100 text-red-600 border border-red-200 px-1.5 py-0.5 rounded">� Premium</span>' : '';
-let label = '';
-if(t==='base') label = '1. Framework Base Interativo';
-else if(t==='negocio') label = '2. BMC Interativo';
-else if(t==='marketing') label = '3. Marketing';
-else if(t==='vendas') label = '4. Vendas';
-else if(t==='cs') label = '5. Sucesso do Cliente';
-else if(t==='educacao') label = '6. Educação do Cliente';
-else if(t==='esteira') label = '7. Esteira de Produtos';
-else if(t==='bsc') label = '8. Balanced Scorecard';
-else if(t==='escala') label = '9. Escala e Crescimento';
-else if(t==='iaprompts') label = '10. IA com Prompts Livres';
-else if(t==='docs') label = '11. Docs & Contexto';
-else if(t==='extras') label = '12. Ferramentas (EXTRAS)';
-btn.innerHTML = label + lockBadge;
-btn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-transparent flex justify-between items-center";
-});
+  const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
+  const temPermissao = authKit.temAcessoPremium();
+
+  ['base', 'negocio', 'marketing', 'vendas', 'cs', 'educacao', 'esteira', 'bsc', 'escala', 'iaprompts', 'docs', 'extras'].forEach(t => {
+    const btn = document.getElementById(`tab-btn-${t}`);
+    if (!btn) return;
+    let isPremiumTab = abasPremium.includes(t);
+    let lockBadge = '';
+    if (isPremiumTab) {
+      lockBadge = temPermissao 
+        ? ' <span class="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded font-bold">✨ Premium</span>'
+        : ' <span class="lock-icon text-[10px] bg-amber-50 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded">� Premium</span>';
+    }
+    let label = obterTituloAba(t);
+    btn.innerHTML = label + lockBadge;
+    btn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-transparent flex justify-between items-center";
+  });
 }
-function obterClassesImpacto(tipo) {
-const strTipo = tipo ? String(tipo).toLowerCase() : '';
-if (strTipo === 'positivo') return { text: 'text-green-700 font-medium', border: 'border-green-400 ring-2 ring-green-100 bg-green-50', badge: 'bg-green-100 text-green-700 border-green-200', icon: '✅' };
-if (strTipo === 'negativo') return { text: 'text-red-700 font-medium', border: 'border-red-400 ring-2 ring-red-100 bg-red-50', badge: 'bg-red-100 text-red-700 border-red-200', icon: '�' };
-if (strTipo === 'neutro') return { text: 'text-orange-700 font-medium', border: 'border-orange-400 ring-2 ring-orange-100 bg-orange-50', badge: 'bg-orange-100 text-orange-700 border-orange-200', icon: '⚠️' };
-return { text: 'text-slate-700', border: 'border-slate-200 bg-white', badge: '', icon: '' };
-}
+
 function mudarAbaExpansao(tabName) {
-const r = registros.find(x => x.id === registroAtivoId);
-if (!r) return;
-const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
-if (abasPremium.includes(tabName) && !verificarSenha()) return;
-abaAtiva = tabName;
-atualizarBotoesAba();
-const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-if(activeBtn) activeBtn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-blue-100 text-blue-800 border border-blue-200 flex justify-between items-center";
-const contentArea = document.getElementById('expansao-content-area');
+  const r = registros.find(x => x.id === registroAtivoId);
+  if (!r) return;
+  const abasPremium = ['marketing', 'cs', 'esteira', 'bsc', 'escala', 'iaprompts'];
+  
+  // Verificação automática de permissão do plano (ADMIN, PREMIUM, PRO, TRIAL liberam direto sem senha)
+  if (abasPremium.includes(tabName) && !authKit.temAcessoPremium()) {
+    authKit.exigirPremium(obterTituloAba(tabName));
+    return;
+  }
+
+  abaAtiva = tabName;
+  atualizarBotoesAba();
+  const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+  if (activeBtn) activeBtn.className = "text-left px-3 py-2.5 rounded-lg text-[13px] font-semibold transition bg-blue-100 text-blue-800 border border-blue-200 flex justify-between items-center";
+  const contentArea = document.getElementById('expansao-content-area');
 // --- ABA EXTRAS (Link Externo) ---
 if (tabName === 'docs') {
 renderizarDocs(contentArea);
@@ -3085,6 +3086,10 @@ const authKit = (() => {
       }
       badge.classList.remove('hidden');
       badge.classList.add('flex');
+    }
+
+    if (typeof atualizarBotoesAba === 'function') {
+      atualizarBotoesAba();
     }
   }
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GERIAH Fractal v2.2| Seu negócio a partir de quem você é</title>
+<title>GERIAH Fractal 3.0| Seu negócio a partir de quem você é</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .bg-quem-sou { background-color: #ffffff; border-top: 4px solid #3b82f6; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
@@ -107,6 +107,7 @@ z-index: 100;
 <div id="auth-user-badge" class="hidden items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700">
 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
 <span id="auth-user-email" class="max-w-[140px] truncate">usuario@email.com</span>
+<span id="auth-user-nivel-badge" class="bg-blue-100 text-blue-800 text-[10px] px-1.5 py-0.5 rounded font-bold">FREE</span>
 <button type="button" onclick="authKit.sair()" class="text-red-500 hover:text-red-700 hover:underline ml-1 font-bold">Sair</button>
 </div>
 <button type="button" onclick="abrirTutorial()" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-md hover:bg-blue-100 transition font-semibold text-sm">
@@ -2844,6 +2845,42 @@ const authKit = (() => {
   const DEFAULT_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwk_LpLIMEZedCZ1k0RKScwXntzIjo5lAWVSdLZklDBHrm_9awxfZjX20SBpWQyCKQ_/exec"; 
 
   let _emailPendente = "";
+  let _clientIp = "";
+
+  async function getClientIp() {
+    if (_clientIp) return _clientIp;
+    
+    const fetchWithTimeout = async (url, extractFn) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 2500);
+      try {
+        const res = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+        clearTimeout(timer);
+        const data = await res.json();
+        const ip = extractFn(data);
+        if (ip && typeof ip === 'string' && ip.length >= 7) return ip.trim();
+        throw new Error('IP inválido');
+      } catch (err) {
+        clearTimeout(timer);
+        throw err;
+      }
+    };
+
+    const providers = [
+      () => fetchWithTimeout('https://api.ipify.org?format=json', d => d.ip),
+      () => fetchWithTimeout('https://ipwho.is/', d => d.ip),
+      () => fetchWithTimeout('https://api.seeip.org/jsonip', d => d.ip),
+      () => fetchWithTimeout('https://api.db-ip.com/v2/free/self', d => d.ipAddress),
+      () => fetchWithTimeout('https://httpbin.org/ip', d => (d.origin || '').split(',')[0])
+    ];
+
+    try {
+      _clientIp = await Promise.any(providers.map(fn => fn()));
+    } catch (err) {
+      _clientIp = "";
+    }
+    return _clientIp || "";
+  }
 
   function getBackendUrl() {
     return DEFAULT_BACKEND_URL;
@@ -2868,9 +2905,10 @@ const authKit = (() => {
   async function apiCall(action, payload = {}) {
     const url = getBackendUrl();
     if (!url) {
-      throw new Error("URL do backend não configurada. Clique em 'Configurar URL do Backend' abaixo.");
+      throw new Error("URL do backend não configurada.");
     }
-    const bodyData = { action, appName: "GERiAH Fractal", ...payload };
+    const clientIp = await getClientIp();
+    const bodyData = { action, appName: "GERiAH Fractal", clientIp, ...payload };
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -2930,7 +2968,7 @@ const authKit = (() => {
         localStorage.setItem(LS_TOKEN_KEY, res.token);
         localStorage.setItem(LS_EMAIL_KEY, res.email);
         localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
-        desbloquearInterface(res.email);
+        desbloquearInterface(res.email, res.nivel);
       } else if (res.precisa_criar_senha) {
         _emailPendente = email;
         document.getElementById('auth-view-login').style.display = 'none';
@@ -3011,7 +3049,7 @@ const authKit = (() => {
         localStorage.setItem(LS_TOKEN_KEY, res.token);
         localStorage.setItem(LS_EMAIL_KEY, res.email);
         localStorage.setItem(LS_NIVEL_KEY, res.nivel || 'FREE');
-        desbloquearInterface(res.email);
+        desbloquearInterface(res.email, res.nivel);
       } else {
         setStatusMsg('auth-definir-status-msg', res.message || 'Código incorreto ou expirado.', true);
       }
@@ -3022,14 +3060,29 @@ const authKit = (() => {
     }
   }
 
-  function desbloquearInterface(email) {
+  function desbloquearInterface(email, nivel) {
     const gatekeeper = document.getElementById('authGatekeeper');
     if (gatekeeper) gatekeeper.style.display = 'none';
     
     const badge = document.getElementById('auth-user-badge');
     const emailEl = document.getElementById('auth-user-email');
+    const nivelEl = document.getElementById('auth-user-nivel-badge');
+    const nivelVal = (nivel || getNivel() || 'FREE').toUpperCase();
+
     if (badge && emailEl) {
       emailEl.textContent = email;
+      if (nivelEl) {
+        nivelEl.textContent = nivelVal;
+        if (nivelVal === 'ADMIN') {
+          nivelEl.className = "bg-purple-100 text-purple-800 border border-purple-300 text-[10px] px-1.5 py-0.5 rounded font-bold";
+        } else if (nivelVal === 'PREMIUM' || nivelVal === 'PRO') {
+          nivelEl.className = "bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] px-1.5 py-0.5 rounded font-bold";
+        } else if (nivelVal === 'TRIAL') {
+          nivelEl.className = "bg-amber-100 text-amber-800 border border-amber-300 text-[10px] px-1.5 py-0.5 rounded font-bold";
+        } else {
+          nivelEl.className = "bg-blue-100 text-blue-800 border border-blue-200 text-[10px] px-1.5 py-0.5 rounded font-bold";
+        }
+      }
       badge.classList.remove('hidden');
       badge.classList.add('flex');
     }
@@ -3067,13 +3120,65 @@ const authKit = (() => {
         localStorage.removeItem(LS_TOKEN_KEY);
         localStorage.removeItem(LS_EMAIL_KEY);
         bloquearInterface();
+      } else if (res.nivel) {
+        localStorage.setItem(LS_NIVEL_KEY, res.nivel);
+        desbloquearInterface(getEmail(), res.nivel);
       }
     } catch(e) {}
   }
 
-  function init() {
+  function temAcessoPremium() {
+    const n = (getNivel() || 'FREE').toUpperCase();
+    return n === 'ADMIN' || n === 'PREMIUM' || n === 'PRO' || n === 'TRIAL';
+  }
+
+  function exigirPremium(nomeRecurso = 'este recurso') {
+    if (temAcessoPremium()) return true;
+
+    const gatekeeper = document.getElementById('authGatekeeper');
+    if (!gatekeeper) return false;
+
+    document.getElementById('auth-view-login').style.display = 'none';
+    document.getElementById('auth-view-solicitar-otp').style.display = 'none';
+    document.getElementById('auth-view-definir-senha').style.display = 'none';
+    
+    const upgradeView = document.getElementById('auth-view-upgrade');
+    if (upgradeView) {
+      upgradeView.style.display = 'block';
+      const desc = document.getElementById('auth-upgrade-recurso-nome');
+      if (desc) desc.innerHTML = `O módulo <strong>${nomeRecurso}</strong> é exclusivo para assinantes. No plano <strong>FREE</strong> seu acesso está restrito.`;
+      gatekeeper.style.display = 'flex';
+    }
+    return false;
+  }
+
+  function fecharUpgradeModal() {
+    const gatekeeper = document.getElementById('authGatekeeper');
     if (isAutenticado()) {
-      desbloquearInterface(getEmail());
+      if (gatekeeper) gatekeeper.style.display = 'none';
+    } else {
+      abrirLogin();
+    }
+  }
+
+  function bindPremiumInterceptors() {
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest("[data-premium='true'], .msas-premium-only, .requer-premium");
+      if (target && !temAcessoPremium()) {
+        e.preventDefault();
+        e.stopPropagation();
+        const nome = target.getAttribute('data-nome') || target.innerText.trim() || 'este recurso';
+        exigirPremium(nome);
+      }
+    }, true);
+  }
+
+  function init() {
+    getClientIp(); // Pre-fetch do IP em segundo plano
+    bindPremiumInterceptors();
+
+    if (isAutenticado()) {
+      desbloquearInterface(getEmail(), getNivel());
       verificarSessaoRemota();
     } else {
       bloquearInterface();
@@ -3087,6 +3192,9 @@ const authKit = (() => {
     abrirSolicitarOTP,
     solicitarCodigo,
     definirSenha,
+    temAcessoPremium,
+    exigirPremium,
+    fecharUpgradeModal,
     sair
   };
 })();
@@ -3266,6 +3374,26 @@ style="background:#059669;color:#fff;border:none;border-radius:10px;padding:8px 
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- TELA 4: UPGRADE PARA RECURSOS PREMIUM -->
+      <div id="auth-view-upgrade" style="display:none" class="text-center">
+        <div class="text-4xl mb-2">�</div>
+        <h3 class="text-lg font-bold text-slate-900 mb-1">Recurso Exclusivo [� Premium]</h3>
+        <p id="auth-upgrade-recurso-nome" class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Este módulo faz parte dos planos <strong>TRIAL</strong>, <strong>PRO</strong> e <strong>PREMIUM</strong>.
+        </p>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 mb-5 text-left text-xs text-blue-900 leading-relaxed">
+          <p class="font-bold mb-1">✨ Diferença dos Planos:</p>
+          <p class="text-slate-600 mb-1">� <strong>Plano FREE:</strong> Acesso aos módulos essenciais básicos.</p>
+          <p class="text-blue-700 font-semibold">� <strong>TRIAL / PRO / PREMIUM:</strong> Acesso total aos módulos estratégicos, inteligência artificial e ferramentas de crescimento.</p>
+        </div>
+
+        <button type="button" onclick="authKit.fecharUpgradeModal()" 
+          class="w-full bg-slate-900 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-slate-800 transition text-sm">
+          Entendido
+        </button>
       </div>
 
     </div>
